@@ -1,0 +1,43 @@
+<div class="affirmationPanel">
+  <div class="leftPanel">
+    <span class="affirmationListTitle">Affirmations: {{affirmationId | async}}</span>
+    <ul class="selectAffirmation">
+      <li *ngFor="let affirmation of affirmations" id="{{affirmation.title}}" 
+      [ngClass]="{ 'selected' : activeAffirmationId == affirmation.title }">
+        <div class="affirmation-title" (click)="selectAffirmation(affirmation.title)">
+          {{affirmation.title}}
+        </div>  
+        <div *ngIf="activeAffirmationId == affirmation.title" class="affirmation-edit-buttons">
+          <span *ngIf="!isBeingEdited">
+            <span (click)="startEdit()">edit</span>
+          </span>
+          <span *ngIf="isBeingEdited">
+            <span (click)="updateItem()">update </span>
+            <span (click)="cancelEdit()"> cancel</span>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="rightPanel">
+    <div class="affirmation">
+      <div class="superLogos" delay="1">QUANT</div>
+      <div class="subLogoi">
+        <span class="aveLogos" delay="1">AVE AVE</span>
+        <span class="jhwhLogos" delay="1">יהוה</span>
+        <span class="allaLogos" no-wrap="true" delay="1">الإلَه</span>
+      </div>
+
+      <div id="sexsextaza" class="affirmationContent" style="font-size: 13px; line-height: 1; letter-spacing: -1px; display: block;">
+        <div *ngIf="!isBeingEdited" class="pfpItem entry-content" style="white-space: pre-wrap;">
+          <p>{{selectedAffirmation.content}}</p>
+        </div>
+        <div *ngIf="isBeingEdited" class="edit-content">
+          <textarea name="edit" id="affirmationEdit" cols="30" rows="10" [(ngModel)]="selectedAffirmation.content">{{selectedAffirmation.content}}</textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

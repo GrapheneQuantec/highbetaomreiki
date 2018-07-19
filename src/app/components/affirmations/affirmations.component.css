@@ -1,0 +1,100 @@
+.affirmationPanel {
+    float: left;
+    width: 100%;
+}
+
+.leftPanel {
+    float: left;
+    width: 20%;
+    margin: 0 60px;
+    background-color: rgba(45, 239, 221, 0.8);
+    border-radius: 24px;
+}
+
+.affirmationListTitle {
+    font-size: 32px;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    display: inline-block;
+}
+
+.selectAffirmation {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.selectAffirmation li {
+    cursor: pointer;
+    float: left;
+    width: 100%;
+}
+
+.selectAffirmation li .affirmation-title {
+    float: left;
+    width: 50%;
+}
+
+.selectAffirmation li .affirmation-edit-buttons {
+    float: right;
+    width: 50%;
+    text-align: left;
+}
+
+.selectAffirmation li.selected {
+    color: red;
+}
+
+.rightPanel {
+    float: right;
+    width: 70%;
+}
+
+.affirmation {
+    background-image: url(../../../assets/images/OmegaSubaru.gif);
+    background-size: 659px 864px;
+    background-repeat: no-repeat;
+    width: 290px;
+    color: #800000;
+    text-align: center;
+    padding: 188px 182px;
+    font-size: 10px;
+    line-height: 13px;
+    font-family: cursive;
+    min-height: 864px;
+    cursor: pointer;
+    zoom: 0.5;
+    display: inline-block;
+}
+
+.affirmation-edit {
+    display: inline-block;
+}
+
+.superLogos {
+    font-size: 16px;
+    margin-right: 6px;
+    font-weight: bold;
+}
+
+.subLogoi {
+    padding-right: 6px;
+    width: max-content;
+    margin: auto;
+}
+
+.aveLogos {
+    font-size: 22px;
+}
+
+.jhwhLogos {
+    font-size: 32px;
+}
+
+.allaLogos {
+    font-size: 32px;
+    position: relative;
+    top: 6px;
+    float: right;
+}
