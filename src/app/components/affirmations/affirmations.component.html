@@ -1,6 +1,6 @@
 <div class="affirmationPanel">
   <div class="leftPanel">
-    <span class="affirmationListTitle">Affirmations: {{affirmationId | async}}</span>
+    <span class="affirmationListTitle">Affirmations:</span>
     <ul class="selectAffirmation">
       <li *ngFor="let affirmation of affirmations" id="{{affirmation.title}}" 
       [ngClass]="{ 'selected' : activeAffirmationId == affirmation.title }">
