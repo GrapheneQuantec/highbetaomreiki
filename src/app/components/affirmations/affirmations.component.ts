@@ -30,10 +30,10 @@ export class AffirmationsComponent implements OnInit {
   ngOnInit() {
     this.route.url.subscribe((u) => {
       if (u[1]) {
-        this.affirmationService.getAffirmations(u[1].path).subscribe(affirmations => {
-          if (affirmations.length > 0) {
-            this.selectedAffirmation = affirmations[0];
-            this.activeAffirmationId = affirmations[0].title;
+        this.affirmationService.getAffirmationById(u[1].path).then(affirmation => {
+          if (affirmation) {
+            this.selectedAffirmation = affirmation.data();
+            this.activeAffirmationId = affirmation.id;
           }
         })
       }
@@ -43,7 +43,7 @@ export class AffirmationsComponent implements OnInit {
       this.affirmations = affirmations;
       if (affirmations.length > 0) {
         this.selectedAffirmation = affirmations[0];
-        this.activeAffirmationId = affirmations[0].title;
+        this.activeAffirmationId = affirmations[0].id;
       }
     })
 
@@ -52,8 +52,8 @@ export class AffirmationsComponent implements OnInit {
   addAffirmation() {
     var item: Affirmation = {
       id: 'sextantra',
-      title: 'Sex Tantra',
-      content: 'Ave Ave Sex Tantra',
+      title: 'Title',
+      content: 'Affirmation content',
       fontSettings: {
         fontSize: 12,
         lineHeight: 1.5,
@@ -75,8 +75,8 @@ export class AffirmationsComponent implements OnInit {
     }
   }
 
-  selectAffirmation(title) {
-    this.router.navigate(['/affirmation/' + title]);
+  selectAffirmation(id) {
+    this.router.navigate(['/affirmation/' + id]);
     this.isBeingEdited = false;
   }
 

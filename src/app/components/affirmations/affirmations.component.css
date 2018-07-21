@@ -10,14 +10,17 @@
 .leftPanel {
     float: left;
     width: 20%;
-    margin: 0 60px;
-    background-color: rgba(45, 239, 221, 0.8);
-    border-radius: 24px;
+    background-color: rgb(255, 187, 41);
+    border-radius: 10px;
+    color: #8b0f0d;
+}
+
+.affirmation-list {
+    padding: 20px;
 }
 
 .affirmationListTitle {
     font-size: 32px;
-    margin-top: 48px;
     margin-bottom: 16px;
     display: inline-block;
 }
@@ -27,6 +30,7 @@
     margin: 0;
     padding: 0;
     text-align: center;
+    display: grid;
 }
 
 .selectAffirmation li {
@@ -35,14 +39,20 @@
     width: 100%;
 }
 
+.add-affirmation {
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
 .selectAffirmation li .affirmation-title {
     float: left;
-    width: 50%;
+    width: 60%;
 }
 
 .selectAffirmation li .affirmation-edit-buttons {
     float: right;
-    width: 50%;
+    width: 40%;
     text-align: left;
 }
 
@@ -52,23 +62,35 @@
 
 .rightPanel {
     float: left;
-    width: 50%;
+    width: 40%;
+    text-align: center;
+}
+
+.to-do {
+    float: left;
+    width: 40%;
+    color: #edff00;
+}
+
+.todo-title {
+    text-align: center;
+    font-size: 36px;
 }
 
 .affirmation .affirmation-title {
-    font-size: 48px;
+    font-size: 36px;
 }
 
 .affirmation {
     background-image: url(../../../assets/images/OmegaSubaru.gif);
     background-size: 659px 864px;
     background-repeat: no-repeat;
-    width: 290px;
+    width: 296px;
     color: #800000;
     text-align: center;
-    padding: 66px 182px;
+    padding: 86px 179px;
     font-family: cursive;
-    min-height: 864px;
+    min-height: 700px;
     cursor: pointer;
     zoom: 0.8;
     display: inline-block;
@@ -82,7 +104,7 @@
     font-size: 14px;
     margin-right: 6px;
     font-weight: bold;
-    margin-top: 46px;
+    margin-top: 43px;
 }
 
 .subLogoi {
@@ -107,11 +129,24 @@
     float: right;
 }
 
-.edit-content {
-    height: 296px;
+.entry-content {
+    margin: 8px 2px;
 }
 
-.edit-content textarea {
+.edit-content {
+    height: 292px;
+    border: 2px solid #8b0f0d;
+    margin: 6px 0 9px;
+    border-radius: 4px;
+}
+
+.edit-affirmation-title {
+    border: 2px solid #8b0f0d;
+    margin: -2px;
+    border-radius: 10px;
+}
+
+.edit-content textarea, .edit-affirmation-title input {
     width: 100%;
     background: transparent;
     border: 0;
@@ -122,7 +157,9 @@
     font-size: inherit;
     letter-spacing: inherit;
     line-height: inherit;
+    height: inherit;
     outline: none;
+    overflow-x: hidden;
 }
 
 .text-controls {
@@ -130,6 +167,7 @@
     height: 54px;
     padding-left: 8px;
     border: 2px solid #8b0f0d;
+    border-radius: 4px;
 }
 
 .text-controls span {

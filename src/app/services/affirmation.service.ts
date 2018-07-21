@@ -23,23 +23,27 @@ export class AffirmationService {
     this.getAffirmations();
   }
 
-  getAffirmations(id?: string) {
-    if(id) {
-      this.affirmationsCollection = this.afs$.collection<Affirmation>(this.collectionName, ref => ref.where("title", "==", id));
-    }
-
-    else {
+  getAffirmationById(id?: string) {
       this.affirmationsCollection = this.afs$.collection<Affirmation>(this.collectionName);
+
+      var selectedAffirmation = this.affirmationsCollection.doc(id).ref.get().then(function(doc) {
+          return doc;
+      });
+      return selectedAffirmation;
+      
     }
 
-    this.affirmations = this.affirmationsCollection.snapshotChanges().pipe(map(changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as Affirmation;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }));
-    return this.affirmations;
+  getAffirmations() {
+
+      this.affirmationsCollection = this.afs$.collection<Affirmation>(this.collectionName);
+      this.affirmations = this.affirmationsCollection.snapshotChanges().pipe(map(changes => {
+        return changes.map(a => {
+          const data = a.payload.doc.data() as Affirmation;
+          data.id = a.payload.doc.id;
+          return data;
+        })
+      }));
+      return this.affirmations;
   }
 
   addItem(affirmation: Affirmation){

@@ -1,33 +1,39 @@
 <div class="affirmationPanel">
   <div class="leftPanel">
-    <span class="affirmationListTitle">Affirmations:</span>
-    <div class="add-affirmation">
-      <span (click)="addAffirmation()">add</span>
+    <div class="affirmation-list">
+      <span class="affirmationListTitle">Affirmations:</span>
+      <div class="add-affirmation">
+        <span (click)="addAffirmation()">add</span>
+      </div>
+      <ul class="selectAffirmation">
+        <li *ngFor="let affirmation of affirmations" id="{{affirmation.id}}" [ngClass]="{ 'selected' : activeAffirmationId == affirmation.id }">
+          <div class="affirmation-title" (click)="selectAffirmation(affirmation.id)">
+            {{affirmation.title}}
+          </div>
+          <div *ngIf="activeAffirmationId == affirmation.id" class="affirmation-edit-buttons">
+            <span *ngIf="!isBeingEdited">
+              <span (click)="startEdit()">edit</span>
+            </span>
+            <span *ngIf="isBeingEdited">
+              <span (click)="updateItem()">update </span>
+              <span (click)="cancelEdit()"> cancel</span>
+            </span>
+          </div>
+        </li>
+      </ul>
     </div>
-    <ul class="selectAffirmation">
-      <li *ngFor="let affirmation of affirmations" id="{{affirmation.id}}" 
-      [ngClass]="{ 'selected' : activeAffirmationId == affirmation.title }">
-        <div class="affirmation-title" (click)="selectAffirmation(affirmation.title)">
-          {{affirmation.title}}
-        </div>  
-        <div *ngIf="activeAffirmationId == affirmation.title" class="affirmation-edit-buttons">
-          <span *ngIf="!isBeingEdited">
-            <span (click)="startEdit()">edit</span>
-          </span>
-          <span *ngIf="isBeingEdited">
-            <span (click)="updateItem()">update </span>
-            <span (click)="cancelEdit()"> cancel</span>
-          </span>
-        </div>
-      </li>
-    </ul>
   </div>
 
   <div class="rightPanel">
     <div class="affirmation">
-        <div class="affirmation-title">
+      <div class="affirmation-title">
+        <div *ngIf="!isBeingEdited">
           {{selectedAffirmation.title}}
         </div>
+        <div *ngIf="isBeingEdited" class="edit-affirmation-title">
+          <input type="text" id="affirmationTitleEdit" [(ngModel)]="selectedAffirmation.title">
+        </div>
+      </div>
       <div class="superLogos" delay="1">QUANT</div>
       <div class="subLogoi">
         <span class="aveLogos" delay="1">AVE AVE</span>
@@ -35,30 +41,55 @@
         <span class="allaLogos" no-wrap="true" delay="1">الإلَه</span>
       </div>
 
-      <div id="sexsextaza" class="affirmationContent" 
-        [ngStyle]="getAffirmationStyle()">
+      <div id="sexsextaza" class="affirmationContent" [ngStyle]="getAffirmationStyle()">
         <div *ngIf="!isBeingEdited" class="pfpItem entry-content" style="white-space: pre-wrap;">
           <p>{{selectedAffirmation.content}}</p>
         </div>
         <div *ngIf="isBeingEdited" class="edit-content">
           <textarea name="edit" id="affirmationEdit" [(ngModel)]="selectedAffirmation.content">{{selectedAffirmation.content}}</textarea>
-          
         </div>
       </div>
       <div *ngIf="isBeingEdited" class="text-controls">
-          <span>
-            <div>font size</div>
-            <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.fontSize">
-          </span>
-          <span>
-            <div>line height</div>
-            <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.lineHeight" step="0.1">
-          </span>
-          <span>
-            <div>spacing</div>
-            <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.letterSpacing">
-          </span>
+        <span>
+          <div>font size</div>
+          <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.fontSize">
+        </span>
+        <span>
+          <div>line height</div>
+          <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.lineHeight" step="0.1">
+        </span>
+        <span>
+          <div>spacing</div>
+          <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.letterSpacing">
+        </span>
       </div>
     </div>
+  </div>
+
+  <div class="to-do">
+    <div class="todo-title">To do</div>
+    <ul>
+      <li>
+        Affirmations
+        <ul>
+          <li>Rearrange affirmation list and add icons for crud</li>
+          <li>
+            crud
+            <ul>
+              <li>delete: create functionality</li>
+              <li>add:
+                <ul>
+                  <li>when creating new affirmation make edit active</li>
+                  <li>make templates with different affirmation frame</li>
+                  <li>implement copy affirmation functionality</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>omega background selection</li>
+          <li>karaoke</li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </div>
