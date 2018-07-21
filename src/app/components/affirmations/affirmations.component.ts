@@ -21,32 +21,58 @@ export class AffirmationsComponent implements OnInit {
   copyAffirmation: Affirmation;
   isBeingEdited: boolean = false;
 
-  constructor(private router: Router, 
+  constructor(private router: Router,
     private route: ActivatedRoute,
     public affirmationService: AffirmationService) {
 
-     }
+  }
 
   ngOnInit() {
     this.route.url.subscribe((u) => {
-      if(u[1]) {
+      if (u[1]) {
         this.affirmationService.getAffirmations(u[1].path).subscribe(affirmations => {
-          this.selectedAffirmation = affirmations[0];
-          this.activeAffirmationId = affirmations[0].title;
+          if (affirmations.length > 0) {
+            this.selectedAffirmation = affirmations[0];
+            this.activeAffirmationId = affirmations[0].title;
+          }
         })
       }
     });
 
     this.affirmationService.getAffirmations().subscribe(affirmations => {
       this.affirmations = affirmations;
-      console.log(affirmations)
-
-      this.selectedAffirmation = affirmations[0];
-      this.activeAffirmationId = affirmations[0].title;
-
-      console.log(this.selectedAffirmation)
+      if (affirmations.length > 0) {
+        this.selectedAffirmation = affirmations[0];
+        this.activeAffirmationId = affirmations[0].title;
+      }
     })
-    
+
+  }
+
+  addAffirmation() {
+    var item: Affirmation = {
+      id: 'sextantra',
+      title: 'Sex Tantra',
+      content: 'Ave Ave Sex Tantra',
+      fontSettings: {
+        fontSize: 12,
+        lineHeight: 1.5,
+        letterSpacing: 0,
+      }
+    }
+
+    this.affirmationService.addItem(item).then((doc: Affirmation) => {
+    });
+  }
+
+  getAffirmationStyle(): object {
+    if (this.selectedAffirmation.fontSettings) {
+      return {
+        'font-size': this.selectedAffirmation.fontSettings.fontSize + 'px',
+        'line-height': this.selectedAffirmation.fontSettings.lineHeight,
+        'letter-spacing': this.selectedAffirmation.fontSettings.letterSpacing + 'px'
+      };
+    }
   }
 
   selectAffirmation(title) {

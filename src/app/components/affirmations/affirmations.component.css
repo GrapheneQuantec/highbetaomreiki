@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+.affirmationPanel p {
+    margin: 0;
+}
+
 .leftPanel {
     float: left;
     width: 20%;
@@ -47,8 +51,12 @@
 }
 
 .rightPanel {
-    float: right;
-    width: 70%;
+    float: left;
+    width: 50%;
+}
+
+.affirmation .affirmation-title {
+    font-size: 48px;
 }
 
 .affirmation {
@@ -58,9 +66,7 @@
     width: 290px;
     color: #800000;
     text-align: center;
-    padding: 188px 182px;
-    font-size: 10px;
-    line-height: 13px;
+    padding: 66px 182px;
     font-family: cursive;
     min-height: 864px;
     cursor: pointer;
@@ -73,15 +79,17 @@
 }
 
 .superLogos {
-    font-size: 16px;
+    font-size: 14px;
     margin-right: 6px;
     font-weight: bold;
+    margin-top: 46px;
 }
 
 .subLogoi {
     padding-right: 6px;
     width: max-content;
     margin: auto;
+    line-height: 0.5;
 }
 
 .aveLogos {
@@ -97,4 +105,41 @@
     position: relative;
     top: 6px;
     float: right;
+}
+
+.edit-content {
+    height: 296px;
+}
+
+.edit-content textarea {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    text-align: inherit;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    outline: none;
+}
+
+.text-controls {
+    background: #f65b10;
+    height: 54px;
+    padding-left: 8px;
+    border: 2px solid #8b0f0d;
+}
+
+.text-controls span {
+    float:left;
+    width: 30%;
+    margin-right:3%;
+}
+
+.text-controls span input {
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
 }
