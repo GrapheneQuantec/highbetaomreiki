@@ -1,9 +1,9 @@
 <div class="affirmationPanel">
   <div class="leftPanel">
     <div class="affirmation-list">
-      <span class="affirmationListTitle">Affirmations:</span>
-      <div class="add-affirmation">
-        <span (click)="addAffirmation()">add</span>
+      <div class="affirmations-list-header">
+          <span class="affirmationListTitle">Affirmations</span>
+            <span (click)="addAffirmation()" class="add-affirmation"><i class="fa fa-plus"></i></span>
       </div>
       <ul class="selectAffirmation">
         <li *ngFor="let affirmation of affirmations" id="{{affirmation.id}}" [ngClass]="{ 'selected' : activeAffirmationId == affirmation.id }">
@@ -12,11 +12,11 @@
           </div>
           <div *ngIf="activeAffirmationId == affirmation.id" class="affirmation-edit-buttons">
             <span *ngIf="!isBeingEdited">
-              <span (click)="startEdit()">edit</span>
+              <span (click)="startEdit()" class="crud-icon"><i class="fa fa-pencil"></i></span>
             </span>
             <span *ngIf="isBeingEdited">
-              <span (click)="updateItem()">update </span>
-              <span (click)="cancelEdit()"> cancel</span>
+              <span (click)="updateItem()" class="crud-icon"><i class="fa fa-check"></i></span>
+              <span (click)="cancelEdit()" class="crud-icon"><i class="fa fa-close"></i></span>
             </span>
           </div>
         </li>
