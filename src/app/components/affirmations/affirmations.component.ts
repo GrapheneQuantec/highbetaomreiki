@@ -20,6 +20,7 @@ export class AffirmationsComponent implements OnInit {
   };
   copyAffirmation: Affirmation;
   isBeingEdited: boolean = false;
+  isConfirmDelete: boolean = false;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -79,6 +80,7 @@ export class AffirmationsComponent implements OnInit {
   selectAffirmation(id) {
     this.router.navigate(['/affirmation/' + id]);
     this.isBeingEdited = false;
+    this.isConfirmDelete = false;
   }
 
   updateItem() {
@@ -95,6 +97,19 @@ export class AffirmationsComponent implements OnInit {
   cancelEdit() {
     this.selectedAffirmation = this.copyAffirmation
     this.isBeingEdited = false;
+  }
+
+  deleteAffirmation() {
+    this.isConfirmDelete = true;
+  }
+
+  confirmedDeleteAffirmation(affirmation: Affirmation) {
+    this.isConfirmDelete = false;
+    this.affirmationService.deleteItem(affirmation);
+  }
+
+  revokedDeleteAffirmation() {
+    this.isConfirmDelete = false;
   }
 
 }

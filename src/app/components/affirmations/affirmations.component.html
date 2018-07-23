@@ -11,12 +11,20 @@
             {{affirmation.title}}
           </div>
           <div *ngIf="activeAffirmationId == affirmation.id" class="affirmation-edit-buttons">
-            <span *ngIf="!isBeingEdited">
-              <span (click)="startEdit()" class="crud-icon"><i class="fa fa-pencil"></i></span>
+            <span *ngIf="!isConfirmDelete">
+              <span *ngIf="!isBeingEdited">
+                <span (click)="startEdit()" class="crud-icon"><i class="fa fa-pencil"></i></span>
+                <span (click)="deleteAffirmation()" class="crud-icon"><i class="fa fa-trash"></i></span>
+              </span>
+              <span *ngIf="isBeingEdited">
+                <span (click)="updateItem()" class="crud-icon"><i class="fa fa-check"></i></span>
+                <span (click)="cancelEdit()" class="crud-icon"><i class="fa fa-close"></i></span>
+              </span>
             </span>
-            <span *ngIf="isBeingEdited">
-              <span (click)="updateItem()" class="crud-icon"><i class="fa fa-check"></i></span>
-              <span (click)="cancelEdit()" class="crud-icon"><i class="fa fa-close"></i></span>
+            <span *ngIf="isConfirmDelete">
+              Delete? 
+              <span (click)="confirmedDeleteAffirmation(affirmation)" class="crud-icon"><i class="fa fa-check"></i></span>
+              <span (click)="revokedDeleteAffirmation()" class="crud-icon"><i class="fa fa-close"></i></span>
             </span>
           </div>
         </li>
@@ -75,7 +83,6 @@
           <li>
             crud
             <ul>
-              <li>delete: create functionality</li>
               <li>add:
                 <ul>
                   <li>make templates with different affirmation frame</li>
