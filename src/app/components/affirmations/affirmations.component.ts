@@ -62,6 +62,7 @@ export class AffirmationsComponent implements OnInit {
     }
 
     this.affirmationService.addItem(item).then((doc: Affirmation) => {
+      this.selectAffirmation(doc.id);
     });
   }
 
