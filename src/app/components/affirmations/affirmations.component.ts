@@ -21,6 +21,12 @@ export class AffirmationsComponent implements OnInit {
   copyAffirmation: Affirmation;
   isBeingEdited: boolean = false;
   isConfirmDelete: boolean = false;
+  selectedOmega: string = 'OmegaSubaru';
+
+  omegas = [
+    {value : "OmegaSubaru", text : "Omega Subaru", url : "omega_subaru.gif"},
+    {value : "OmegaMultipleString", text : "Omega Multiple String", url : "omega_multiple_string.png"}
+  ];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -35,6 +41,7 @@ export class AffirmationsComponent implements OnInit {
           if (affirmation) {
             this.selectedAffirmation = affirmation.data();
             this.activeAffirmationId = affirmation.id;
+            this.selectedOmega = this.getOmegaBackgroundPath(affirmation.data().omegaBackground);
           }
         })
       }
@@ -45,6 +52,7 @@ export class AffirmationsComponent implements OnInit {
       if (affirmations.length > 0) {
         this.selectedAffirmation = affirmations[0];
         this.activeAffirmationId = affirmations[0].id;
+        this.selectedOmega = this.getOmegaBackgroundPath(affirmations[0].omegaBackground);
       }
     })
 
@@ -59,7 +67,8 @@ export class AffirmationsComponent implements OnInit {
         fontSize: 12,
         lineHeight: 1.5,
         letterSpacing: 0,
-      }
+      },
+      omegaBackground: this.omegas[0].value
     }
 
     this.affirmationService.addItem(item).then((doc: Affirmation) => {
@@ -77,10 +86,29 @@ export class AffirmationsComponent implements OnInit {
     }
   }
 
+  getOmegaBackgroundPath(omegaValue) {
+    // select omega from the omegas array by its value
+    var omega = this.omegas.filter(obj => { return obj.value === omegaValue })
+    var omegaPath;
+    
+    if (omega[0]) {
+      omegaPath = omega[0].url;
+    }
+    else {
+      omegaPath = this.omegas[0].url;
+    }
+    // set path to omega background
+    return omegaPath;
+  }
+
   selectAffirmation(id) {
     this.router.navigate(['/affirmation/' + id]);
     this.isBeingEdited = false;
     this.isConfirmDelete = false;
+  }
+
+  changeOmega(event: any) {
+    this.selectedOmega = this.getOmegaBackgroundPath(event.target.value);
   }
 
   updateItem() {
@@ -96,6 +124,7 @@ export class AffirmationsComponent implements OnInit {
 
   cancelEdit() {
     this.selectedAffirmation = this.copyAffirmation
+    this.selectedOmega = this.getOmegaBackgroundPath(this.copyAffirmation.omegaBackground);
     this.isBeingEdited = false;
   }
 
