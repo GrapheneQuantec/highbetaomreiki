@@ -43,7 +43,7 @@
   </div>
 
   <div class="rightPanel">
-    <div class="affirmation">
+    <div class="affirmation" [ngStyle]="{'background-image':'url(../../../assets/images/' + selectedOmega + ')'}">
       <div class="affirmation-title">
         <div *ngIf="!isBeingEdited">
           {{selectedAffirmation.title}}
@@ -67,6 +67,8 @@
           <textarea name="edit" id="affirmationEdit" [(ngModel)]="selectedAffirmation.content">{{selectedAffirmation.content}}</textarea>
         </div>
       </div>
+
+      <!-- font controls -->
       <div *ngIf="isBeingEdited" class="text-controls">
         <span>
           <div>font size</div>
@@ -81,6 +83,15 @@
           <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.letterSpacing">
         </span>
       </div>
+
+      <!-- omega chooser -->
+      <div *ngIf="isBeingEdited" class="omega-background-select">
+        <div>Omega background</div>
+        <select (change)="changeOmega($event)" [(ngModel)]="selectedAffirmation.omegaBackground">
+          <option *ngFor='let omega of omegas' value="{{omega.value}}">{{omega.text}}</option>
+        </select>
+      </div>
+
     </div>
   </div>
 
@@ -101,7 +112,6 @@
               </li>
             </ul>
           </li>
-          <li>omega background selection</li>
           <li>karaoke</li>
         </ul>
       </li>

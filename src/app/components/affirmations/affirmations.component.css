@@ -10,13 +10,15 @@
 .leftPanel {
     float: left;
     width: 20%;
-    background-color: rgb(255, 187, 41);
-    border-radius: 10px;
     color: #8b0f0d;
 }
 
 .affirmation-list {
     padding: 20px;
+    background-color: rgb(255, 187, 41);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flow-root;
 }
 
 .affirmations-list-header {
@@ -73,6 +75,19 @@
     color: red;
 }
 
+.omega-background-select {
+    background: #f65b10;
+    border: 2px solid #8b0f0d;
+    border-radius: 4px;
+    margin-top: 10px;   
+}
+
+.omega-background-select select {
+    font-size: 18px;
+    padding: 1px 0;
+    margin-bottom: 6px;
+}
+
 .rightPanel {
     float: left;
     width: 40%;
@@ -95,7 +110,6 @@
 }
 
 .affirmation {
-    background-image: url(../../../assets/images/OmegaSubaru.gif);
     background-size: 659px 864px;
     background-repeat: no-repeat;
     width: 296px;

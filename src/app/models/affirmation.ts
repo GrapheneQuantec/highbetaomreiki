@@ -3,6 +3,7 @@ export interface Affirmation {
     title?: string;
     content?: string;
     fontSettings?: FontSettings;
+    omegaBackground?: string;
   }
 
   export interface FontSettings {
