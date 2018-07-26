@@ -1,27 +1,37 @@
-<div class="affirmationPanel">
+
+    <button (click)="authService.googleLogin()" class="button btn-social btn-google">
+        <i class="fa fa-google"></i> Connect Google
+      </button>
+<div *ngIf="authService.user$ | async as user" class="affirmationPanel">
   <div class="leftPanel">
+    <div>
+      <button (click)="authService.signOut()" class="button">Logout</button>
+    </div>
+
     <div class="affirmation-list">
       <div class="affirmations-list-header">
           <span class="affirmationListTitle">Affirmations</span>
-            <span (click)="addAffirmation()" class="add-affirmation"><i class="fa fa-plus"></i></span>
-      </div>
+          <div *ngIf="authService.user$ | async as user">
+            <span *ngIf="authService.canEdit(user)" (click)="addAffirmation()" class="add-affirmation"><i class="fa fa-plus"></i></span>
+          </div>
+        </div>
       <ul class="selectAffirmation">
         <li *ngFor="let affirmation of affirmations" id="{{affirmation.id}}" [ngClass]="{ 'selected' : activeAffirmationId == affirmation.id }">
           <div class="affirmation-title" (click)="selectAffirmation(affirmation.id)">
             {{affirmation.title}}
           </div>
-          <div *ngIf="activeAffirmationId == affirmation.id" class="affirmation-edit-buttons">
+          <div *ngIf="activeAffirmationId == affirmation.id && authService.user$ | async as user" class="affirmation-edit-buttons">
             <span *ngIf="!isConfirmDelete">
               <span *ngIf="!isBeingEdited">
-                <span (click)="startEdit()" class="crud-icon"><i class="fa fa-pencil"></i></span>
-                <span (click)="deleteAffirmation()" class="crud-icon"><i class="fa fa-trash"></i></span>
+                <span *ngIf="authService.canEdit(user)" (click)="startEdit()" class="crud-icon"><i class="fa fa-pencil"></i></span>
+                <span *ngIf="authService.canDelete(user)" (click)="deleteAffirmation()" class="crud-icon"><i class="fa fa-trash"></i></span>
               </span>
               <span *ngIf="isBeingEdited">
                 <span (click)="updateItem()" class="crud-icon"><i class="fa fa-check"></i></span>
                 <span (click)="cancelEdit()" class="crud-icon"><i class="fa fa-close"></i></span>
               </span>
             </span>
-            <span *ngIf="isConfirmDelete">
+            <span *ngIf="isConfirmDelete && authService.canDelete(user)">
               Delete? 
               <span (click)="confirmedDeleteAffirmation(affirmation)" class="crud-icon"><i class="fa fa-check"></i></span>
               <span (click)="revokedDeleteAffirmation()" class="crud-icon"><i class="fa fa-close"></i></span>

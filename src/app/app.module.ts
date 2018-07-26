@@ -10,6 +10,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AffirmationsComponent } from './components/affirmations/affirmations.component';
+import { AuthService } from './core/auth.service';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 // services
 import { AffirmationService } from './services/affirmation.service';
@@ -32,9 +34,10 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularFireDatabaseModule
   ],
-  providers: [AffirmationService],
+  providers: [AffirmationService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

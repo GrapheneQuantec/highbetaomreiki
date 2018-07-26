@@ -3,6 +3,7 @@ import { AffirmationService } from '../../services/affirmation.service';
 import { Affirmation } from '../../models/affirmation';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap, map } from 'rxjs/operators';
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'app-affirmations',
@@ -21,14 +22,21 @@ export class AffirmationsComponent implements OnInit {
   copyAffirmation: Affirmation;
   isBeingEdited: boolean = false;
   isConfirmDelete: boolean = false;
+  user;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    public affirmationService: AffirmationService) {
+    public affirmationService: AffirmationService,
+    public authService: AuthService) {
 
   }
 
   ngOnInit() {
+
+    this.authService.user$.subscribe(user => {
+      this.user = user
+    });
+
     this.route.url.subscribe((u) => {
       if (u[1]) {
         this.affirmationService.getAffirmationById(u[1].path).then(affirmation => {
