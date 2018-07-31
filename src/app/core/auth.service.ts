@@ -30,11 +30,9 @@ export class AuthService {
 
     this.user$ = this.afAuth.authState.pipe(switchMap(user => {
       if (user) {
-        console.log('user', user);
         return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
       }
       else {
-        console.log('theres no user');
         return new Observable();
       }
     }))
@@ -81,7 +79,6 @@ export class AuthService {
   }
 
   canEdit(user: User): boolean {
-    console.log('in auth', user);
     return this.checkAuthorization(user, ['admin', 'author'])
   }
 

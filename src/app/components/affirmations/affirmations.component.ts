@@ -38,13 +38,13 @@ export class AffirmationsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    
     this.authService.user$.subscribe(user => {
       this.user = user
     });
 
     this.route.url.subscribe((u) => {
-      if (u[1]) {
+    if (u[1]) {
         this.affirmationService.getAffirmationById(u[1].path).then(affirmation => {
           if (affirmation) {
             this.selectedAffirmation = affirmation.data();
@@ -59,7 +59,7 @@ export class AffirmationsComponent implements OnInit {
       this.affirmations = affirmations;
       if (affirmations.length > 0) {
         this.selectedAffirmation = affirmations[0];
-        this.activeAffirmationId = affirmations[0].id;
+        this.activeAffirmationId = (this.activeAffirmationId)? this.activeAffirmationId : affirmations[0].id;
         this.selectedOmega = this.getOmegaBackgroundPath(affirmations[0].omegaBackground);
       }
     })
@@ -68,7 +68,6 @@ export class AffirmationsComponent implements OnInit {
 
   addAffirmation() {
     var item: Affirmation = {
-      id: 'sextantra',
       title: 'Title',
       content: 'Affirmation content',
       fontSettings: {
@@ -80,7 +79,9 @@ export class AffirmationsComponent implements OnInit {
     }
 
     this.affirmationService.addItem(item).then((doc: Affirmation) => {
-      this.selectAffirmation(doc.id);
+        item.id = doc.id;
+        this.affirmationService.updateItem(item);
+        this.selectAffirmation(doc.id);
     });
   }
 
