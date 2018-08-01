@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Thompson Michelli Ménage à trois</th>
+    <th *ngFor="let verbal of verbals">
+      <span class="chage-index-arrows" (click)="moveBack(verbal)">&#xab;</span>
+      {{ verbal.content }}
+      <span class="chage-index-arrows" (click)="moveFurther(verbal)">&#xbb;</span>
+    </th>
+  </tr>
+  <tr *ngFor="let nonverbal of nonverbals">
+    <th>{{ nonverbal }}</th>
+    <td *ngFor="let verbal of verbals">{{ verbal.content }} {{ nonverbal }}</td>
+  </tr>
+</table>

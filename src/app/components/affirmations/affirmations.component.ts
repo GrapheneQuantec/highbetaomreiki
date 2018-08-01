@@ -14,11 +14,7 @@ export class AffirmationsComponent implements OnInit {
 
   affirmations: Affirmation[];
   activeAffirmationId: string;
-  selectedAffirmation: Affirmation = {
-    id: '',
-    title: '',
-    content: '',
-  };
+  selectedAffirmation: Affirmation;
   copyAffirmation: Affirmation;
   isBeingEdited: boolean = false;
   isConfirmDelete: boolean = false;

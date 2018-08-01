@@ -16,7 +16,6 @@ export class AffirmationService {
   afs$: AngularFirestore;
   collectionName: string = 'affirmations';
 
-
   constructor(public afs: AngularFirestore) { 
 
     this.afs$ = afs;
