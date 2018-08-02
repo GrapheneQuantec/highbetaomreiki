@@ -117,6 +117,7 @@
       </li>
     </ul>
   </div>
+
+  <app-matrixcollection *ngIf="authService.canEdit(user)"></app-matrixcollection>
 </div>
 
-<app-matrixcollection></app-matrixcollection>

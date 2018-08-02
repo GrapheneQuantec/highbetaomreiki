@@ -49,11 +49,6 @@ export class MatrixcollectionService {
     this.affirmationDoc.update(affirmation);
   }
 
-  increaseItemsIndex(item: MatrixItem) {
-    this.affirmationDoc = this.afs.doc<MatrixColleciton>(this.collectionName + "/" + item.id);
-    // this.affirmationDoc.update(item);
-  }
-
   deleteItem(affirmation: MatrixColleciton) {
     this.affirmationDoc = this.afs.doc<MatrixColleciton>(this.collectionName + "/" + affirmation.id);
     this.affirmationDoc.delete();

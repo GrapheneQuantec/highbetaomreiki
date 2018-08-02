@@ -18,6 +18,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AffirmationService } from './services/affirmation.service';
 import { MatrixcollectionService } from './services/matrixcollection.service';
 
+// third party
+import { DragulaModule } from 'ng2-dragula';
+
 const appRoutes: Routes = [
   { path: '**', component: AffirmationsComponent },
   { path: 'affirmation', component: AffirmationsComponent },
@@ -38,7 +41,8 @@ const appRoutes: Routes = [
     AngularFirestoreModule,
     AngularFireAuthModule,
     RouterModule.forRoot(appRoutes),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    DragulaModule.forRoot()
   ],
   providers: [AffirmationService, MatrixcollectionService, AuthService],
   bootstrap: [AppComponent]

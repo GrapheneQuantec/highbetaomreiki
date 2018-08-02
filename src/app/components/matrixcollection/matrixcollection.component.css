@@ -1,8 +1,18 @@
 table {
     color: yellow;
-    font-size: 24px;
+    font-size: 36px;
+}
+
+td, th {
+    padding: 10px 20px;
 }
 
 .chage-index-arrows {
     cursor: pointer;
+    
+}
+
+.chage-index-arrows.rotated {
+    transform: rotate(90deg);
+    display: inline-block;
 }

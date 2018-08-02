@@ -1,14 +1,20 @@
 <table>
   <tr>
-    <th>Thompson Michelli Ménage à trois</th>
-    <th *ngFor="let verbal of verbals">
-      <span class="chage-index-arrows" (click)="moveBack(verbal)">&#xab;</span>
+    <th>Matrix</th>
+    <th class="{{ verbal.content }}" *ngFor="let verbal of verbals">
+      <span *ngIf="verbal.index != 0" class="chage-index-arrows" (click)="moveBack(verbal, verbals, verbalsCollection)">&#xab;</span>
       {{ verbal.content }}
-      <span class="chage-index-arrows" (click)="moveFurther(verbal)">&#xbb;</span>
+      <span *ngIf="verbal.index != verbals.length-1" class="chage-index-arrows" (click)="moveFurther(verbal, verbals, verbalsCollection)">&#xbb;</span>
     </th>
   </tr>
-  <tr *ngFor="let nonverbal of nonverbals">
-    <th>{{ nonverbal }}</th>
-    <td *ngFor="let verbal of verbals">{{ verbal.content }} {{ nonverbal }}</td>
+  <tr *ngFor="let letter of letters">
+      
+    <div><th>
+        <span *ngIf="letter.index != 0" class="chage-index-arrows rotated" (click)="moveBack(letter, letters, noneverbalsCollection)">&#xab;</span>
+        {{ letter.content }}
+        <span *ngIf="letter.index != letters.length-1" class="chage-index-arrows rotated" (click)="moveFurther(letter, letters, noneverbalsCollection)">&#xbb;</span>
+      </th></div>
+    
+    <td *ngFor="let verbal of verbals">{{ verbal.content }} {{ letter.content }}</td>
   </tr>
 </table>
