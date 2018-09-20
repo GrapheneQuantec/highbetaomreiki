@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule }   from '@app/app-routing.module';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     RouterModule.forRoot(appRoutes),
     AngularFireDatabaseModule,
-    DragulaModule.forRoot()
+    DragulaModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [AffirmationService, MatrixcollectionService, AuthService],
   bootstrap: [AppComponent]

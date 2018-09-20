@@ -1,7 +1,5 @@
 
-    <button (click)="authService.googleLogin()" class="button btn-social btn-google">
-        <i class="fa fa-google"></i> Connect Google
-      </button>
+
 <div *ngIf="authService.user$ | async as user" class="affirmationPanel">
   <div class="leftPanel">
     <div>
@@ -118,6 +116,6 @@
     </ul>
   </div>
 
-  <app-matrixcollection *ngIf="authService.canEdit(user)"></app-matrixcollection>
+  
 </div>
 

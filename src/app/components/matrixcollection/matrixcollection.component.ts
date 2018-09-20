@@ -21,15 +21,22 @@ export class MatrixcollectionComponent implements OnInit {
   subs = new Subscription();
   numbers: MatrixItem[];
   letters: MatrixItem[];
+  user;
 
   constructor(
     private matrixcollectionService: MatrixcollectionService,
-    private dragulaService: DragulaService
+    private dragulaService: DragulaService,
+    public authService: AuthService
   ) { }
 
   ngOnInit() {
 
     // this.addAffirmation();
+
+    this.authService.user$.subscribe(user => {
+      this.user = user
+    });
+
 
     this.matrixcollectionService.getItems().subscribe(items => {
       if (items.length > 0) {
