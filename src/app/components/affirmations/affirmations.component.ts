@@ -22,8 +22,8 @@ export class AffirmationsComponent implements OnInit {
   selectedOmega: string = 'OmegaSubaru';
 
   omegas = [
-    {value : "OmegaSubaru", text : "Omega Subaru", url : "omega_subaru.gif"},
-    {value : "OmegaMultipleString", text : "Omega Multiple String", url : "omega_multiple_string.png"}
+    { value: "OmegaSubaru", text: "Omega Subaru", url: "omega_subaru.gif" },
+    { value: "OmegaMultipleString", text: "Omega Multiple String", url: "omega_multiple_string.png" }
   ];
 
   constructor(private router: Router,
@@ -34,32 +34,40 @@ export class AffirmationsComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     this.authService.user$.subscribe(user => {
       this.user = user
     });
 
     this.route.url.subscribe((u) => {
-    if (u[1]) {
-        this.affirmationService.getAffirmationById(u[1].path).then(affirmation => {
-          if (affirmation) {
-            this.selectedAffirmation = affirmation.data();
-            this.activeAffirmationId = affirmation.id;
-            this.selectedOmega = this.getOmegaBackgroundPath(affirmation.data().omegaBackground);
-          }
-        })
+      if (this.affirmations) {
+        let aff = this.affirmations.find(aff => aff.id == u[1].path);
+        this.setSelectedAffirmation(aff);
+      }
+      else {
+        if (u[1]) {
+          this.affirmationService.getAffirmationById(u[1].path).then(affirmation => {
+            if (affirmation) {
+              this.setSelectedAffirmation(affirmation.data());
+            }
+          })
+        }
       }
     });
 
     this.affirmationService.getAffirmations().subscribe(affirmations => {
-      this.affirmations = affirmations;
-      if (affirmations.length > 0) {
-        this.selectedAffirmation = affirmations[0];
-        this.activeAffirmationId = (this.activeAffirmationId)? this.activeAffirmationId : affirmations[0].id;
-        this.selectedOmega = this.getOmegaBackgroundPath(affirmations[0].omegaBackground);
+    this.affirmations = affirmations;
+      if (affirmations.length > 0 && !this.activeAffirmationId) {
+        this.setSelectedAffirmation(affirmations[0]);
       }
     })
 
+  }
+
+  setSelectedAffirmation(affirmation) {
+    this.selectedAffirmation = affirmation;
+    this.activeAffirmationId = affirmation.id;
+    this.selectedOmega = this.getOmegaBackgroundPath(affirmation.omegaBackground);
   }
 
   addAffirmation() {
@@ -75,9 +83,9 @@ export class AffirmationsComponent implements OnInit {
     }
 
     this.affirmationService.addItem(item).then((doc: Affirmation) => {
-        item.id = doc.id;
-        this.affirmationService.updateItem(item);
-        this.selectAffirmation(doc.id);
+      item.id = doc.id;
+      this.affirmationService.updateItem(item);
+      this.selectAffirmation(doc.id);
     });
   }
 
@@ -95,7 +103,7 @@ export class AffirmationsComponent implements OnInit {
     // select omega from the omegas array by its value
     var omega = this.omegas.filter(obj => { return obj.value === omegaValue })
     var omegaPath;
-    
+
     if (omega[0]) {
       omegaPath = omega[0].url;
     }
