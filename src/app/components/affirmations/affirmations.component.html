@@ -2,9 +2,6 @@
 
 <div *ngIf="authService.user$ | async as user" class="affirmationPanel">
   <div class="leftPanel">
-    <div>
-      <button (click)="authService.signOut()" class="button">Logout</button>
-    </div>
 
     <div class="affirmation-list">
       <div class="affirmations-list-header">

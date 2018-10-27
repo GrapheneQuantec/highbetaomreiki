@@ -1,6 +1,5 @@
 // src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
-import { Router } from "@angular/router";
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
@@ -22,7 +21,7 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private db: AngularFireDatabase,
-    private _firebaseAuth: AngularFireAuth
+    private _firebaseAuth: AngularFireAuth,
     // ,
     // private router: Router
   ) {
@@ -51,7 +50,7 @@ export class AuthService {
   }
 
   signOut() {
-    this.afAuth.auth.signOut();
+    this.afAuth.auth.signOut().then(value => location.reload());
   }
 
   private updateUser(authData) {

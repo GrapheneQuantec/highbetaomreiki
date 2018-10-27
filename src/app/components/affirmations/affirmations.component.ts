@@ -40,19 +40,21 @@ export class AffirmationsComponent implements OnInit {
     });
 
     this.route.url.subscribe((u) => {
-      if (this.affirmations) {
-        this.setSelectedAffirmation(this.affirmations.find(aff => aff.id === u[u.length - 1].path));
-      } else {
-        this.affirmationService.getAffirmationById(u[u.length - 1].path).then(affirmation => {
-          if (affirmation) {
-            this.setSelectedAffirmation(affirmation.data());
-          }
-        });
+      if (u.length > 0) {
+        if (this.affirmations) {
+          this.setSelectedAffirmation(this.affirmations.find(aff => aff.id === u[u.length - 1].path));
+        } else {
+          this.affirmationService.getAffirmationById(u[u.length - 1].path).then(affirmation => {
+            if (affirmation) {
+              this.setSelectedAffirmation(affirmation.data());
+            }
+          });
+        }
       }
     });
 
     this.affirmationService.getAffirmations().subscribe(affirmations => {
-    this.affirmations = affirmations;
+      this.affirmations = affirmations;
       if (affirmations.length > 0 && !this.activeAffirmationId) {
         this.setSelectedAffirmation(affirmations[0]);
       }

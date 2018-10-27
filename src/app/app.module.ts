@@ -22,6 +22,7 @@ import { MatrixcollectionService } from './services/matrixcollection.service';
 // third party
 import { DragulaModule } from 'ng2-dragula';
 import { SymbolsComponent } from './components/symbols/symbols.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 const appRoutes: Routes = [
   { path: '**', component: AffirmationsComponent },
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     AppComponent,
     AffirmationsComponent,
     MatrixcollectionComponent,
-    SymbolsComponent
+    SymbolsComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

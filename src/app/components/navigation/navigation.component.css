@@ -1,0 +1,7 @@
+.menu-item {
+  height: 50px;
+  color: yellow;
+  cursor: pointer;
+  display: inline-block;
+  padding: 14px;
+}
