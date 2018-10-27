@@ -5,11 +5,11 @@ import { MatrixcollectionComponent } from '@app/components/matrixcollection/matr
 
 export const appRoutes: Routes = [
   // Affirmations
-  { path: 'affirmation',  component: AffirmationsComponent },
+  { path: 'affirmation', component: AffirmationsComponent },
   // Individual affirmation
-  { path: 'affirmation/:affid',  component: AffirmationsComponent},
+  { path: 'affirmation/:affid', component: AffirmationsComponent },
   // Matrix
-  { path: 'matrix',  component: MatrixcollectionComponent },
+  { path: 'matrix', component: MatrixcollectionComponent },
   // Default
   { path: '', component: AffirmationsComponent },
   // catch unmatched

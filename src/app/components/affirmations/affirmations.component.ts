@@ -16,10 +16,10 @@ export class AffirmationsComponent implements OnInit {
   activeAffirmationId: string;
   selectedAffirmation: Affirmation;
   copyAffirmation: Affirmation;
-  isBeingEdited: boolean = false;
-  isConfirmDelete: boolean = false;
+  isBeingEdited = false;
+  isConfirmDelete = false;
   user;
-  selectedOmega: string = 'OmegaSubaru';
+  selectedOmega = 'OmegaSubaru';
 
   omegas = [
     { value: "OmegaSubaru", text: "Omega Subaru", url: "omega_subaru.gif" },
@@ -36,21 +36,19 @@ export class AffirmationsComponent implements OnInit {
   ngOnInit() {
 
     this.authService.user$.subscribe(user => {
-      this.user = user
+      this.user = user;
     });
 
     this.route.url.subscribe((u) => {
       if (this.affirmations) {
-        let aff = this.affirmations.find(aff => aff.id == u[1].path);
-        this.setSelectedAffirmation(aff);
-      }
-      else {
+        this.setSelectedAffirmation(this.affirmations.find(aff => aff.id === u[1].path));
+      } else {
         if (u[1]) {
           this.affirmationService.getAffirmationById(u[1].path).then(affirmation => {
             if (affirmation) {
               this.setSelectedAffirmation(affirmation.data());
             }
-          })
+          });
         }
       }
     });
@@ -60,7 +58,7 @@ export class AffirmationsComponent implements OnInit {
       if (affirmations.length > 0 && !this.activeAffirmationId) {
         this.setSelectedAffirmation(affirmations[0]);
       }
-    })
+    });
 
   }
 
@@ -71,7 +69,7 @@ export class AffirmationsComponent implements OnInit {
   }
 
   addAffirmation() {
-    var item: Affirmation = {
+    const item: Affirmation = {
       title: 'Title',
       content: 'Affirmation content',
       fontSettings: {
@@ -80,7 +78,7 @@ export class AffirmationsComponent implements OnInit {
         letterSpacing: 0,
       },
       omegaBackground: this.omegas[0].value
-    }
+    };
 
     this.affirmationService.addItem(item).then((doc: Affirmation) => {
       item.id = doc.id;
@@ -101,13 +99,12 @@ export class AffirmationsComponent implements OnInit {
 
   getOmegaBackgroundPath(omegaValue) {
     // select omega from the omegas array by its value
-    var omega = this.omegas.filter(obj => { return obj.value === omegaValue })
-    var omegaPath;
+    const omega = this.omegas.filter(obj => obj.value === omegaValue);
+    let omegaPath;
 
     if (omega[0]) {
       omegaPath = omega[0].url;
-    }
-    else {
+    } else {
       omegaPath = this.omegas[0].url;
     }
     // set path to omega background
@@ -136,7 +133,7 @@ export class AffirmationsComponent implements OnInit {
   }
 
   cancelEdit() {
-    this.selectedAffirmation = this.copyAffirmation
+    this.selectedAffirmation = this.copyAffirmation;
     this.selectedOmega = this.getOmegaBackgroundPath(this.copyAffirmation.omegaBackground);
     this.isBeingEdited = false;
   }
