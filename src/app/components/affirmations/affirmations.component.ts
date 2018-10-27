@@ -41,15 +41,13 @@ export class AffirmationsComponent implements OnInit {
 
     this.route.url.subscribe((u) => {
       if (this.affirmations) {
-        this.setSelectedAffirmation(this.affirmations.find(aff => aff.id === u[1].path));
+        this.setSelectedAffirmation(this.affirmations.find(aff => aff.id === u[u.length - 1].path));
       } else {
-        if (u[1]) {
-          this.affirmationService.getAffirmationById(u[1].path).then(affirmation => {
-            if (affirmation) {
-              this.setSelectedAffirmation(affirmation.data());
-            }
-          });
-        }
+        this.affirmationService.getAffirmationById(u[u.length - 1].path).then(affirmation => {
+          if (affirmation) {
+            this.setSelectedAffirmation(affirmation.data());
+          }
+        });
       }
     });
 
@@ -88,7 +86,7 @@ export class AffirmationsComponent implements OnInit {
   }
 
   getAffirmationStyle(): object {
-    if (this.selectedAffirmation.fontSettings) {
+    if (this.selectedAffirmation && this.selectedAffirmation.fontSettings) {
       return {
         'font-size': this.selectedAffirmation.fontSettings.fontSize + 'px',
         'line-height': this.selectedAffirmation.fontSettings.lineHeight,
@@ -112,7 +110,7 @@ export class AffirmationsComponent implements OnInit {
   }
 
   selectAffirmation(id) {
-    this.router.navigate(['/affirmation/' + id]);
+    this.router.navigate(['/meditation/affirmation/' + id]);
     this.isBeingEdited = false;
     this.isConfirmDelete = false;
   }

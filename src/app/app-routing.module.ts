@@ -2,12 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AffirmationsComponent } from '@app/components/affirmations/affirmations.component';
 import { MatrixcollectionComponent } from '@app/components/matrixcollection/matrixcollection.component';
+import { SymbolsComponent } from '@app/components/symbols/symbols.component';
 
 export const appRoutes: Routes = [
   // Affirmations
-  { path: 'affirmation', component: AffirmationsComponent },
+  { path: 'meditation/affirmation', component: AffirmationsComponent },
   // Individual affirmation
-  { path: 'affirmation/:affid', component: AffirmationsComponent },
+  { path: 'meditation/affirmation/:affid', component: AffirmationsComponent },
+
+  { path: 'meditation/symbols', component: SymbolsComponent },
   // Matrix
   { path: 'matrix', component: MatrixcollectionComponent },
   // Default

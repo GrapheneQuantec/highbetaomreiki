@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule }   from '@app/app-routing.module';
+import { AppRoutingModule } from '@app/app-routing.module';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -21,6 +21,7 @@ import { MatrixcollectionService } from './services/matrixcollection.service';
 
 // third party
 import { DragulaModule } from 'ng2-dragula';
+import { SymbolsComponent } from './components/symbols/symbols.component';
 
 const appRoutes: Routes = [
   { path: '**', component: AffirmationsComponent },
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     AffirmationsComponent,
-    MatrixcollectionComponent
+    MatrixcollectionComponent,
+    SymbolsComponent
   ],
   imports: [
     BrowserModule,
