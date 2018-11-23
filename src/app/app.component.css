@@ -6,3 +6,17 @@
   background: linear-gradient(90deg, rgba(250,0,0,1) 0%, rgba(0,237,255,1) 100%);
   margin: 0 50px 50px 50px;
 }
+
+.outerWelcome {
+  height: 100vh;
+  position: relative;
+}
+
+.innerWelcome {
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color:yellow;
+}

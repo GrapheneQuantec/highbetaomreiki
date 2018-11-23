@@ -1,17 +1,25 @@
-<div class="top-bar">
+<ng-container *ngIf="(authService.user$ | async) as user; else loading">
 
-  <span *ngIf="(authService.user$ | async) as user; else loading">
+  <div class="top-bar">
+
     <button (click)="authService.signOut()" class="button">Logout</button>
-  </span>
-  <ng-template #loading>
-    <span>
+
+    <app-navigation></app-navigation>
+  </div>
+  <div class="main-site">
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+
+
+
+<ng-template #loading>
+  <div class="outerWelcome">
+    <div class="innerWelcome">
+      <h1>Li Om Reiki welcomes you</h1>
       <button (click)="authService.googleLogin()" class="button btn-social btn-google">
         <i class="fa fa-google"></i> Connect Google
       </button>
-    </span>
-  </ng-template>
-  <app-navigation></app-navigation>
-</div>
-<div class="main-site">
-  <router-outlet></router-outlet>
-</div>
+    </div>
+  </div>
+</ng-template>
