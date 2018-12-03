@@ -63,9 +63,11 @@ export class AffirmationsComponent implements OnInit {
   }
 
   setSelectedAffirmation(affirmation) {
-    this.selectedAffirmation = affirmation;
-    this.activeAffirmationId = affirmation.id;
-    this.selectedOmega = this.getOmegaBackgroundPath(affirmation.omegaBackground);
+    if (affirmation) {
+      this.selectedAffirmation = affirmation;
+      this.activeAffirmationId = affirmation.id;
+      this.selectedOmega = this.getOmegaBackgroundPath(affirmation.omegaBackground);
+    }
   }
 
   addAffirmation() {
