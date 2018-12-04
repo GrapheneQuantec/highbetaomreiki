@@ -1,5 +1,5 @@
 .affirmationPanel {
-    float: left;
+    display: inline-block;
     width: 100%;
 }
 
@@ -141,19 +141,21 @@
     line-height: 0.5;
 }
 
-.aveLogos {
-    font-size: 22px;
+.aveLogos{
+  font-size: 17px;
+  margin-left: 4px;
+}
+
+.allaLogos{
+  font-size: 22px; position: relative; top: 3px;
 }
 
 .jhwhLogos {
-    font-size: 32px;
+  font-size: 24px;
 }
 
-.allaLogos {
-    font-size: 32px;
-    position: relative;
-    top: 6px;
-    float: right;
+.yesuLogos {
+  font-size: 17px;
 }
 
 .entry-content {

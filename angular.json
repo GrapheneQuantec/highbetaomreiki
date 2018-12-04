@@ -24,9 +24,12 @@
             ],
             "styles": [
               "src/styles.scss",
-              "./node_modules/font-awesome/css/font-awesome.css"
+              "./node_modules/font-awesome/css/font-awesome.css",
+              "src/assets/styles/carousel.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/carousel.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -73,9 +76,12 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/styles/carousel.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/js/carousel3d.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"

@@ -14,23 +14,51 @@ export class AffirmationsComponent implements OnInit {
 
   affirmations: Affirmation[];
   activeAffirmationId: string;
-  selectedAffirmation: Affirmation;
+  selectedAffirmation: Affirmation = {};
   copyAffirmation: Affirmation;
   isBeingEdited = false;
   isConfirmDelete = false;
   user;
   selectedOmega = 'OmegaSubaru';
+  private player;
 
   omegas = [
     { value: "OmegaSubaru", text: "Omega Subaru", url: "omega_subaru.gif" },
     { value: "OmegaMultipleString", text: "Omega Multiple String", url: "omega_multiple_string.png" }
   ];
 
+  videos = [
+    { videoId:"zR9-KR1PbJ4", caption: "AnaAna & Jesper" },
+    { videoId:"TMDkAVlNPL8", caption: "AnaAna Orgy" },
+    { videoId:"WznVXaV1b90", caption: "AnaAna & Monia" },
+    { videoId:"7jR7HIBY168", caption: "AnaAna Triptych" },
+    { videoId:"2Rvb1nv7oNQ", caption: "AnaAna Holo" },
+    { videoId:"aCncS0vkaNM", caption: "AnaAna Pregnant" },
+    { videoId:"SSAJG_N2fmU", caption: "AnaAna & Sisisi" },
+    { videoId:"aCncS0vkaNM", caption: "AnaAna Pregnant" },
+    { videoId:"GUWkrx5Tl7Q", caption: "AnaAna Zuberec" },
+    { videoId:"qpWosird7l4", caption: "AnaAna & Mae" },
+  ]
+
   constructor(private router: Router,
     private route: ActivatedRoute,
     public affirmationService: AffirmationService,
     public authService: AuthService) {
 
+  }
+
+  
+  savePlayer(player, videoId) {
+    let video = this.videos.find(vid => vid.videoId == videoId);
+    video["player"] = player;
+    player.playVideo();
+  }
+
+  onStateChange(event, videoId) {
+    if(event.data == YT.PlayerState.ENDED) {
+      let video = this.videos.find(vid => vid.videoId == videoId);
+      video["player"].seekTo(0);
+    }
   }
 
   ngOnInit() {
@@ -60,6 +88,16 @@ export class AffirmationsComponent implements OnInit {
       }
     });
 
+  }
+
+  spinRight(entered: boolean) {
+    let animationDuration = (entered) ? "running" : "paused";
+    document.getElementById("carousel-outer").setAttribute('style', 'animation-play-state: ' + animationDuration)
+  }
+
+  spinLeft(entered: boolean) {
+    let animationDuration = (entered) ? "running" : "paused";
+    document.getElementById("carousel-outerer").setAttribute('style', 'animation-play-state: ' + animationDuration)
   }
 
   setSelectedAffirmation(affirmation) {

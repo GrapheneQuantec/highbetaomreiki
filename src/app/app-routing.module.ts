@@ -14,7 +14,7 @@ export const appRoutes: Routes = [
   // Matrix
   { path: 'matrix', component: MatrixcollectionComponent },
   // Default
-  { path: '', component: SymbolsComponent },
+  { path: '', component: AffirmationsComponent },
   // catch unmatched
   { path: '**', redirectTo: '/affirmation', pathMatch: 'full' },
 ];
