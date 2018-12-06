@@ -26,7 +26,7 @@ Carousel3D.prototype.modify = function () {
 
   // do some trig to figure out how big the carousel
   // is in 3D space
-  this.radius = Math.round((this.panelSize / 2) / Math.tan(Math.PI / this.panelCount));
+  this.radius = 2 * Math.round((this.panelSize / 2) / Math.tan(Math.PI / this.panelCount));
 
   for (i = 0; i < this.panelCount; i++) {
       panel = this.element.children[i];
@@ -34,7 +34,7 @@ Carousel3D.prototype.modify = function () {
       panel.style.opacity = 1;
       //panel.style.backgroundColor = 'hsla(' + angle + ', 100%, 50%, 0.8)';
       // rotate panel, then push it out in 3D space
-      panel.style[transformProp] = this.rotateFn + '(' + angle + 'deg) translateZ(' + this.radius + 'px)';
+      panel.style[transformProp] = this.rotateFn + '(' + angle + 'deg) translateX(-50%)  translateZ(' + this.radius + 'px)';
   }
 
   // hide other panels
@@ -45,7 +45,7 @@ Carousel3D.prototype.modify = function () {
   }
 
   // adjust rotation so panels are always flat
-  this.rotation = Math.round(this.rotation / this.theta) * this.theta;
+  this.rotation = 2* Math.round(this.rotation / this.theta) * this.theta;
 
   this.transform();
 
@@ -59,7 +59,8 @@ Carousel3D.prototype.transform = function () {
 
 
 
-var init = function () {
+var initCarousel = function (panelCount) {
+  console.log('panelCount', panelCount);
   setTimeout(function () {
 
     var carousel = new Carousel3D(document.getElementById('carousel')),
@@ -74,7 +75,7 @@ var init = function () {
       };
 
   // populate on startup
-  carousel.panelCount = 10; // parseInt(panelCountInput.value, 10);
+  carousel.panelCount = (panelCount) ? panelCount : 10; // parseInt(panelCountInput.value, 10);
   carousel.modify();
 
 
@@ -98,8 +99,8 @@ var init = function () {
 
 
       document.body.classList.add('ready');
-  }, 2000);
+  }, 1000);
 
 };
 
-window.addEventListener('DOMContentLoaded', init, false);
+// window.addEventListener('DOMContentLoaded', initCarousel, false);

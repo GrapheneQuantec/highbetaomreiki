@@ -78,12 +78,9 @@ canvas {
     section.container {
       width: 210px;
       height: 160px;
-	  margin: auto;
+	    margin: auto;
       position: relative;
-      -webkit-perspective: 1100px;
-         -moz-perspective: 1100px;
-           -o-perspective: 1100px;
-              perspective: 1100px;
+      perspective: 16000px;
     }
 
     #carousel {
@@ -112,7 +109,7 @@ canvas {
 
 	
 	#mainPortal {
-      width: 212px;
+      width: 412px;
       height: 246px;
 	}
 
@@ -122,7 +119,7 @@ canvas {
       width: 212px;
       height: 246px;
       left: 10px;
-      top: 10px;
+      top: 600px;
       font-size: 24px;
       font-weight: bold;
       color: white;
@@ -168,13 +165,17 @@ canvas {
 	   animation: rotating 16s linear infinite; 
   }
 
-	.ready #carousel:hover {
+  .affirmation {
+    animation: rotating 16s linear infinite reverse; 
+ }
+
+	/* .ready #carousel:hover, .affirmation:hover {
     animation-play-state: paused;
-  }
+  } */
 
   .carousel-wrapper {
-    margin-top: 60px;
     position: relative;
+    zoom: 0.8;
   }
   
   .carousel-button {

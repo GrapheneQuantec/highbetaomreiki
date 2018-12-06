@@ -24,52 +24,80 @@ export class AffirmationsComponent implements OnInit {
   user;
   selectedOmega = 'OmegaSubaru';
   private player;
+  videos;
 
   omegas = [
     { value: "OmegaSubaru", text: "Omega Subaru", url: "omega_subaru.gif" },
     { value: "OmegaMultipleString", text: "Omega Multiple String", url: "omega_multiple_string.png" }
   ];
 
-  videos = [
-    { videoId:"zR9-KR1PbJ4", caption: "AnaAna & Jesper" },
-    { videoId:"TMDkAVlNPL8", caption: "AnaAna Orgy" },
-    { videoId:"WznVXaV1b90", caption: "AnaAna & Monia" },
-    { videoId:"7jR7HIBY168", caption: "AnaAna Triptych" },
-    { videoId:"2Rvb1nv7oNQ", caption: "AnaAna Holo" },
-    { videoId:"aCncS0vkaNM", caption: "AnaAna Pregnant" },
-    { videoId:"SSAJG_N2fmU", caption: "AnaAna & Sisisi" },
-    { videoId:"aCncS0vkaNM", caption: "AnaAna Pregnant" },
-    { videoId:"GUWkrx5Tl7Q", caption: "AnaAna Zuberec" },
-    { videoId:"qpWosird7l4", caption: "AnaAna & Mae" },
-  ];
+  carouselVideos = [
 
-  // SFW videos
-  // videos = [
-  //   { videoId:"q9JClFXo6dM", caption: "AnaAna & Jesper" },
-  //   { videoId:"_L9h2w798yY", caption: "AnaAna Orgy" },
-  //   { videoId:"q9JClFXo6dM", caption: "AnaAna & Monia" },
-  //   { videoId:"_L9h2w798yY", caption: "AnaAna Triptych" },
-  //   { videoId:"q9JClFXo6dM", caption: "AnaAna Holo" },
-  //   { videoId:"_L9h2w798yY", caption: "AnaAna Pregnant" },
-  //   { videoId:"q9JClFXo6dM", caption: "AnaAna & Sisisi" },
-  //   { videoId:"_L9h2w798yY", caption: "AnaAna Pregnant" },
-  //   { videoId:"q9JClFXo6dM", caption: "AnaAna Zuberec" },
-  //   { videoId:"_L9h2w798yY", caption: "AnaAna & Mae" },
-  // ];
+    [
+      { videoId: "zR9-KR1PbJ4", caption: "AnaAna & Jesper" },
+      { videoId: "TMDkAVlNPL8", caption: "AnaAna Orgy" },
+      { videoId: "WznVXaV1b90", caption: "AnaAna & Monia" },
+      { videoId: "7jR7HIBY168", caption: "AnaAna Triptych" },
+      { videoId: "2Rvb1nv7oNQ", caption: "AnaAna Holo" },
+      { videoId: "aCncS0vkaNM", caption: "AnaAna Pregnant" },
+      { videoId: "SSAJG_N2fmU", caption: "AnaAna & Sisisi" },
+      { videoId: "GUWkrx5Tl7Q", caption: "AnaAna Zuberec" },
+      { videoId: "qpWosird7l4", caption: "AnaAna & Mae" },
+    ],
+
+    [
+      { videoId: "lElk0ZDeimA", caption: "Monia Gangbang" },
+      { videoId: "J1GfrpA533M", caption: "Monia Trois" },
+      { videoId: "ZpbaJ5n9dDI", caption: "Monia & Jeremy" },
+      { videoId: "g_2EYNEi39c", caption: "Monia & Jeremy" },
+      { videoId: "D2KxRiUM12Y", caption: "Monia & Jeremy" },
+      { videoId: "jvxrLjsmPGs", caption: "Monia Minette" },
+      { videoId: "xGQKqk7H72U", caption: "Monia with Two" },
+
+    ],
+
+    [
+      { videoId: "q9JClFXo6dM", caption: "AnaAna & Jesper" },
+      { videoId: "_8wwAwEDeGo", caption: "AnaAna Orgy" },
+      { videoId: "q9JClFXo6dM", caption: "AnaAna & Monia" },
+      { videoId: "_8wwAwEDeGo", caption: "AnaAna Triptych" },
+      { videoId: "q9JClFXo6dM", caption: "AnaAna Holo" },
+      { videoId: "_8wwAwEDeGo", caption: "AnaAna Pregnant" },
+      { videoId: "q9JClFXo6dM", caption: "AnaAna & Sisisi" },
+      { videoId: "_8wwAwEDeGo", caption: "AnaAna Pregnant" },
+      { videoId: "q9JClFXo6dM", caption: "AnaAna Zuberec" },
+      { videoId: "_L9h2w798yY", caption: "AnaAna & Mae" },
+    ],
+    [
+      { videoId: "zGbylnMqNLs", caption: "AnaAna & Jesper" },
+      { videoId: "_8wwAwEDeGo", caption: "AnaAna Pregnant" },
+      { videoId: "zGbylnMqNLs", caption: "AnaAna & Sisisi" },
+      { videoId: "_8wwAwEDeGo", caption: "AnaAna Pregnant" },
+      { videoId: "zGbylnMqNLs", caption: "AnaAna Zuberec" },
+      { videoId: "_L9h2w798yY", caption: "AnaAna & Mae" },
+    ]
+
+  ]
+
+
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     public affirmationService: AffirmationService,
     public authService: AuthService,
     private utilService: UtilsService,
-    ) {
+  ) {
+  }
 
+  changedCarouselVideos(event) {
+    this.videos = this.carouselVideos[event.target.selectedIndex];
+    initCarousel(this.videos.length);
   }
 
   videoSelected(video) {
     this.utilService.setBackgroundVideo(video.videoId);
   }
-  
+
   savePlayer(player, videoId) {
     let video = this.videos.find(vid => vid.videoId == videoId);
     video["player"] = player;
@@ -77,7 +105,7 @@ export class AffirmationsComponent implements OnInit {
   }
 
   onStateChange(event, videoId) {
-    if(event.data == YT.PlayerState.ENDED) {
+    if (event.data == YT.PlayerState.ENDED) {
       let video = this.videos.find(vid => vid.videoId == videoId);
       video["player"].seekTo(0);
     }
@@ -87,6 +115,8 @@ export class AffirmationsComponent implements OnInit {
 
     this.authService.user$.subscribe(user => {
       this.user = user;
+      this.videos = this.carouselVideos[0];
+      initCarousel(this.carouselVideos[0].length);
     });
 
     this.route.url.subscribe((u) => {
@@ -109,6 +139,14 @@ export class AffirmationsComponent implements OnInit {
         this.setSelectedAffirmation(affirmations[0]);
       }
     });
+
+  }
+
+  rotationPause() {
+    document.getElementById("carousel").setAttribute('style', 'animation-play-state: ' + 'pause');
+  }
+
+  rotationResume() {
 
   }
 
