@@ -218,3 +218,10 @@
 .crud-icon .fa {
     cursor: pointer;
 }
+
+.youtube-overlay {
+    width: 208px;
+    height: 117px;
+    position: absolute;
+    z-index: 100;
+}

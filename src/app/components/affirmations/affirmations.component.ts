@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { AffirmationService } from '../../services/affirmation.service';
 import { Affirmation } from '../../models/affirmation';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap, map } from 'rxjs/operators';
 import { AuthService } from '../../core/auth.service';
+import { UtilsService } from '@app/services/utils.service';
 
 @Component({
   selector: 'app-affirmations',
@@ -11,6 +12,8 @@ import { AuthService } from '../../core/auth.service';
   styleUrls: ['./affirmations.component.css']
 })
 export class AffirmationsComponent implements OnInit {
+
+  @Output() selectedVideoId: string;
 
   affirmations: Affirmation[];
   activeAffirmationId: string;
@@ -38,15 +41,34 @@ export class AffirmationsComponent implements OnInit {
     { videoId:"aCncS0vkaNM", caption: "AnaAna Pregnant" },
     { videoId:"GUWkrx5Tl7Q", caption: "AnaAna Zuberec" },
     { videoId:"qpWosird7l4", caption: "AnaAna & Mae" },
-  ]
+  ];
+
+  // SFW videos
+  // videos = [
+  //   { videoId:"q9JClFXo6dM", caption: "AnaAna & Jesper" },
+  //   { videoId:"_L9h2w798yY", caption: "AnaAna Orgy" },
+  //   { videoId:"q9JClFXo6dM", caption: "AnaAna & Monia" },
+  //   { videoId:"_L9h2w798yY", caption: "AnaAna Triptych" },
+  //   { videoId:"q9JClFXo6dM", caption: "AnaAna Holo" },
+  //   { videoId:"_L9h2w798yY", caption: "AnaAna Pregnant" },
+  //   { videoId:"q9JClFXo6dM", caption: "AnaAna & Sisisi" },
+  //   { videoId:"_L9h2w798yY", caption: "AnaAna Pregnant" },
+  //   { videoId:"q9JClFXo6dM", caption: "AnaAna Zuberec" },
+  //   { videoId:"_L9h2w798yY", caption: "AnaAna & Mae" },
+  // ];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     public affirmationService: AffirmationService,
-    public authService: AuthService) {
+    public authService: AuthService,
+    private utilService: UtilsService,
+    ) {
 
   }
 
+  videoSelected(video) {
+    this.utilService.setBackgroundVideo(video.videoId);
+  }
   
   savePlayer(player, videoId) {
     let video = this.videos.find(vid => vid.videoId == videoId);

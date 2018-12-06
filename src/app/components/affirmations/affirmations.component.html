@@ -101,6 +101,7 @@
         <div id="carousel">
           <figure *ngFor="let video of videos">
             <div class="hexdiv">
+              <div class="youtube-overlay" (click)="videoSelected(video)"></div>
               <youtube-player [videoId]="video.videoId" (ready)="savePlayer($event, video.videoId)" (change)="onStateChange($event, video.videoId)"
                 width="208" height="117"></youtube-player>
             </div>

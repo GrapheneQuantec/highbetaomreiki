@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './core/auth.service';
+import { UtilsService } from './services/utils.service';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,11 @@ export class AppComponent {
   backgroundVideoId = "4XT5PsazYcM";
   private player;
   private ytEvent;
+  
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    private utilService: UtilsService,
   ) {
   }
 
@@ -27,6 +30,7 @@ export class AppComponent {
   savePlayer(player) {
     this.player = player;
     this.player.playVideo();
+    this.utilService.backgroundVideoId.subscribe(videoId => this.player.loadVideoById({'videoId': videoId}));
   }
   
   playVideo() {

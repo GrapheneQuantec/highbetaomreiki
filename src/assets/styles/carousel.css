@@ -132,6 +132,7 @@ canvas {
 	
     }
 		#carousel figure .hexdiv {
+      position: relative;
 		}
 		
 		#carousel figure .hexdiv img {
