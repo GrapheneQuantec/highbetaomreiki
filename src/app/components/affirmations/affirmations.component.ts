@@ -6,6 +6,9 @@ import { switchMap, map } from 'rxjs/operators';
 import { AuthService } from '../../core/auth.service';
 import { UtilsService } from '@app/services/utils.service';
 
+declare var initCarousel: any;
+
+
 @Component({
   selector: 'app-affirmations',
   templateUrl: './affirmations.component.html',
@@ -39,10 +42,13 @@ export class AffirmationsComponent implements OnInit {
       { videoId: "WznVXaV1b90", caption: "AnaAna & Monia" },
       { videoId: "7jR7HIBY168", caption: "AnaAna Triptych" },
       { videoId: "2Rvb1nv7oNQ", caption: "AnaAna Holo" },
-      { videoId: "aCncS0vkaNM", caption: "AnaAna Pregnant" },
       { videoId: "SSAJG_N2fmU", caption: "AnaAna & Sisisi" },
       { videoId: "GUWkrx5Tl7Q", caption: "AnaAna Zuberec" },
       { videoId: "qpWosird7l4", caption: "AnaAna & Mae" },
+      { videoId: "vQNGP_0JkLc", caption: "AnaAna in Gaj" },
+      { videoId: "3I5lbhlmRGQ", caption: "Maria" },
+      { videoId: "qmzQyOcZYDM", caption: "Maria" },
+      { videoId: "BtAezHra1O8", caption: "Maria" },
     ],
 
     [
