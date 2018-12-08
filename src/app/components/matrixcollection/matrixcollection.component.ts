@@ -55,7 +55,6 @@ export class MatrixcollectionComponent implements OnInit {
 
     this.subs.add(this.dragulaService.drop("row")
       .subscribe(({ name, el, target, source, sibling }) => {
-        // console.log('el.class', el.classList[0]);
 
         // get clicked item from collection
         let updateItem = this.verbalsCollection.matrixItems.find(x => x.content == el.classList[0]);

@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { AffirmationService } from '../../services/affirmation.service';
 import { Affirmation } from '../../models/affirmation';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap, map } from 'rxjs/operators';
 import { AuthService } from '../../core/auth.service';
+import { UtilsService } from '@app/services/utils.service';
+
+declare var initCarousel: any;
+
 
 @Component({
   selector: 'app-affirmations',
@@ -12,31 +16,113 @@ import { AuthService } from '../../core/auth.service';
 })
 export class AffirmationsComponent implements OnInit {
 
+  @Output() selectedVideoId: string;
+
   affirmations: Affirmation[];
   activeAffirmationId: string;
-  selectedAffirmation: Affirmation;
+  selectedAffirmation: Affirmation = {};
   copyAffirmation: Affirmation;
   isBeingEdited = false;
   isConfirmDelete = false;
   user;
   selectedOmega = 'OmegaSubaru';
+  private player;
+  videos;
 
   omegas = [
     { value: "OmegaSubaru", text: "Omega Subaru", url: "OmegaSubaru3.gif q" },
     { value: "OmegaMultipleString", text: "Omega Multiple String", url: "omega_multiple_string.png" },
   ];
 
+  carouselVideos = [
+
+    [
+      { videoId: "zR9-KR1PbJ4", caption: "AnaAna & Jesper" },
+      { videoId: "TMDkAVlNPL8", caption: "AnaAna Orgy" },
+      { videoId: "WznVXaV1b90", caption: "AnaAna & Monia" },
+      { videoId: "7jR7HIBY168", caption: "AnaAna Triptych" },
+      { videoId: "2Rvb1nv7oNQ", caption: "AnaAna Holo" },
+      { videoId: "SSAJG_N2fmU", caption: "AnaAna & Sisisi" },
+      { videoId: "GUWkrx5Tl7Q", caption: "AnaAna Zuberec" },
+      { videoId: "qpWosird7l4", caption: "AnaAna & Mae" },
+      { videoId: "vQNGP_0JkLc", caption: "AnaAna in Gaj" },
+      { videoId: "3I5lbhlmRGQ", caption: "Maria" },
+      { videoId: "qmzQyOcZYDM", caption: "Maria" },
+      { videoId: "BtAezHra1O8", caption: "Maria" },
+    ],
+
+    [
+      { videoId: "lElk0ZDeimA", caption: "Monia Gangbang" },
+      { videoId: "J1GfrpA533M", caption: "Monia Trois" },
+      { videoId: "ZpbaJ5n9dDI", caption: "Monia & Jeremy" },
+      { videoId: "g_2EYNEi39c", caption: "Monia & Jeremy" },
+      { videoId: "D2KxRiUM12Y", caption: "Monia & Jeremy" },
+      { videoId: "jvxrLjsmPGs", caption: "Monia Minette" },
+      { videoId: "xGQKqk7H72U", caption: "Monia with Two" },
+
+    ],
+
+    [
+      { videoId: "q9JClFXo6dM", caption: "AnaAna & Jesper" },
+      { videoId: "_8wwAwEDeGo", caption: "AnaAna Orgy" },
+      { videoId: "q9JClFXo6dM", caption: "AnaAna & Monia" },
+      { videoId: "_8wwAwEDeGo", caption: "AnaAna Triptych" },
+      { videoId: "q9JClFXo6dM", caption: "AnaAna Holo" },
+      { videoId: "_8wwAwEDeGo", caption: "AnaAna Pregnant" },
+      { videoId: "q9JClFXo6dM", caption: "AnaAna & Sisisi" },
+      { videoId: "_8wwAwEDeGo", caption: "AnaAna Pregnant" },
+      { videoId: "q9JClFXo6dM", caption: "AnaAna Zuberec" },
+      { videoId: "_L9h2w798yY", caption: "AnaAna & Mae" },
+    ],
+    [
+      { videoId: "zGbylnMqNLs", caption: "AnaAna & Jesper" },
+      { videoId: "_8wwAwEDeGo", caption: "AnaAna Pregnant" },
+      { videoId: "zGbylnMqNLs", caption: "AnaAna & Sisisi" },
+      { videoId: "_8wwAwEDeGo", caption: "AnaAna Pregnant" },
+      { videoId: "zGbylnMqNLs", caption: "AnaAna Zuberec" },
+      { videoId: "_L9h2w798yY", caption: "AnaAna & Mae" },
+    ]
+
+  ]
+
+
+
   constructor(private router: Router,
     private route: ActivatedRoute,
     public affirmationService: AffirmationService,
-    public authService: AuthService) {
+    public authService: AuthService,
+    private utilService: UtilsService,
+  ) {
+  }
 
+  changedCarouselVideos(event) {
+    this.videos = this.carouselVideos[event.target.selectedIndex];
+    initCarousel(this.videos.length);
+  }
+
+  videoSelected(video) {
+    this.utilService.setBackgroundVideo(video.videoId);
+  }
+
+  savePlayer(player, videoId) {
+    let video = this.videos.find(vid => vid.videoId == videoId);
+    video["player"] = player;
+    player.playVideo();
+  }
+
+  onStateChange(event, videoId) {
+    if (event.data == YT.PlayerState.ENDED) {
+      let video = this.videos.find(vid => vid.videoId == videoId);
+      video["player"].seekTo(0);
+    }
   }
 
   ngOnInit() {
 
     this.authService.user$.subscribe(user => {
       this.user = user;
+      this.videos = this.carouselVideos[0];
+      initCarousel(this.carouselVideos[0].length);
     });
 
     this.route.url.subscribe((u) => {
@@ -62,10 +148,30 @@ export class AffirmationsComponent implements OnInit {
 
   }
 
+  rotationPause() {
+    document.getElementById("carousel").setAttribute('style', 'animation-play-state: ' + 'pause');
+  }
+
+  rotationResume() {
+
+  }
+
+  spinRight(entered: boolean) {
+    let animationDuration = (entered) ? "running" : "paused";
+    document.getElementById("carousel-outer").setAttribute('style', 'animation-play-state: ' + animationDuration)
+  }
+
+  spinLeft(entered: boolean) {
+    let animationDuration = (entered) ? "running" : "paused";
+    document.getElementById("carousel-outerer").setAttribute('style', 'animation-play-state: ' + animationDuration)
+  }
+
   setSelectedAffirmation(affirmation) {
-    this.selectedAffirmation = affirmation;
-    this.activeAffirmationId = affirmation.id;
-    this.selectedOmega = this.getOmegaBackgroundPath(affirmation.omegaBackground);
+    if (affirmation) {
+      this.selectedAffirmation = affirmation;
+      this.activeAffirmationId = affirmation.id;
+      this.selectedOmega = this.getOmegaBackgroundPath(affirmation.omegaBackground);
+    }
   }
 
   addAffirmation() {

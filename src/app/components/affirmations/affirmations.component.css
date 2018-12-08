@@ -1,5 +1,5 @@
 .affirmationPanel {
-    float: left;
+    display: inline-block;
     width: 100%;
 }
 
@@ -8,9 +8,11 @@
 }
 
 .leftPanel {
-    float: left;
-    width: 20%;
-    color: #8b0f0d;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  color: #8b0f0d;
+  z-index: 1;
 }
 
 .affirmation-list {
@@ -90,7 +92,7 @@
 
 .rightPanel {
     float: left;
-    width: 40%;
+    width: 100%;
     text-align: center;
 }
 
@@ -110,17 +112,27 @@
 }
 
 .affirmation {
-    background-size: 659px 864px;
-    background-repeat: no-repeat;
-    width: 296px;
-    color: #800000;
-    text-align: center;
-    padding: 86px 179px;
-    font-family: cursive;
-    min-height: 700px;
-    cursor: pointer;
-    zoom: 0.8;
-    display: inline-block;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 404px;
+  color: maroon;
+  text-align: center;
+  padding: 124px 260px;
+  font-family: cursive;
+  min-height: 700px;
+  cursor: pointer;
+  zoom: .8;
+  display: inline-block;
+  height: 1000px;
+  position: fixed;
+  left: -292px;
+  top: -60px;
+  opacity: 1!important;
+  
+}
+
+.affirmation p {
+  margin: 0;
 }
 
 .affirmation-edit {
@@ -128,10 +140,10 @@
 }
 
 .superLogos {
-    font-size: 14px;
-    margin-right: 6px;
+    font-size: 22px;
+    margin-right: 10px;
     font-weight: bold;
-    margin-top: 51px;
+    margin-top: 94px;
 }
 
 .subLogoi {
@@ -141,19 +153,25 @@
     line-height: 0.5;
 }
 
-.aveLogos {
-    font-size: 22px;
+.aveLogos{
+  font-size: 22px;
+  margin-right: 8px;
+}
+
+.allaLogos{
+  font-size: 31px;
+  position: relative;
+  top: 3px;
+  margin-right: 4px;
 }
 
 .jhwhLogos {
-    font-size: 32px;
+  font-size: 35px;
+    margin-right: 6px;
 }
 
-.allaLogos {
-    font-size: 32px;
-    position: relative;
-    top: 6px;
-    float: right;
+.yesuLogos {
+  font-size: 24px;
 }
 
 .entry-content {
@@ -161,7 +179,7 @@
 }
 
 .edit-content {
-    height: 292px;
+    height: 406px;
     border: 2px solid #8b0f0d;
     margin: 6px 0 9px;
     border-radius: 4px;
@@ -215,4 +233,11 @@
 
 .crud-icon .fa {
     cursor: pointer;
+}
+
+.youtube-overlay {
+    width: 400px;
+    height: 225px;
+    position: absolute;
+    z-index: 100;
 }

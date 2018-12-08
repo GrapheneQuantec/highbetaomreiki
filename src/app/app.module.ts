@@ -23,6 +23,8 @@ import { MatrixcollectionService } from './services/matrixcollection.service';
 import { DragulaModule } from 'ng2-dragula';
 import { SymbolsComponent } from './components/symbols/symbols.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { YoutubePlayerModule } from 'ngx-youtube-player';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 const appRoutes: Routes = [
   { path: '**', component: AffirmationsComponent },
@@ -48,7 +50,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AngularFireDatabaseModule,
     DragulaModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    YoutubePlayerModule,
   ],
   providers: [AffirmationService, MatrixcollectionService, AuthService],
   bootstrap: [AppComponent]

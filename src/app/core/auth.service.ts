@@ -64,7 +64,7 @@ export class AuthService {
       photoURL: authData.photoURL,
       displayName: authData.displayName,
       roles: {
-        reader: true
+        reader: false
       }
     };
 
