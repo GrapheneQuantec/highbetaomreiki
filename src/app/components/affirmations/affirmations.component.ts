@@ -59,6 +59,9 @@ export class AffirmationsComponent implements OnInit {
       { videoId: "D2KxRiUM12Y", caption: "Monia & Jeremy" },
       { videoId: "jvxrLjsmPGs", caption: "Monia Minette" },
       { videoId: "xGQKqk7H72U", caption: "Monia with Two" },
+      { videoId: "uX89J6zmvj0", caption: "Sisisi in Cph" },
+      { videoId: "7WvfWcxULoI", caption: "Sisisi in Zuberec" },
+      { videoId: "X0PDoGtogDo", caption: "Sisisi in Germany" },
 
     ],
 
