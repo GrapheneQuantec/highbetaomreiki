@@ -38,16 +38,16 @@
 
         <div class="contentField">
 
-            <h4>Choose carousel</h4
-                >
+            <h3>Carousel</h3>
             <div class="carousel-chooser">
                 <select name="carousel" id="" (change)="changedCarouselVideos($event)">
+                    <option value="select">Choose carousel</option>
                     <option value="AnaAna">AnaAna</option>
                     <option value="Monia">Monia</option>
                 </select>
             </div>
 
-            <h4>Volume</h4>
+            <h3>Volume</h3>
             <div class="volume-picker">
                 <input (change)="volumeChanged()" [(ngModel)]="globalVolume" type="range" min="0" max="100" value="50">
             </div>

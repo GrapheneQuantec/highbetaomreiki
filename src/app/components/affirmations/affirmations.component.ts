@@ -93,38 +93,10 @@ export class AffirmationsComponent implements OnInit {
   ) {
   }
 
-  changedCarouselVideos(event) {
-    this.videos = this.carouselVideos[event.target.selectedIndex];
-    initCarousel(this.videos.length);
-  }
-
-  videoSelected(video) {
-    this.utilService.setBackgroundVideo(video.videoId);
-  }
-
-  volumeChanged(event) {
-     this.videos.forEach(video => video["player"].setVolume(this.globalVolume)); //.setVolume(this.globalVolume)
-  }
-
-  savePlayer(player, videoId) {
-    let video = this.videos.find(vid => vid.videoId == videoId);
-    video["player"] = player;
-    player.playVideo();
-  }
-
-  onStateChange(event, videoId) {
-    if (event.data == YT.PlayerState.ENDED) {
-      let video = this.videos.find(vid => vid.videoId == videoId);
-      video["player"].seekTo(0);
-    }
-  }
-
   ngOnInit() {
 
     this.authService.user$.subscribe(user => {
       this.user = user;
-      this.videos = this.carouselVideos[0];
-      initCarousel(this.videos.length);
     });
 
     this.route.url.subscribe((u) => {
@@ -148,6 +120,36 @@ export class AffirmationsComponent implements OnInit {
       }
     });
 
+  }
+
+  changedCarouselVideos(event) {
+      if(event.target.selectedIndex > 0) {
+        this.videos = this.carouselVideos[event.target.selectedIndex - 1];
+        initCarousel(this.videos.length);
+      } else {
+        this.videos = [];
+      }
+  }
+
+  videoSelected(video) {
+    this.utilService.setBackgroundVideo(video.videoId);
+  }
+
+  volumeChanged(event) {
+     this.videos.forEach(video => video["player"].setVolume(this.globalVolume)); //.setVolume(this.globalVolume)
+  }
+
+  savePlayer(player, videoId) {
+    let video = this.videos.find(vid => vid.videoId == videoId);
+    video["player"] = player;
+    player.playVideo();
+  }
+
+  onStateChange(event, videoId) {
+    if (event.data == YT.PlayerState.ENDED) {
+      let video = this.videos.find(vid => vid.videoId == videoId);
+      video["player"].seekTo(0);
+    }
   }
 
   rotationPause() {
