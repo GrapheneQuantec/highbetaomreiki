@@ -123,7 +123,7 @@ export class AffirmationsComponent implements OnInit {
 
     this.authService.user$.subscribe(user => {
       this.user = user;
-      this.videos = this.carouselVideos[3];
+      this.videos = this.carouselVideos[0];
       initCarousel(this.videos.length);
     });
 
