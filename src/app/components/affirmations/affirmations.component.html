@@ -1,123 +1,131 @@
 <div *ngIf="authService.user$ | async as user" class="affirmationPanel">
-  <div class="leftPanel">
+    <div class="leftPanel">
 
-    <div class="affirmation-list">
-      <div class="affirmations-list-header">
-        <span class="affirmationListTitle">Affirmations</span>
-        <div *ngIf="authService.user$ | async as user">
-          <span *ngIf="authService.canEdit(user)" (click)="addAffirmation()" class="add-affirmation"><i class="fa fa-plus"></i></span>
+        <div class="affirmation-list contentField">
+            <div class="affirmations-list-header">
+                <span class="affirmationListTitle">Affirmations</span>
+                <div *ngIf="authService.user$ | async as user">
+                    <span *ngIf="authService.canEdit(user)" (click)="addAffirmation()" class="add-affirmation"><i class="fa fa-plus"></i></span>
+                </div>
+            </div>
+            <ul class="selectAffirmation">
+                <li *ngFor="let affirmation of affirmations" id="{{affirmation.id}}" [ngClass]="{ 'selected' : activeAffirmationId == affirmation.id }">
+                    <div class="affirmation-title" (click)="selectAffirmation(affirmation.id)">
+                        {{affirmation.title}}
+                    </div>
+                    <div *ngIf="activeAffirmationId == affirmation.id && authService.user$ | async as user" class="affirmation-edit-buttons">
+                        <span *ngIf="!isConfirmDelete">
+                            <span *ngIf="!isBeingEdited">
+                                <span *ngIf="authService.canEdit(user)" (click)="startEdit()" class="crud-icon"><i
+                                        class="fa fa-pencil"></i></span>
+                                <span *ngIf="authService.canDelete(user)" (click)="deleteAffirmation()" class="crud-icon"><i
+                                        class="fa fa-trash"></i></span>
+                            </span>
+                            <span *ngIf="isBeingEdited">
+                                <span (click)="updateItem()" class="crud-icon"><i class="fa fa-check"></i></span>
+                                <span (click)="cancelEdit()" class="crud-icon"><i class="fa fa-close"></i></span>
+                            </span>
+                        </span>
+                        <span *ngIf="isConfirmDelete && authService.canDelete(user)">
+                            Delete?
+                            <span (click)="confirmedDeleteAffirmation(affirmation)" class="crud-icon"><i class="fa fa-check"></i></span>
+                            <span (click)="revokedDeleteAffirmation()" class="crud-icon"><i class="fa fa-close"></i></span>
+                        </span>
+                    </div>
+                </li>
+            </ul>
         </div>
-      </div>
-      <ul class="selectAffirmation">
-        <li *ngFor="let affirmation of affirmations" id="{{affirmation.id}}" [ngClass]="{ 'selected' : activeAffirmationId == affirmation.id }">
-          <div class="affirmation-title" (click)="selectAffirmation(affirmation.id)">
-            {{affirmation.title}}
-          </div>
-          <div *ngIf="activeAffirmationId == affirmation.id && authService.user$ | async as user" class="affirmation-edit-buttons">
-            <span *ngIf="!isConfirmDelete">
-              <span *ngIf="!isBeingEdited">
-                <span *ngIf="authService.canEdit(user)" (click)="startEdit()" class="crud-icon"><i class="fa fa-pencil"></i></span>
-                <span *ngIf="authService.canDelete(user)" (click)="deleteAffirmation()" class="crud-icon"><i class="fa fa-trash"></i></span>
-              </span>
-              <span *ngIf="isBeingEdited">
-                <span (click)="updateItem()" class="crud-icon"><i class="fa fa-check"></i></span>
-                <span (click)="cancelEdit()" class="crud-icon"><i class="fa fa-close"></i></span>
-              </span>
-            </span>
-            <span *ngIf="isConfirmDelete && authService.canDelete(user)">
-              Delete?
-              <span (click)="confirmedDeleteAffirmation(affirmation)" class="crud-icon"><i class="fa fa-check"></i></span>
-              <span (click)="revokedDeleteAffirmation()" class="crud-icon"><i class="fa fa-close"></i></span>
-            </span>
-          </div>
-        </li>
-      </ul>
+
+        <div class="contentField">
+
+            <h4>Choose carousel</h4
+                >
+            <div class="carousel-chooser">
+                <select name="carousel" id="" (change)="changedCarouselVideos($event)">
+                    <option value="AnaAna">AnaAna</option>
+                    <option value="Monia">Monia</option>
+                </select>
+            </div>
+
+            <h4>Volume</h4>
+            <div class="volume-picker">
+                <input (change)="volumeChanged()" [(ngModel)]="globalVolume" type="range" min="0" max="100" value="50">
+            </div>
+
+        </div>
+
     </div>
-
-    <div class="carousel-chooser">
-      <select name="carousel" id="" (change)="changedCarouselVideos($event)">
-        <option value="AnaAna">AnaAna</option>
-        <option value="Monia">Monia</option>
-      </select>
-    </div>
-
-  </div>
-
-  <div class="rightPanel">
-
-  </div>
-
 
 </div>
 
-<div class="carousel-wrapper" >
-  <div class="carousel-button left-button" (mouseenter)="spinRight(true)" (mouseleave)="spinRight(false)"></div>
-  <div class="carousel-button right-button" (mouseenter)="spinLeft(true)" (mouseleave)="spinLeft(false)"></div>
-  <section class="container">
-    <div id="carousel-outerer">
-      <div id="carousel-outer">
-        <div id="carousel">
-            <figure *ngFor="let video of videos">
-              <div class="hexdiv" (mouseenter)="rotationPause()" (mouseleave)="rotationResume()">
-                <div class="youtube-overlay" (click)="videoSelected(video)"></div>
-                <youtube-player [videoId]="video.videoId" (ready)="savePlayer($event, video.videoId)" (change)="onStateChange($event, video.videoId)"
-                  width="400" height="225"></youtube-player>
-              </div>
-              <div class="subdiv">{{video.caption}}</div>
-            </figure>
-            <div class="affirmation" [ngStyle]="{'background-image':'url(../../../assets/images/' + selectedOmega + ')'}">
-              <div class="affirmation-title">
-                <div *ngIf="!isBeingEdited">
-                  {{selectedAffirmation.title}}
+<div class="carousel-wrapper">
+    <div class="carousel-button left-button" (mouseenter)="spinRight(true)" (mouseleave)="spinRight(false)"></div>
+    <div class="carousel-button right-button" (mouseenter)="spinLeft(true)" (mouseleave)="spinLeft(false)"></div>
+    <section class="container">
+        <div id="carousel-outerer">
+            <div id="carousel-outer">
+                <div id="carousel">
+                    <figure *ngFor="let video of videos">
+                        <div class="hexdiv" (mouseenter)="rotationPause()" (mouseleave)="rotationResume()">
+                            <div class="youtube-overlay" (click)="videoSelected(video)"></div>
+                            <youtube-player [videoId]="video.videoId" (ready)="savePlayer($event, video.videoId)"
+                                (change)="onStateChange($event, video.videoId)" width="400" height="225"></youtube-player>
+                        </div>
+                        <div class="subdiv">{{video.caption}}</div>
+                    </figure>
+                    <div class="affirmation" [ngStyle]="{'background-image':'url(../../../assets/images/' + selectedOmega + ')'}">
+                        <div class="affirmation-title">
+                          <div *ngIf="!isBeingEdited">
+                            {{selectedAffirmation.title}}
+                          </div>
+                          <div *ngIf="isBeingEdited" class="edit-affirmation-title">
+                            <input type="text" id="affirmationTitleEdit" [(ngModel)]="selectedAffirmation.title">
+                          </div>
+                        </div>
+                        <div class="superLogos" delay="1">QUANT</div>
+                        <div class="subLogoi">
+                          <span class="aveLogos" delay="1">AVE AVE</span>
+                          <span class="allaLogos" no-wrap="true" delay="1">الإلَه</span>
+                          <span class="jhwhLogos" delay="1">יהוה</span>
+                          <span class="yesuLogos" no-wrap="true" delay="1">Yes'u</span>
+                        </div>
+                  
+                        <div id="sexsextaza" class="affirmationContent" [ngStyle]="getAffirmationStyle()">
+                          <div *ngIf="!isBeingEdited" class="pfpItem entry-content" style="white-space: pre-wrap;">
+                            <p>{{selectedAffirmation.content}}</p>
+                          </div>
+                          <div *ngIf="isBeingEdited" class="edit-content">
+                            <textarea name="edit" id="affirmationEdit" [(ngModel)]="selectedAffirmation.content">{{selectedAffirmation.content}}</textarea>
+                          </div>
+                        </div>
+                  
+                        <!-- font controls -->
+                        <div *ngIf="isBeingEdited" class="text-controls">
+                          <span>
+                            <div>font size</div>
+                            <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.fontSize">
+                          </span>
+                          <span>
+                            <div>line height</div>
+                            <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.lineHeight" step="0.1">
+                          </span>
+                          <span>
+                            <div>spacing</div>
+                            <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.letterSpacing">
+                          </span>
+                        </div>
+                  
+                        <!-- omega chooser -->
+                        <div *ngIf="isBeingEdited" class="omega-background-select">
+                          <div>Omega background</div>
+                          <select (change)="changeOmega($event)" [(ngModel)]="selectedAffirmation.omegaBackground">
+                            <option *ngFor='let omega of omegas' value="{{omega.value}}">{{omega.text}}</option>
+                          </select>
+                        </div>
+                  
+                      </div>
                 </div>
-                <div *ngIf="isBeingEdited" class="edit-affirmation-title">
-                  <input type="text" id="affirmationTitleEdit" [(ngModel)]="selectedAffirmation.title">
-                </div>
-              </div>
-              <div class="superLogos" delay="1">QUANT</div>
-              <div class="subLogoi">
-                <span class="aveLogos" delay="1">AVE AVE</span>
-                <span class="allaLogos" no-wrap="true" delay="1">الإلَه</span>
-                <span class="jhwhLogos" delay="1">יהוה</span>
-                <span class="yesuLogos" no-wrap="true" delay="1">Yes'u</span>
-              </div>
-        
-              <div id="sexsextaza" class="affirmationContent" [ngStyle]="getAffirmationStyle()">
-                <div *ngIf="!isBeingEdited" class="pfpItem entry-content" style="white-space: pre-wrap;">
-                  <p>{{selectedAffirmation.content}}</p>
-                </div>
-                <div *ngIf="isBeingEdited" class="edit-content">
-                  <textarea name="edit" id="affirmationEdit" [(ngModel)]="selectedAffirmation.content">{{selectedAffirmation.content}}</textarea>
-                </div>
-              </div>
-        
-              <!-- font controls -->
-              <div *ngIf="isBeingEdited" class="text-controls">
-                <span>
-                  <div>font size</div>
-                  <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.fontSize">
-                </span>
-                <span>
-                  <div>line height</div>
-                  <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.lineHeight" step="0.1">
-                </span>
-                <span>
-                  <div>spacing</div>
-                  <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.letterSpacing">
-                </span>
-              </div>
-        
-              <!-- omega chooser -->
-              <div *ngIf="isBeingEdited" class="omega-background-select">
-                <div>Omega background</div>
-                <select (change)="changeOmega($event)" [(ngModel)]="selectedAffirmation.omegaBackground">
-                  <option *ngFor='let omega of omegas' value="{{omega.value}}">{{omega.text}}</option>
-                </select>
-              </div>
-        
             </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </div>

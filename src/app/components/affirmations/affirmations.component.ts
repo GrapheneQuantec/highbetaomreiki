@@ -27,7 +27,8 @@ export class AffirmationsComponent implements OnInit {
   user;
   selectedOmega = 'OmegaSubaru';
   private player;
-  videos;
+  videos = [];
+  globalVolume;
 
   omegas = [
     { value: "OmegaSubaru", text: "Omega Subaru", url: "omega_subaru.gif" },
@@ -75,12 +76,9 @@ export class AffirmationsComponent implements OnInit {
       { videoId: "_L9h2w798yY", caption: "AnaAna & Mae" },
     ],
     [
-      { videoId: "zGbylnMqNLs", caption: "AnaAna & Jesper" },
-      { videoId: "_8wwAwEDeGo", caption: "AnaAna Pregnant" },
-      { videoId: "zGbylnMqNLs", caption: "AnaAna & Sisisi" },
+      { videoId: "fzD6g_wp76A", caption: "AnaAna & Jesper" },
       { videoId: "_8wwAwEDeGo", caption: "AnaAna Pregnant" },
       { videoId: "zGbylnMqNLs", caption: "AnaAna Zuberec" },
-      { videoId: "_L9h2w798yY", caption: "AnaAna & Mae" },
     ]
 
   ]
@@ -104,6 +102,10 @@ export class AffirmationsComponent implements OnInit {
     this.utilService.setBackgroundVideo(video.videoId);
   }
 
+  volumeChanged(event) {
+     this.videos.forEach(video => video["player"].setVolume(this.globalVolume)); //.setVolume(this.globalVolume)
+  }
+
   savePlayer(player, videoId) {
     let video = this.videos.find(vid => vid.videoId == videoId);
     video["player"] = player;
@@ -121,8 +123,8 @@ export class AffirmationsComponent implements OnInit {
 
     this.authService.user$.subscribe(user => {
       this.user = user;
-      this.videos = this.carouselVideos[0];
-      initCarousel(this.carouselVideos[0].length);
+      this.videos = this.carouselVideos[3];
+      initCarousel(this.videos.length);
     });
 
     this.route.url.subscribe((u) => {

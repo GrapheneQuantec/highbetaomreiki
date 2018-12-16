@@ -15,12 +15,27 @@
   z-index: 1;
 }
 
-.affirmation-list {
+.contentField {
     padding: 20px;
-    background-color: rgb(255, 187, 41);
+    background-color: rgb(255, 187, 41, 0.8);
+    border: 3px solid rgb(255, 187, 41);
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin: 20px;
     display: flow-root;
+}
+
+.volume-picker input {
+    width: 100%;
+}
+
+.carousel-chooser select {
+    font-size: 24px;
+    padding: 2px 10px;
+    border: 1px solid #8a0909;
+    border-radius: 5px;
+    color: #8a0909;
+    background: transparent;
+    cursor: pointer;
 }
 
 .affirmations-list-header {
