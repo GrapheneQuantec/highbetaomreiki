@@ -60,7 +60,6 @@ Carousel3D.prototype.transform = function () {
 
 
 var initCarousel = function (panelCount) {
-  console.log('panelCount', panelCount);
   setTimeout(function () {
 
     var carousel = new Carousel3D(document.getElementById('carousel')),

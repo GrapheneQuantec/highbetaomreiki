@@ -9,7 +9,7 @@
 
 .leftPanel {
   position: fixed;
-  top: 100px;
+  bottom: 0;
   left: 0;
   color: #8b0f0d;
   z-index: 1;
@@ -17,8 +17,8 @@
 
 .contentField {
     padding: 20px;
-    background-color: rgb(255, 187, 41, 0.8);
-    border: 3px solid rgb(255, 187, 41);
+    background-color: #fedb90b8;
+    border: 3px solid #fedb90;
     border-radius: 10px;
     margin: 20px;
     display: flow-root;
@@ -28,8 +28,8 @@
     width: 100%;
 }
 
-.carousel-chooser select {
-    font-size: 24px;
+select {
+    font-size: 20px;
     padding: 2px 10px;
     border: 1px solid #8a0909;
     border-radius: 5px;
@@ -82,14 +82,18 @@
     cursor: pointer;
 }
 
-.selectAffirmation li .affirmation-edit-buttons {
-    float: right;
-    width: 40%;
-    text-align: left;
+.affirmation-edit-buttons {
+    display: inline-block;
 }
 
 .selectAffirmation li.selected {
     color: red;
+}
+
+.toggleAffirmation {
+    float: left;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .omega-background-select {
@@ -142,7 +146,6 @@
   position: fixed;
   left: -292px;
   top: -60px;
-  opacity: 1!important;
   
 }
 
