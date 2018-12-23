@@ -130,6 +130,7 @@ export class AffirmationsComponent implements OnInit {
         if (event.target.selectedIndex > 0) {
             this.videos = this.carouselVideos[event.target.selectedIndex - 1].videos;
             initCarousel(this.videos.length);
+            this.videoSelected(this.videos[0]);
         } else {
             this.videos = [];
         }
