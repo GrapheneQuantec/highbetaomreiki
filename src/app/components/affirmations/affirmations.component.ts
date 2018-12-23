@@ -30,6 +30,7 @@ export class AffirmationsComponent implements OnInit {
     videos = [];
     globalVolume;
     affirmationVisible: boolean = false;
+    optionsVisible: boolean = false;
 
     omegas = [
         { value: "OmegaSubaru", text: "Omega Subaru", url: "omega_subaru.gif" },

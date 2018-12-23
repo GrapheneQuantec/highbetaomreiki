@@ -1,8 +1,14 @@
 <div *ngIf="authService.user$ | async as user" class="affirmationPanel">
     <div class="leftPanel">
 
-        <div class="contentField">
+        <div class="showOptionsIcon contentField" (click)="optionsVisible = true" *ngIf="!optionsVisible">
+                <i class="fa fa-cogs" aria-hidden="true"></i>
+        </div>
 
+        <div class="contentField" *ngIf="optionsVisible">
+
+                <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true"  (click)="optionsVisible = false"></i>
+            
             <h3>Affirmations</h3>
 
             <!-- toggle affirmation view -->
