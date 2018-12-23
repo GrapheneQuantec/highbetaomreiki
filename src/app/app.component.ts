@@ -30,6 +30,7 @@ export class AppComponent {
   savePlayer(player) {
     this.player = player;
     this.player.playVideo();
+    this.player.setVolume(10);
     this.utilService.backgroundVideoId.subscribe(videoId => this.player.loadVideoById({'videoId': videoId}));
   }
   

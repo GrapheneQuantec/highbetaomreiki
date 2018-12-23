@@ -149,24 +149,25 @@ canvas {
               transition: opacity 1s, transform 1s;
     }
 	
-	.ready #carousel-outer {
+	#carousel-outer {
     transform-style: preserve-3d;
     animation: rotating 8s linear infinite ;
     animation-play-state: paused;
   }
 	
-	.ready #carousel-outerer {
+	#carousel-outerer {
     transform-style: preserve-3d;
     animation: rotating 4s linear infinite reverse; 
     animation-play-state: paused;
   }
 
-  .ready #carousel {
+  #carousel {
 	   animation: rotating 16s linear infinite; 
   }
 
-  .affirmation {
+  .affirmationWrapper {
     animation: rotating 16s linear infinite reverse; 
+    opacity: 1!important;
  }
 
 	/* .ready #carousel:hover, .affirmation:hover {
