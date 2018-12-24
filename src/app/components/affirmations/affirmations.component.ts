@@ -35,7 +35,7 @@ export class AffirmationsComponent implements OnInit {
     loopAllAffirmations: boolean = true;
 
     omegas = [
-        { value: "OmegaSubaru", text: "Omega Subaru", url: "omega_subaru.gif" },
+        { value: "OmegaSubaru", text: "Omega Subaru", url: "OmegaSubaru3.gif" },
         { value: "OmegaMultipleString", text: "Omega Multiple String", url: "omega_multiple_string.png" }
     ];
 
