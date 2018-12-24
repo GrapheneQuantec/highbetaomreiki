@@ -81,12 +81,12 @@ export class AffirmationsComponent implements OnInit {
             value: "poli",
             videos: [
                 { videoId: "op4bkI9TRLU", caption: "Poli" },
-                { videoId: "7ggkZ2qXJAw", caption: "Systema Nervosum" },
+                { videoId: "sVSfhE-g1EU", caption: "Systema Nervosum" },
                 { videoId: "2pRCp9YyfyU", caption: "Nervous System" },
-                { videoId: "Q9qaXmjvTm8", caption: "Polmoni" },
-                { videoId: "upDZMMoUXJA", caption: "Renibus" },
-                { videoId: "wpinzsv07uM", caption: "Zatoki" },
-                { videoId: "vkOd5mx7VnA", caption: "Poli Маріє" },
+                { videoId: "YHD2sk4O13g", caption: "Polmoni" },
+                { videoId: "knyAfmz0kBs", caption: "Renibus" },
+                { videoId: "mX2o6JLFXwg", caption: "Zatoki" },
+                { videoId: "6IrLyCTSJRI", caption: "Poli Маріє" },
             ],
         },
   ]
