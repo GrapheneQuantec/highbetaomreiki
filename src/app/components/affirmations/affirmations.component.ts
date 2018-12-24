@@ -235,7 +235,6 @@ export class AffirmationsComponent implements OnInit {
     }
 
     selectAffirmation(id) {
-        console.log('id', id)
         this.router.navigate(['/meditation/affirmation/' + id]);
         this.isBeingEdited = false;
         this.isConfirmDelete = false;

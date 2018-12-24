@@ -67,7 +67,6 @@ export class AppComponent implements OnInit {
   }
 
   loadPlaylist(playlist: Playlist) {
-    console.log('load playlist', playlist);
     this.playlist = playlist;
     if (this.playlist.videos.length > 0) {
       this.currentPlaylistIndex = 0;
