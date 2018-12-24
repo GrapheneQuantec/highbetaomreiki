@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
     this.utilService.backgroundVideoId.subscribe(videoId => this.loadVideo(videoId));
     this.utilService.playlist.subscribe(playlist => this.loadPlaylist(playlist));
     this.utilService.playlistOptions.subscribe(opt => this.loopAll = opt.loopAll);
+    this.utilService.volumeChanged.subscribe(volume => this.volumeChanged(volume));
   }
 
   onStateChange(event) {
@@ -51,6 +52,10 @@ export class AppComponent implements OnInit {
 
   playVideo() {
     this.player.playVideo();
+  }
+
+  volumeChanged(volume) {
+    this.player.setVolume(volume);
   }
 
   pauseVideo() {

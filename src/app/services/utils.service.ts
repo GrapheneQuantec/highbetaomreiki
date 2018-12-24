@@ -16,6 +16,9 @@ export class UtilsService {
   private _playlistOptions: Subject<PlaylistOptions> = new Subject();
   public readonly playlistOptions: Observable<PlaylistOptions> = this._playlistOptions.asObservable();
 
+  private _volumeChanged: Subject<number> = new Subject();
+  public readonly volumeChanged: Observable<number> = this._volumeChanged.asObservable();
+
   constructor() { }
 
   setBackgroundVideo(videoId) {
@@ -28,5 +31,9 @@ export class UtilsService {
 
   setBackgroundPlaylistOptions(playlistOptions: PlaylistOptions) {
     this._playlistOptions.next(playlistOptions);
+  }
+
+  setBackgroundVolume(volume: number) {
+    this,this._volumeChanged.next(volume);
   }
 }

@@ -148,7 +148,8 @@ export class AffirmationsComponent implements OnInit {
     }
 
     volumeChanged(event) {
-        this.videos.forEach(video => video["player"].setVolume(this.globalVolume)); //.setVolume(this.globalVolume)
+        this.videos.forEach(video => video["player"].setVolume(this.globalVolume));
+        this.utilService.setBackgroundVolume(this.globalVolume);
     }
 
     savePlayer(player, videoId) {
