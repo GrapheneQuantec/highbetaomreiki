@@ -12,7 +12,7 @@
             <h3>Affirmations</h3>
 
             <!-- toggle affirmation view -->
-            <div class="toggleAffirmation">
+            <div class="checkboxField">
                 <input type="checkbox" [(ngModel)]="affirmationVisible"><span>Show Affirmation</span>
             </div>
 
@@ -46,6 +46,12 @@
             </div>
 
             <h3>Carousel</h3>
+
+            <!-- toggle loop all / loop one -->
+            <div class="checkboxField">
+                <input type="checkbox" [(ngModel)]="loopAllAffirmations" (change)="setPlaylistOptions()"><span>LoopAll</span>
+            </div>
+
             <div class="carousel-chooser">
                 <select name="carousel" id="" (change)="changedCarouselVideos($event)">
                     <option value="select">Select</option>

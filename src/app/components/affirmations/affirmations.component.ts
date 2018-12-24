@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap, map } from 'rxjs/operators';
 import { AuthService } from '../../core/auth.service';
 import { UtilsService } from '@app/services/utils.service';
+import { Playlist, Video } from '@app/models/playlist';
 
 declare var initCarousel: any;
 
@@ -27,17 +28,18 @@ export class AffirmationsComponent implements OnInit {
     user;
     selectedOmega = 'OmegaSubaru';
     private player;
-    videos = [];
+    videos: Video[] = [];
     globalVolume;
     affirmationVisible: boolean = false;
     optionsVisible: boolean = false;
+    loopAllAffirmations: boolean = true;
 
     omegas = [
         { value: "OmegaSubaru", text: "Omega Subaru", url: "omega_subaru.gif" },
         { value: "OmegaMultipleString", text: "Omega Multiple String", url: "omega_multiple_string.png" }
     ];
 
-    carouselVideos = [
+    carouselVideos: Playlist[] = [
 
         // AnaAna
 
@@ -78,9 +80,9 @@ export class AffirmationsComponent implements OnInit {
             name: "Poli",
             value: "poli",
             videos: [
-                { videoId: "OQrqGVDYmcI", caption: "Poli" },
+                { videoId: "op4bkI9TRLU", caption: "Poli" },
                 { videoId: "7ggkZ2qXJAw", caption: "Systema Nervosum" },
-                { videoId: "41jEGfkIY9Q", caption: "Nervous System" },
+                { videoId: "2pRCp9YyfyU", caption: "Nervous System" },
                 { videoId: "Q9qaXmjvTm8", caption: "Polmoni" },
                 { videoId: "upDZMMoUXJA", caption: "Renibus" },
                 { videoId: "wpinzsv07uM", caption: "Zatoki" },
@@ -128,16 +130,21 @@ export class AffirmationsComponent implements OnInit {
 
     changedCarouselVideos(event) {
         if (event.target.selectedIndex > 0) {
-            this.videos = this.carouselVideos[event.target.selectedIndex - 1].videos;
+            let playlist: Playlist = this.carouselVideos[event.target.selectedIndex - 1];
+            this.videos = playlist.videos;
             initCarousel(this.videos.length);
-            this.videoSelected(this.videos[0]);
-        } else {
+            this.utilService.setBackgroundPlaylist(playlist);
+    } else {
             this.videos = [];
         }
     }
 
     videoSelected(video) {
         this.utilService.setBackgroundVideo(video.videoId);
+    }
+
+    setPlaylistOptions() {
+        this.utilService.setBackgroundPlaylistOptions({loopAll: this.loopAllAffirmations});
     }
 
     volumeChanged(event) {
