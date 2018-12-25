@@ -1,7 +1,7 @@
 <div *ngIf="authService.user$ | async as user" class="affirmationPanel">
     <div class="leftPanel">
 
-        <div class="showOptionsIcon contentField" (click)="optionsVisible = true" *ngIf="!optionsVisible">
+        <div class="showOptionsIcon contentField" (click)="openOptions($event)" *ngIf="!optionsVisible">
                 <i class="fa fa-cogs" aria-hidden="true"></i>
         </div>
 
@@ -55,7 +55,7 @@
             <div class="carousel-chooser">
                 <select name="carousel" id="" (change)="changedCarouselVideos($event)">
                     <option value="select">Select</option>
-                    <option *ngFor="let carousel of carouselVideos" value="carousel.value">{{carousel.name}}</option>
+                    <option *ngFor="let carousel of playlists" value="carousel.value">{{carousel.name}}</option>
                 </select>
             </div>
 

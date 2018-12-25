@@ -33,6 +33,7 @@ export class AffirmationsComponent implements OnInit {
     affirmationVisible: boolean = false;
     optionsVisible: boolean = false;
     loopAllAffirmations: boolean = true;
+    playlists: Playlist[];
 
     omegas = [
         { value: "OmegaSubaru", text: "Omega Subaru", url: "OmegaSubaru3.gif" },
@@ -41,40 +42,18 @@ export class AffirmationsComponent implements OnInit {
 
     carouselVideos: Playlist[] = [
 
-        // AnaAna
+        // Liomreiki
+        {
+            name: "Li Om Reiki",
+            value: "liomreiki",
+            videos: [
+                { videoId: "NMTfMRi2fJk", caption: "Invocation" },
+                { videoId: "dx-UJ-Xkr1M", caption: "Symbols" },
+                { videoId: "VfBS_fHWt00", caption: "Grail" },
+                { videoId: "xxMShqH2IRY", caption: "Song" },
+            ],
+        },
 
-        {
-            name: "AnaAna",
-            value: "ana",
-            videos: [
-                { videoId: "zR9-KR1PbJ4", caption: "AnaAna & Jesper" },
-                { videoId: "TMDkAVlNPL8", caption: "AnaAna Orgy" },
-                { videoId: "WznVXaV1b90", caption: "AnaAna & Monia" },
-                { videoId: "7jR7HIBY168", caption: "AnaAna Triptych" },
-                { videoId: "2Rvb1nv7oNQ", caption: "AnaAna Holo" },
-                { videoId: "SSAJG_N2fmU", caption: "AnaAna & Sisisi" },
-                { videoId: "GUWkrx5Tl7Q", caption: "AnaAna Zuberec" },
-                { videoId: "qpWosird7l4", caption: "AnaAna & Mae" },
-                { videoId: "vQNGP_0JkLc", caption: "AnaAna in Gaj" },
-                { videoId: "3I5lbhlmRGQ", caption: "Maria" },
-                { videoId: "qmzQyOcZYDM", caption: "Maria" },
-                { videoId: "BtAezHra1O8", caption: "Maria" },
-            ],
-        },
-        // Monia
-        {
-            name: "Monia",
-            value: "monia",
-            videos: [
-                { videoId: "lElk0ZDeimA", caption: "Monia Gangbang" },
-                { videoId: "J1GfrpA533M", caption: "Monia Trois" },
-                { videoId: "ZpbaJ5n9dDI", caption: "Monia & Jeremy" },
-                { videoId: "g_2EYNEi39c", caption: "Monia & Jeremy" },
-                { videoId: "D2KxRiUM12Y", caption: "Monia & Jeremy" },
-                { videoId: "jvxrLjsmPGs", caption: "Monia Minette" },
-                { videoId: "xGQKqk7H72U", caption: "Monia with Two" },
-            ],
-        },
         // Poli Brains
         {
             name: "Poli",
@@ -90,6 +69,61 @@ export class AffirmationsComponent implements OnInit {
             ],
         },
   ]
+
+  advancedCarouselVideos: Playlist[] = [
+
+    // AnaAna
+
+    {
+        name: "AnaAna",
+        value: "ana",
+        videos: [
+            
+            { videoId: "9Wgm59jVZ9g", caption: "Santos" },
+            { videoId: "zR9-KR1PbJ4", caption: "AnaAna & Jesper" },
+            { videoId: "TMDkAVlNPL8", caption: "AnaAna Orgy" },
+            { videoId: "WznVXaV1b90", caption: "AnaAna & Monia" },
+            { videoId: "7jR7HIBY168", caption: "AnaAna Triptych" },
+            { videoId: "2Rvb1nv7oNQ", caption: "AnaAna Holo" },
+            { videoId: "SSAJG_N2fmU", caption: "AnaAna & Sisisi" },
+            { videoId: "GUWkrx5Tl7Q", caption: "AnaAna Zuberec" },
+            { videoId: "qpWosird7l4", caption: "AnaAna & Mae" },
+            { videoId: "vQNGP_0JkLc", caption: "AnaAna in Gaj" },
+            { videoId: "3I5lbhlmRGQ", caption: "Maria" },
+            { videoId: "qmzQyOcZYDM", caption: "Maria" },
+            { videoId: "BtAezHra1O8", caption: "Maria" },
+        ],
+    },
+    // Monia
+    {
+        name: "Monia",
+        value: "monia",
+        videos: [
+            { videoId: "lElk0ZDeimA", caption: "Monia Gangbang" },
+            { videoId: "J1GfrpA533M", caption: "Monia Trois" },
+            { videoId: "ZpbaJ5n9dDI", caption: "Monia & Jeremy" },
+            { videoId: "g_2EYNEi39c", caption: "Monia & Jeremy" },
+            { videoId: "D2KxRiUM12Y", caption: "Monia & Jeremy" },
+            { videoId: "jvxrLjsmPGs", caption: "Monia Minette" },
+            { videoId: "xGQKqk7H72U", caption: "Monia with Two" },
+        ],
+    },
+    // Joanna
+    {
+        name: "Joanna",
+        value: "joanna",
+        videos: [
+            { videoId: "v72fr_7ZW2M", caption: "Red couch 23rd 1" },
+            { videoId: "60xtzglV1MA", caption: "Red couch 23rd 2" },
+            { videoId: "E0b3_Q8oUTs", caption: "Red couch 23rd 3" },
+            { videoId: "N-8ZlWWehtk", caption: "Red couch 26th 1" },
+            { videoId: "Hy6IM9Yjjeo", caption: "Red couch 26th 2" },
+            { videoId: "0R4ACtHUVjg", caption: "Red couch 26th 3a" },
+            { videoId: "hBlUDMBs3Lw", caption: "Red couch 26th 3b" },
+            { videoId: "7TUhUeOC1uo", caption: "Red couch 26th 3c" },
+        ],
+    },
+]
 
     constructor(private router: Router,
         private route: ActivatedRoute,
@@ -130,7 +164,7 @@ export class AffirmationsComponent implements OnInit {
 
     changedCarouselVideos(event) {
         if (event.target.selectedIndex > 0) {
-            let playlist: Playlist = this.carouselVideos[event.target.selectedIndex - 1];
+            let playlist: Playlist = this.playlists[event.target.selectedIndex - 1];
             this.videos = playlist.videos;
             initCarousel(this.videos.length);
             this.utilService.setBackgroundPlaylist(playlist);
@@ -232,6 +266,15 @@ export class AffirmationsComponent implements OnInit {
         }
         // set path to omega background
         return omegaPath;
+    }
+
+    openOptions(event) {
+        this.optionsVisible = true;
+        if (event.ctrlKey && event.shiftKey) {
+            this.playlists = this.carouselVideos.concat(this.advancedCarouselVideos);
+        } else {
+            this.playlists = this.carouselVideos;
+        }
     }
 
     selectAffirmation(id) {
