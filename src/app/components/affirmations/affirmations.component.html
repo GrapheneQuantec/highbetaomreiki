@@ -76,7 +76,8 @@
             </div>
             
             <div class="volume-picker">
-                <input (change)="volumeChanged()" [(ngModel)]="globalVolume" type="range" min="0" max="100">
+                <input class="slider" (change)="volumeChanged()" [(ngModel)]="globalVolume" type="range" min="0" max="100">
+                <!-- <input type="range" min="1" max="100" value="50" class="slider" id="myRange"> -->
             </div>
 
             <app-wave></app-wave>
