@@ -177,6 +177,7 @@ canvas {
   .carousel-wrapper {
     position: relative;
     zoom: 0.8;
+    margin-top: 30px;
   }
   
   .carousel-button {
