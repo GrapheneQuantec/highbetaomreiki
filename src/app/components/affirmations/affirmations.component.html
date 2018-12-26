@@ -52,6 +52,7 @@
                 <input type="checkbox" [(ngModel)]="loopAllAffirmations" (change)="setPlaylistOptions()"><span>LoopAll</span>
             </div>
 
+            <!-- carousel chooser -->
             <div class="carousel-chooser">
                 <select name="carousel" id="" (change)="changedCarouselVideos($event)">
                     <option value="select">Select</option>
@@ -59,9 +60,15 @@
                 </select>
             </div>
 
+            <!-- volume control -->
             <h3>Volume</h3>
             <div class="volume-picker">
                 <input (change)="volumeChanged()" [(ngModel)]="globalVolume" type="range" min="0" max="100" value="50">
+            </div>
+
+            <!-- logout button -->
+            <div class="logout_button">
+                <span (click)="authService.signOut()">Logout</span>
             </div>
 
         </div>

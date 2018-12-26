@@ -1,9 +1,5 @@
 <span *ngIf="(authService.user$ | async) as user; else loading">
   <span *ngIf="authService.canRead(user)">
-    <button (click)="authService.signOut()" class="button">Logout</button>
-    <div class="top-bar">
-      <app-navigation></app-navigation>
-    </div>
     <div class="main-site">
       <router-outlet></router-outlet>
     </div>
