@@ -29,7 +29,7 @@ export class AffirmationsComponent implements OnInit {
     selectedOmega = 'OmegaSubaru';
     private player;
     videos: Video[] = [];
-    globalVolume;
+    globalVolume: number = 10;
     affirmationVisible: boolean = false;
     optionsVisible: boolean = false;
     loopAllAffirmations: boolean = true;
@@ -190,6 +190,7 @@ export class AffirmationsComponent implements OnInit {
         let video = this.videos.find(vid => vid.videoId == videoId);
         video["player"] = player;
         player.playVideo();
+        player.setVolume(this.globalVolume);
     }
 
     onStateChange(event, videoId) {
