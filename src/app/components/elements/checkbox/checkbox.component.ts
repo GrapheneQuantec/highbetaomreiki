@@ -14,12 +14,9 @@ export class CheckboxComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('checked init', this.checkedVal);
-    console.log('checked init', this.text);
   }
 
   check(newValue) {
-    console.log('checked', this.checkedVal);
     this.checkedVal = newValue;
     this.checkedEvent.emit(this.checkedVal);
   }

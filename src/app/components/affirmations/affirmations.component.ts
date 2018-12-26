@@ -30,7 +30,7 @@ export class AffirmationsComponent implements OnInit {
     private player;
     videos: Video[] = [];
     globalVolume: number = 10;
-    affirmationVisible: boolean = false;
+    affirmationVisible: boolean = true;
     optionsVisible: boolean = false;
     loopAllAffirmations: boolean = true;
     playlists: Playlist[];
@@ -283,7 +283,10 @@ export class AffirmationsComponent implements OnInit {
     }
 
     selectAffirmation(id) {
-        this.router.navigate(['/meditation/affirmation/' + id]);
+        // this.router.navigate(['/meditation/affirmation/' + id]);
+        if (this.affirmations) {
+            this.setSelectedAffirmation(this.affirmations.find(aff => aff.id === id));
+        } 
         this.isBeingEdited = false;
         this.isConfirmDelete = false;
     }
