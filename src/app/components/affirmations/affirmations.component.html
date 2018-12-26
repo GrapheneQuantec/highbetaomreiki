@@ -23,7 +23,7 @@
             <div class="affirmation-list" *ngIf="affirmationVisible">
                 <!-- select affirmation -->
                 <select name="carousel" id="" (change)="selectAffirmation($event.target.value)">
-                    <option *ngFor="let affirmation of affirmations" [attr.value]="affirmation.id">{{affirmation.title}}</option>
+                    <option *ngFor="let affirmation of affirmations" [attr.selected]="affirmation.id == selectedAffirmation.id ? true : null" [attr.value]="affirmation.id">{{affirmation.title}}</option>
                 </select>
 
                 <!-- edit affirmation -->

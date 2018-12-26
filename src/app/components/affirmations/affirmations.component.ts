@@ -232,8 +232,8 @@ export class AffirmationsComponent implements OnInit {
 
     addAffirmation() {
         const item: Affirmation = {
-            title: 'Title',
-            content: 'Affirmation content',
+            title: 'New',
+            content: '',
             fontSettings: {
                 fontSize: 12,
                 lineHeight: 1.5,
