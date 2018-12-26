@@ -4,6 +4,7 @@ export interface Affirmation {
   content?: string;
   fontSettings?: FontSettings;
   omegaBackground?: string;
+  category?: string;
 }
 
 export interface FontSettings {

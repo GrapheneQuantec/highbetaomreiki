@@ -2,15 +2,15 @@
     <div class="leftPanel">
 
         <div class="showOptionsIcon contentField" (click)="openOptions($event)" *ngIf="!optionsVisible">
-                <i class="fa fa-cogs" aria-hidden="true"></i>
+            <i class="fa fa-cogs" aria-hidden="true"></i>
         </div>
 
         <div class="contentField" *ngIf="optionsVisible">
 
-            <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true"  (click)="optionsVisible = false"></i>
-            
+            <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true" (click)="optionsVisible = false"></i>
+
             <app-wave></app-wave>
-            
+
             <div class="option-title">
                 <span>Affirmations</span>
             </div>
@@ -22,33 +22,46 @@
 
             <div class="affirmation-list" *ngIf="affirmationVisible">
                 <!-- select affirmation -->
-                <select name="carousel" id="" (change)="selectAffirmation($event.target.value)">
-                    <option *ngFor="let affirmation of affirmations" [attr.selected]="affirmation.id == selectedAffirmation.id ? true : null" [attr.value]="affirmation.id">{{affirmation.title}}</option>
+                <select name="carousel" (change)="selectAffirmation($event.target.value)">
+                    <option *ngFor="let affirmation of affirmations" [attr.selected]="affirmation.id == selectedAffirmation.id ? true : null"
+                        [attr.value]="affirmation.id">{{affirmation.title}}</option>
                 </select>
 
                 <!-- edit affirmation -->
                 <div *ngIf="authService.user$ | async as user" class="affirmation-edit-buttons">
                     <span *ngIf="!isConfirmDelete">
                         <span *ngIf="!isBeingEdited">
-                            <span *ngIf="authService.canEdit(user)" (click)="startEdit()" class="crud-icon"><i class="fa fa-pencil"></i></span>
-                            <span *ngIf="authService.canDelete(user)" (click)="deleteAffirmation()" class="crud-icon"><i
-                                    class="fa fa-trash"></i></span>
-                            <span *ngIf="authService.canEdit(user)" (click)="addAffirmation()" class="crud-icon"><i
-                                    class="fa fa-plus"></i></span>
+                            <span *ngIf="authService.canEdit(user)" (click)="startEdit()" class="crud-icon">
+                                <i class="fa fa-pencil"></i>
+                            </span>
+                            <span *ngIf="authService.canDelete(user)" (click)="deleteAffirmation()" class="crud-icon">
+                                <i class="fa fa-trash"></i>
+                            </span>
+                            <span *ngIf="authService.canEdit(user)" (click)="addAffirmation()" class="crud-icon">
+                                <i class="fa fa-plus"></i>
+                            </span>
                         </span>
                         <span *ngIf="isBeingEdited">
-                            <span (click)="updateItem()" class="crud-icon"><i class="fa fa-check"></i></span>
-                            <span (click)="cancelEdit()" class="crud-icon"><i class="fa fa-close"></i></span>
+                            <span (click)="updateItem()" class="crud-icon">
+                                <i class="fa fa-check"></i>
+                            </span>
+                            <span (click)="cancelEdit()" class="crud-icon">
+                                <i class="fa fa-close"></i>
+                            </span>
                         </span>
                     </span>
                     <span *ngIf="isConfirmDelete && authService.canDelete(user)">
                         Delete?
-                        <span (click)="confirmedDeleteAffirmation()" class="crud-icon"><i class="fa fa-check"></i></span>
-                        <span (click)="revokedDeleteAffirmation()" class="crud-icon"><i class="fa fa-close"></i></span>
+                        <span (click)="confirmedDeleteAffirmation()" class="crud-icon">
+                            <i class="fa fa-check"></i>
+                        </span>
+                        <span (click)="revokedDeleteAffirmation()" class="crud-icon">
+                            <i class="fa fa-close"></i>
+                        </span>
                     </span>
                 </div>
             </div>
-            
+
             <app-wave></app-wave>
 
             <div class="option-title">
@@ -68,13 +81,13 @@
                 </select>
             </div>
 
-            <app-wave></app-wave>            
+            <app-wave></app-wave>
 
             <!-- volume control -->
             <div class="option-title">
                 <span>Volume</span>
             </div>
-            
+
             <div class="volume-picker">
                 <input class="slider" (change)="volumeChanged()" [(ngModel)]="globalVolume" type="range" min="0" max="100">
             </div>
@@ -102,8 +115,8 @@
                     <figure *ngFor="let video of videos">
                         <div class="hexdiv" (mouseenter)="rotationPause()" (mouseleave)="rotationResume()">
                             <div class="youtube-overlay" (click)="videoSelected(video)"></div>
-                            <youtube-player [videoId]="video.videoId" (ready)="savePlayer($event, video.videoId)"
-                                (change)="onStateChange($event, video.videoId)" width="400" height="225"></youtube-player>
+                            <youtube-player [videoId]="video.videoId" (ready)="savePlayer($event, video.videoId)" (change)="onStateChange($event, video.videoId)"
+                                width="400" height="225"></youtube-player>
                         </div>
                         <div class="subdiv">{{video.caption}}</div>
                     </figure>
@@ -156,6 +169,25 @@
                                 <select (change)="changeOmega($event)" [(ngModel)]="selectedAffirmation.omegaBackground">
                                     <option *ngFor='let omega of omegas' value="{{omega.value}}">{{omega.text}}</option>
                                 </select>
+                            </div>
+
+                            <!-- category selector -->
+                            <div *ngIf="isBeingEdited" class="omega-background-select">
+                                <div>Category</div>
+                                <span *ngIf="!isCategoryAdded">
+                                    <select (change)="changeOmega($event)" [(ngModel)]="selectedAffirmation.category">
+                                        <option *ngFor='let category of affirmationCategories' value="{{category}}">{{category}}</option>
+                                    </select>
+                                    <span (click)="isCategoryAdded = true" class="crud-icon">
+                                        <i class="fa fa-plus"></i>
+                                    </span>
+                                </span>
+                                <span *ngIf="isCategoryAdded">
+                                    <input type="text" [(ngModel)]="selectedAffirmation.category">
+                                    <span (click)="isCategoryAdded = false" class="crud-icon">
+                                        <i class="fa fa-close"></i>
+                                    </span>
+                                </span>
                             </div>
 
                         </div>
