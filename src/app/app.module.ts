@@ -25,6 +25,8 @@ import { SymbolsComponent } from './components/symbols/symbols.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { YoutubePlayerModule } from 'ngx-youtube-player';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { WaveComponent } from './components/elements/wave/wave.component';
+import { CheckboxComponent } from './components/elements/checkbox/checkbox.component';
 
 const appRoutes: Routes = [
   { path: '**', component: AffirmationsComponent },
@@ -39,7 +41,9 @@ const appRoutes: Routes = [
     AffirmationsComponent,
     MatrixcollectionComponent,
     SymbolsComponent,
-    NavigationComponent
+    NavigationComponent,
+    WaveComponent,
+    CheckboxComponent
   ],
   imports: [
     BrowserModule,

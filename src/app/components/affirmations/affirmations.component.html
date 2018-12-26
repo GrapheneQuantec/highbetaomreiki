@@ -7,13 +7,17 @@
 
         <div class="contentField" *ngIf="optionsVisible">
 
-                <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true"  (click)="optionsVisible = false"></i>
+            <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true"  (click)="optionsVisible = false"></i>
             
-            <h3>Affirmations</h3>
+            <app-wave></app-wave>
+            
+            <div class="option-title">
+                <span>Affirmations</span>
+            </div>
 
             <!-- toggle affirmation view -->
             <div class="checkboxField">
-                <input type="checkbox" [(ngModel)]="affirmationVisible"><span>Show Affirmation</span>
+                <app-checkbox (checkedEvent)="toggleAffirmation($event)" [checkedVal]="affirmationVisible" [text]="'Show Affirmation'"></app-checkbox>
             </div>
 
             <div class="affirmation-list" *ngIf="affirmationVisible">
@@ -44,12 +48,16 @@
                     </span>
                 </div>
             </div>
+            
+            <app-wave></app-wave>
 
-            <h3>Carousel</h3>
+            <div class="option-title">
+                <span>Carousel</span>
+            </div>
 
             <!-- toggle loop all / loop one -->
             <div class="checkboxField">
-                <input type="checkbox" [(ngModel)]="loopAllAffirmations" (change)="setPlaylistOptions()"><span>LoopAll</span>
+                <app-checkbox (checkedEvent)="setPlaylistOptions($event)" [checkedVal]="loopAllAffirmations" [text]="'Loop All'"></app-checkbox>
             </div>
 
             <!-- carousel chooser -->
@@ -60,11 +68,18 @@
                 </select>
             </div>
 
+            <app-wave></app-wave>            
+
             <!-- volume control -->
-            <h3>Volume</h3>
+            <div class="option-title">
+                <span>Volume</span>
+            </div>
+            
             <div class="volume-picker">
                 <input (change)="volumeChanged()" [(ngModel)]="globalVolume" type="range" min="0" max="100">
             </div>
+
+            <app-wave></app-wave>
 
             <!-- logout button -->
             <div class="logout_button">

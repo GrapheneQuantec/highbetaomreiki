@@ -90,7 +90,7 @@ select {
 }
 
 .affirmation-edit-buttons {
-    display: inline-block;
+    margin-top: 10px;
 }
 
 .selectAffirmation li.selected {
@@ -98,9 +98,7 @@ select {
 }
 
 .checkboxField {
-    float: left;
-    width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .omega-background-select {
@@ -270,8 +268,21 @@ select {
 .logout_button {
     width: 100%;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
-    margin-top: 20px;
     cursor: pointer;
+}
+
+.logout_button span {
+    padding: 2px 10px;
+    border: 1px solid #8b0f0d;
+    border-radius: 3px;
+}
+
+.option-title {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: bold;
 }

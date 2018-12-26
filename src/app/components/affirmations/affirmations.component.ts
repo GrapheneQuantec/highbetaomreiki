@@ -34,7 +34,7 @@ export class AffirmationsComponent implements OnInit {
     optionsVisible: boolean = false;
     loopAllAffirmations: boolean = true;
     playlists: Playlist[];
-
+    
     omegas = [
         { value: "OmegaSubaru", text: "Omega Subaru", url: "OmegaSubaru3.gif" },
         { value: "OmegaMultipleString", text: "Omega Multiple String", url: "omega_multiple_string.png" }
@@ -177,13 +177,17 @@ export class AffirmationsComponent implements OnInit {
         this.utilService.setBackgroundVideo(video.videoId);
     }
 
-    setPlaylistOptions() {
-        this.utilService.setBackgroundPlaylistOptions({loopAll: this.loopAllAffirmations});
+    setPlaylistOptions(event) {
+        this.utilService.setBackgroundPlaylistOptions({loopAll: event});
     }
 
     volumeChanged(event) {
         this.videos.forEach(video => video["player"].setVolume(this.globalVolume));
         this.utilService.setBackgroundVolume(this.globalVolume);
+    }
+
+    toggleAffirmation(event) {
+        this.affirmationVisible = event;
     }
 
     savePlayer(player, videoId) {
