@@ -36,7 +36,8 @@ export class AffirmationsComponent implements OnInit {
     loopAllAffirmations: boolean = true;
     playlists: Playlist[];
     affirmationCategories: string[];
-    
+    karaokeText: string;
+
     omegas = [
         { value: "OmegaSubaru", text: "Omega Subaru", url: "OmegaSubaru3.gif" },
         { value: "OmegaMultipleString", text: "Omega Multiple String", url: "omega_multiple_string.png" }
@@ -80,8 +81,9 @@ export class AffirmationsComponent implements OnInit {
             name: "AnaAna",
             value: "ana",
             videos: [
-                
+
                 { videoId: "9Wgm59jVZ9g", caption: "Santos" },
+                { videoId: "fxCIwxeQkLs", caption: "Santos" },
                 { videoId: "zR9-KR1PbJ4", caption: "AnaAna & Jesper" },
                 { videoId: "TMDkAVlNPL8", caption: "AnaAna Orgy" },
                 { videoId: "WznVXaV1b90", caption: "AnaAna & Monia" },
@@ -157,7 +159,7 @@ export class AffirmationsComponent implements OnInit {
 
         this.affirmationService.getAffirmations().subscribe(affirmations => {
             this.affirmations = affirmations;
-            this.affirmationCategories =  this.removeDuplicates(affirmations.filter(aff => aff.category).map(aff => aff.category));
+            this.affirmationCategories = this.removeDuplicates(affirmations.filter(aff => aff.category).map(aff => aff.category));
             if (affirmations.length > 0 && !this.activeAffirmationId) {
                 this.setSelectedAffirmation(affirmations[0]);
             }
@@ -171,7 +173,7 @@ export class AffirmationsComponent implements OnInit {
             this.videos = playlist.videos;
             initCarousel(this.videos.length);
             this.utilService.setBackgroundPlaylist(playlist);
-    } else {
+        } else {
             this.videos = [];
         }
     }
@@ -181,7 +183,7 @@ export class AffirmationsComponent implements OnInit {
     }
 
     setPlaylistOptions(event) {
-        this.utilService.setBackgroundPlaylistOptions({loopAll: event});
+        this.utilService.setBackgroundPlaylistOptions({ loopAll: event });
     }
 
     volumeChanged(event) {
@@ -289,7 +291,7 @@ export class AffirmationsComponent implements OnInit {
         // this.router.navigate(['/meditation/affirmation/' + id]);
         if (this.affirmations) {
             this.setSelectedAffirmation(this.affirmations.find(aff => aff.id === id));
-        } 
+        }
         this.isBeingEdited = false;
         this.isConfirmDelete = false;
     }
@@ -331,12 +333,12 @@ export class AffirmationsComponent implements OnInit {
 
     removeDuplicates(array) {
         let unique = {};
-        array.forEach(function(i) {
-          if(!unique[i]) {
-            unique[i] = true;
-          }
+        array.forEach(function (i) {
+            if (!unique[i]) {
+                unique[i] = true;
+            }
         });
         return Object.keys(unique);
-      }
+    }
 
 }
