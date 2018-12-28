@@ -32,8 +32,19 @@
 }
 
 
-.volume-picker input {
-    width: 100%;
+.volume-picker input, .karaoke-speed-picker input {
+    width: 80%;
+    margin: 0;
+}
+
+.karaoke-speed-picker {
+    margin-bottom: 10px;
+}
+
+.picker-label {
+    display: inline-block;
+    width: 20%;
+    text-align: right;
 }
 
 select {
@@ -300,6 +311,7 @@ select {
     -webkit-transition: .2s;
     transition: opacity .2s;
     cursor: pointer;
+    border-radius: 3px;
   }
   
   .slider:hover {

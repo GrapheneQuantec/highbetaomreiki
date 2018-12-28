@@ -20,6 +20,16 @@
                 <app-checkbox (checkedEvent)="toggleAffirmation($event)" [checkedVal]="affirmationVisible" [text]="'Show Affirmation'"></app-checkbox>
             </div>
 
+            <!-- toggle karaoke -->
+            <div class="checkboxField">
+                    <app-checkbox (checkedEvent)="toggleKaraoke($event)" [checkedVal]="karaokeRunning" [text]="'Karaoke'"></app-checkbox>
+                </div>
+
+            <div class="karaoke-speed-picker">
+                <input class="slider" (change)="karaokeSpeedChanged()" [(ngModel)]="karaokeSpeed" type="range" min="0" max="180">
+                <span class="picker-label">{{karaokeSpeed}}</span>
+            </div>
+
             <div class="affirmation-list" *ngIf="affirmationVisible">
                 <!-- select affirmation -->
                 <select name="carousel" (change)="selectAffirmation($event.target.value)">
@@ -90,6 +100,7 @@
 
             <div class="volume-picker">
                 <input class="slider" (change)="volumeChanged()" [(ngModel)]="globalVolume" type="range" min="0" max="100">
+                <span class="picker-label">{{globalVolume}}</span>
             </div>
 
             <app-wave></app-wave>

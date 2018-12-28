@@ -40,6 +40,9 @@ export class AffirmationsComponent implements OnInit {
     coloredAffirmationText: string;
     normalAffirmationText: string;
     karaokeLetterCount: number = 0;
+    karaokeSpeed: number = 80;
+    karaokeInterval;
+    karaokeRunning: boolean = true;
 
     omegas = [
         { value: "OmegaSubaru", text: "Omega Subaru", url: "OmegaSubaru3.gif" },
@@ -77,7 +80,7 @@ export class AffirmationsComponent implements OnInit {
 
         //QT Tech & Research
         {
-            name: "QT Tech & Research",
+            name: "QT Tech",
             value: "qttr",
             images: [
                 { pictureUrl: "QFCenter_en.png", caption: "Quantum Foundation Modalities" },
@@ -218,8 +221,23 @@ export class AffirmationsComponent implements OnInit {
         this.utilService.setBackgroundVolume(this.globalVolume);
     }
 
+    karaokeSpeedChanged() {
+        clearInterval(this.karaokeInterval);
+        this.karaokeInterval = setInterval(() => this.progressKaraoke(), this.karaokeSpeed);
+    }
+
     toggleAffirmation(event) {
         this.affirmationVisible = event;
+    }
+
+    toggleKaraoke(event) {
+        if (!event) {
+            clearInterval(this.karaokeInterval);
+            this.karaokeLetterCount = 0;
+            this.progressKaraoke();
+        } else {
+            this.karaokeInterval = setInterval(() => this.progressKaraoke(), this.karaokeSpeed);
+        }
     }
 
     savePlayer(player, videoId) {
@@ -263,7 +281,7 @@ export class AffirmationsComponent implements OnInit {
 
             this.normalAffirmationText = affirmation.content;
             this.karaokeLetterCount = 0;
-            setInterval(() => this.progressKaraoke(), 60);
+            this.karaokeInterval = setInterval(() => this.progressKaraoke(), this.karaokeSpeed);
         }
     }
 
