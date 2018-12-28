@@ -1,6 +1,7 @@
 .affirmationPanel {
     display: inline-block;
     width: 100%;
+    white-space: pre-wrap;
 }
 
 .affirmationPanel p {
@@ -320,4 +321,12 @@ select {
     height: 25px;
     background: #8b0f0d;
     cursor: pointer;
+  }
+
+  .colored-text {
+      color: #ffed00;
+  }
+
+  .karaoke-text {
+    white-space: pre-wrap;
   }

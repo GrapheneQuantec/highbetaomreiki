@@ -120,6 +120,12 @@
                         </div>
                         <div class="subdiv">{{video.caption}}</div>
                     </figure>
+                    <figure *ngFor="let image of images">
+                        <div class="hexdiv" (mouseenter)="rotationPause()" (mouseleave)="rotationResume()">
+                            <img [src]="'../../assets/images/' + image.pictureUrl" alt="">
+                        </div>
+                        <div class="subdiv">{{image.caption}}</div>
+                    </figure>
                     <div class="affirmationWrapper">
                         <div *ngIf="affirmationVisible" class="affirmation" [ngStyle]="{'background-image':'url(../../../assets/images/' + selectedOmega + ')'}">
                             <div class="affirmation-title">
@@ -140,7 +146,9 @@
 
                             <div id="sexsextaza" class="affirmationContent" [ngStyle]="getAffirmationStyle()">
                                 <div *ngIf="!isBeingEdited" class="pfpItem entry-content" style="white-space: pre-wrap;">
-                                    <p>{{selectedAffirmation.content}}</p>
+                                    <p class="karaoke-text">
+                                        <span class="colored-text">{{coloredAffirmationText}}</span>{{normalAffirmationText}}
+                                    </p>
                                 </div>
                                 <div *ngIf="isBeingEdited" class="edit-content">
                                     <textarea name="edit" id="affirmationEdit" [(ngModel)]="selectedAffirmation.content">{{selectedAffirmation.content}}</textarea>

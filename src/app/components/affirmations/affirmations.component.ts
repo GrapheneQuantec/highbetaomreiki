@@ -5,10 +5,9 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap, map } from 'rxjs/operators';
 import { AuthService } from '../../core/auth.service';
 import { UtilsService } from '@app/services/utils.service';
-import { Playlist, Video } from '@app/models/playlist';
+import { Playlist, Video, Image } from '@app/models/playlist';
 
 declare var initCarousel: any;
-
 
 @Component({
     selector: 'app-affirmations',
@@ -30,6 +29,7 @@ export class AffirmationsComponent implements OnInit {
     selectedOmega = 'OmegaSubaru';
     private player;
     videos: Video[] = [];
+    images: Image[] = [];
     globalVolume: number = 10;
     affirmationVisible: boolean = true;
     optionsVisible: boolean = false;
@@ -37,6 +37,9 @@ export class AffirmationsComponent implements OnInit {
     playlists: Playlist[];
     affirmationCategories: string[];
     karaokeText: string;
+    coloredAffirmationText: string;
+    normalAffirmationText: string;
+    karaokeLetterCount: number = 0;
 
     omegas = [
         { value: "OmegaSubaru", text: "Omega Subaru", url: "OmegaSubaru3.gif" },
@@ -69,6 +72,21 @@ export class AffirmationsComponent implements OnInit {
                 { videoId: "knyAfmz0kBs", caption: "Renibus" },
                 { videoId: "mX2o6JLFXwg", caption: "Zatoki" },
                 { videoId: "6IrLyCTSJRI", caption: "Poli Маріє" },
+            ],
+        },
+
+        //QT Tech & Research
+        {
+            name: "QT Tech & Research",
+            value: "qttr",
+            images: [
+                { pictureUrl: "QFCenter_en.png", caption: "Quantum Foundation Modalities" },
+                { pictureUrl: "QF3DNMR_en.png", caption: "Quantum Foundation 3D NMR" },
+                { pictureUrl: "QFAen.png", caption: "Quantum Foundation Applications" },
+                { pictureUrl: "QFD_en.png", caption: "Quantum Foundation Devices" },
+                { pictureUrl: "QFK_en.png", caption: "Quantum Foundation Knowledge" },
+                { pictureUrl: "QFR_en.png", caption: "Quantum Foundation Research" },
+                { pictureUrl: "QFT_en.png", caption: "Quantum Foundation Technology" },
             ],
         },
     ]
@@ -170,11 +188,20 @@ export class AffirmationsComponent implements OnInit {
     changedCarouselVideos(event) {
         if (event.target.selectedIndex > 0) {
             let playlist: Playlist = this.playlists[event.target.selectedIndex - 1];
-            this.videos = playlist.videos;
-            initCarousel(this.videos.length);
+            let carouselCount: number = 0;
+            if (playlist.videos) {
+                this.videos = playlist.videos;
+                carouselCount = this.videos.length
+            }
+            if (playlist.images) {
+                this.images = playlist.images;
+                carouselCount = this.images.length
+            }
+            initCarousel(carouselCount);
             this.utilService.setBackgroundPlaylist(playlist);
         } else {
             this.videos = [];
+            this.images = [];
         }
     }
 
@@ -227,11 +254,16 @@ export class AffirmationsComponent implements OnInit {
         document.getElementById("carousel-outerer").setAttribute('style', 'animation-play-state: ' + animationDuration)
     }
 
-    setSelectedAffirmation(affirmation) {
+    setSelectedAffirmation(affirmation: Affirmation) {
         if (affirmation) {
             this.selectedAffirmation = affirmation;
+
             this.activeAffirmationId = affirmation.id;
             this.selectedOmega = this.getOmegaBackgroundPath(affirmation.omegaBackground);
+
+            this.normalAffirmationText = affirmation.content;
+            this.karaokeLetterCount = 0;
+            setInterval(() => this.progressKaraoke(), 60);
         }
     }
 
@@ -339,6 +371,15 @@ export class AffirmationsComponent implements OnInit {
             }
         });
         return Object.keys(unique);
+    }
+
+    progressKaraoke() {
+        if (this.selectedAffirmation) {
+            let texts = this.selectedAffirmation.content; //.replace(/<br\s*[\/]?>/gi, "")
+            this.coloredAffirmationText = texts.substring(0, this.karaokeLetterCount);
+            this.normalAffirmationText = texts.substring(this.karaokeLetterCount, texts.length);
+            this.karaokeLetterCount = (this.karaokeLetterCount < texts.length)? this.karaokeLetterCount + 1: 0;
+        }
     }
 
 }
