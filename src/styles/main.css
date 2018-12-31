@@ -2,3 +2,7 @@ body {
   background: red;
   margin: 0;
 }
+
+.hidden-element {
+  display: none!important;
+}

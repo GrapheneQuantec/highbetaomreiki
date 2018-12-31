@@ -45,6 +45,7 @@ export class AffirmationsComponent implements OnInit {
     karaokeRunning: boolean = true;
     affirmationCounter: number = 1;
     affirmationBackground: string;
+    carouselShown: boolean = true;
 
     omegas = [
         { value: "OmegaSubaru", text: "Omega Subaru", url: "OmegaSubaru3.gif" },

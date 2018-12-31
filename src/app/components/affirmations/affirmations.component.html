@@ -84,6 +84,11 @@
 
             <!-- toggle loop all / loop one -->
             <div class="checkboxField">
+                <app-checkbox (checkedEvent)="carouselShown = $event" [checkedVal]="carouselShown" [text]="'Show carousel'"></app-checkbox>
+            </div>
+
+            <!-- toggle loop all / loop one -->
+            <div class="checkboxField">
                 <app-checkbox (checkedEvent)="setPlaylistOptions($event)" [checkedVal]="loopAllAffirmations" [text]="'Loop All'"></app-checkbox>
             </div>
 
@@ -127,7 +132,7 @@
         <div id="carousel-outerer">
             <div id="carousel-outer">
                 <div id="carousel">
-                    <figure *ngFor="let video of videos">
+                    <figure *ngFor="let video of videos" [ngClass]="{'hidden-element': !carouselShown}">
                         <div class="hexdiv" (mouseenter)="rotationPause()" (mouseleave)="rotationResume()">
                             <div class="youtube-overlay" (click)="videoSelected(video)"></div>
                             <youtube-player [videoId]="video.videoId" (ready)="savePlayer($event, video.videoId)" (change)="onStateChange($event, video.videoId)"

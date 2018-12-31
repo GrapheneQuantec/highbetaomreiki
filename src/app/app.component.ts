@@ -67,10 +67,10 @@ export class AppComponent implements OnInit {
   }
 
   loadPlaylist(playlist: Playlist) {
-    // this.playlist = playlist;
-    // if (this.playlist.videos.length > 0) {
-    //   this.currentPlaylistIndex = 0;
-    //   this.loadVideo(this.playlist.videos[0].videoId);
-    // }
+    this.playlist = playlist;
+    if (playlist.videos && playlist.videos.length > 0) {
+      this.currentPlaylistIndex = 0;
+      this.loadVideo(this.playlist.videos[0].videoId);
+    }
   }
 }
