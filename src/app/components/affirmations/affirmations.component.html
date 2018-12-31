@@ -20,13 +20,17 @@
                 <app-checkbox (checkedEvent)="toggleAffirmation($event)" [checkedVal]="affirmationVisible" [text]="'Show Affirmation'"></app-checkbox>
             </div>
 
-            <!-- toggle karaoke -->
-            <div class="checkboxField">
-                    <app-checkbox (checkedEvent)="toggleKaraoke($event)" [checkedVal]="karaokeRunning" [text]="'Karaoke'"></app-checkbox>
-                </div>
+            <div class="karaoke-controls">
+                <i class="fa fa-fast-backward" aria-hidden="true" (click)="resetKaraoke()"></i>
+                <i class="fa fa-backward" aria-hidden="true" (click)="stopKaraoke()"></i>
+                <i class="fa fa-pause" aria-hidden="true" (click)="pauseKaraoke()" *ngIf="karaokeInterval"></i>
+                <i class="fa fa-play" aria-hidden="true" (click)="playKaraoke()" *ngIf="!karaokeInterval"></i>
+                <i class="fa fa-forward" aria-hidden="true" (click)="forwardKaraoke()"></i>
+                <i class="fa fa-fast-forward" aria-hidden="true" (click)="finishKaraoke()"></i>
+            </div>
 
             <div class="karaoke-speed-picker">
-                <input class="slider" (change)="karaokeSpeedChanged()" [(ngModel)]="karaokeSpeed" type="range" min="0" max="180">
+                <input class="slider" (change)="karaokeSpeedChanged()" [(ngModel)]="karaokeSpeed" type="range" min="0" max="400" step="16">
                 <span class="picker-label">{{karaokeSpeed}}</span>
             </div>
 
@@ -138,7 +142,7 @@
                         <div class="subdiv">{{image.caption}}</div>
                     </figure>
                     <div class="affirmationWrapper">
-                        <div *ngIf="affirmationVisible" class="affirmation" [ngStyle]="{'background-image':'url(../../../assets/images/' + selectedOmega + ')'}">
+                        <div *ngIf="affirmationVisible" class="affirmation" [ngStyle]="{'background-image': affirmationBackground }">
                             <div class="affirmation-title">
                                 <div *ngIf="!isBeingEdited">
                                     {{selectedAffirmation.title}}

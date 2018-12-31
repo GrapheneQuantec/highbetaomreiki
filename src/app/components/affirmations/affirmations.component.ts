@@ -43,6 +43,8 @@ export class AffirmationsComponent implements OnInit {
     karaokeSpeed: number = 80;
     karaokeInterval;
     karaokeRunning: boolean = true;
+    affirmationCounter: number = 1;
+    affirmationBackground: string;
 
     omegas = [
         { value: "OmegaSubaru", text: "Omega Subaru", url: "OmegaSubaru3.gif" },
@@ -148,6 +150,19 @@ export class AffirmationsComponent implements OnInit {
                 { videoId: "7TUhUeOC1uo", caption: "Red couch 26th 3c" },
             ],
         },
+
+        // 2018 12 28
+        {
+            name: "2018 12 28",
+            value: "20181228",
+            videos: [
+                { videoId: "bcvsHfD1UV0", caption: "South" },
+                { videoId: "kFuLMvieOIs", caption: "North East" },
+                { videoId: "tZOMKLHmczM", caption: "East" },
+                { videoId: "JsrrDDIOYZg", caption: "North" },
+            ],
+        },
+        
     ]
 
     constructor(private router: Router,
@@ -231,13 +246,65 @@ export class AffirmationsComponent implements OnInit {
     }
 
     toggleKaraoke(event) {
-        if (!event) {
-            clearInterval(this.karaokeInterval);
+        if (!event) this.stopKaraoke();
+        else this.playKaraoke();
+    }
+
+    stopKaraoke() {
+        clearInterval(this.karaokeInterval);
+        this.karaokeInterval = null;
+        if (this.karaokeLetterCount != 0) {
             this.karaokeLetterCount = 0;
-            this.progressKaraoke();
-        } else {
-            this.karaokeInterval = setInterval(() => this.progressKaraoke(), this.karaokeSpeed);
         }
+        else {
+            this.affirmationCounter = (this.affirmationCounter > 1) ? this.affirmationCounter - 1 : 1;
+            this.updateOmegaCounter();
+        }
+        this.updateKaraoke();
+    }
+
+    forwardKaraoke() {
+        clearInterval(this.karaokeInterval);
+        this.karaokeInterval = null;
+        let texts = this.selectedAffirmation.content;
+        if (this.karaokeLetterCount < texts.length) {
+            this.karaokeLetterCount = texts.length;
+        }
+        else {
+            this.affirmationCounter = (this.affirmationCounter < 16) ? this.affirmationCounter + 1 : this.affirmationCounter;
+            this.updateOmegaCounter();
+        }
+        this.updateKaraoke();
+    }
+    
+    resetKaraoke() {
+        clearInterval(this.karaokeInterval);
+        this.karaokeInterval = null;
+        this.karaokeLetterCount = 0;
+        this.updateKaraoke();
+        this.affirmationCounter = 1;
+        this.updateOmegaCounter();
+    }
+
+    finishKaraoke() {
+        clearInterval(this.karaokeInterval);
+        this.karaokeInterval = null;
+
+        let texts = this.selectedAffirmation.content;
+        this.karaokeLetterCount = texts.length;
+        this.updateKaraoke();
+        this.affirmationCounter = 16;
+        this.updateOmegaCounter();
+    }
+
+    playKaraoke() {
+        clearInterval(this.karaokeInterval);
+        this.karaokeInterval = setInterval(() => this.progressKaraoke(), this.karaokeSpeed);
+    }
+
+    pauseKaraoke() {
+        clearInterval(this.karaokeInterval);
+        this.karaokeInterval = null;
     }
 
     savePlayer(player, videoId) {
@@ -278,9 +345,10 @@ export class AffirmationsComponent implements OnInit {
 
             this.activeAffirmationId = affirmation.id;
             this.selectedOmega = this.getOmegaBackgroundPath(affirmation.omegaBackground);
-
+            this.updateOmegaCounter();
             this.normalAffirmationText = affirmation.content;
             this.karaokeLetterCount = 0;
+            clearInterval(this.karaokeInterval);
             this.karaokeInterval = setInterval(() => this.progressKaraoke(), this.karaokeSpeed);
         }
     }
@@ -328,6 +396,10 @@ export class AffirmationsComponent implements OnInit {
         return omegaPath;
     }
 
+    updateOmegaCounter() {
+        this.affirmationBackground = `url(../../../assets/images/starpoints/active_star_${this.affirmationCounter}.png), url(../../../assets/images/${this.selectedOmega})`;
+    }
+
     openOptions(event) {
         this.optionsVisible = true;
         if (event.ctrlKey && event.shiftKey) {
@@ -342,6 +414,7 @@ export class AffirmationsComponent implements OnInit {
         if (this.affirmations) {
             this.setSelectedAffirmation(this.affirmations.find(aff => aff.id === id));
         }
+        this.resetKaraoke();
         this.isBeingEdited = false;
         this.isConfirmDelete = false;
     }
@@ -391,12 +464,29 @@ export class AffirmationsComponent implements OnInit {
         return Object.keys(unique);
     }
 
+    updateKaraoke() {
+        let texts = this.selectedAffirmation.content; //.replace(/<br\s*[\/]?>/gi, "")
+        this.coloredAffirmationText = texts.substring(0, this.karaokeLetterCount);
+        this.normalAffirmationText = texts.substring(this.karaokeLetterCount, texts.length);
+    }
+
     progressKaraoke() {
         if (this.selectedAffirmation) {
             let texts = this.selectedAffirmation.content; //.replace(/<br\s*[\/]?>/gi, "")
-            this.coloredAffirmationText = texts.substring(0, this.karaokeLetterCount);
-            this.normalAffirmationText = texts.substring(this.karaokeLetterCount, texts.length);
-            this.karaokeLetterCount = (this.karaokeLetterCount < texts.length)? this.karaokeLetterCount + 1: 0;
+            this.updateKaraoke();
+            if (this.karaokeLetterCount < texts.length) {
+                this.karaokeLetterCount = this.karaokeLetterCount + 1;
+            }
+            else {
+                this.karaokeLetterCount = 0;
+                if (this.affirmationCounter < 16) {
+                    this.affirmationCounter = this.affirmationCounter + 1;
+                }
+                else {
+                    this.affirmationCounter = 1;
+                }
+                this.updateOmegaCounter();
+            }
         }
     }
 

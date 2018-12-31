@@ -37,6 +37,11 @@
     margin: 0;
 }
 
+.karaoke-controls i {
+    margin: 0 14px 10px 0;
+    cursor: pointer;
+}
+
 .karaoke-speed-picker {
     margin-bottom: 10px;
 }
