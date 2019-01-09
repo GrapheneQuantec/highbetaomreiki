@@ -21,14 +21,25 @@
     background-color: #fedb90b8;
     border: 3px solid #fedb90;
     border-radius: 10px;
-    margin: 20px;
-    display: flow-root;
+    margin: 10px;
+    display: block;
 
 }
 
-.showOptionsIcon, .hideOptionsIcon {
+.showOptionsIcon {
     font-size: 24px;
     cursor: pointer;
+    text-align: center;
+    width: 26px;
+}
+
+.hideOptionsIcon {
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    display: inline;
+    vertical-align: middle;
+    padding: 10px;
 }
 
 
@@ -283,11 +294,14 @@ select {
 }
 
 .logout_button {
-    width: 100%;
+    width: 90%;
     text-align: center;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    display: inline;
+    vertical-align: middle;
+    margin-left: 10px;
 }
 
 .logout_button span {

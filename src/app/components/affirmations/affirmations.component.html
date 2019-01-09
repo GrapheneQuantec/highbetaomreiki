@@ -1,15 +1,9 @@
 <div *ngIf="authService.user$ | async as user" class="affirmationPanel">
     <div class="leftPanel">
 
-        <div class="showOptionsIcon contentField" (click)="openOptions($event)" *ngIf="!optionsVisible">
-            <i class="fa fa-cogs" aria-hidden="true"></i>
-        </div>
+        <div class="showOptionsIcon contentField" (click)="affirmationSwitch()" *ngIf="!affirmationsVisible">Ω</div>
 
-        <div class="contentField" *ngIf="optionsVisible">
-
-            <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true" (click)="optionsVisible = false"></i>
-
-            <app-wave></app-wave>
+        <div class="contentField" *ngIf="affirmationsVisible">
 
             <div class="option-title">
                 <span>Affirmations</span>
@@ -77,6 +71,16 @@
             </div>
 
             <app-wave></app-wave>
+           
+            <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true" (click)="affirmationsVisible = false"></i>
+
+        </div>
+
+        <div class="showOptionsIcon contentField" (click)="carouselSwitch($event)" *ngIf="!carouselVisible">
+            <i class="fa fa-youtube-square" aria-hidden="true"></i>
+        </div>
+
+        <div class="contentField" *ngIf="carouselVisible">
 
             <div class="option-title">
                 <span>Carousel</span>
@@ -102,6 +106,17 @@
 
             <app-wave></app-wave>
 
+            <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true" (click)="carouselVisible = false"></i>
+
+        </div>
+
+
+        <div class="showOptionsIcon contentField" (click)="optionsSwitch()" *ngIf="!optionsVisible">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+        </div>
+
+        <div class="contentField" *ngIf="optionsVisible">
+
             <!-- volume control -->
             <div class="option-title">
                 <span>Volume</span>
@@ -113,6 +128,8 @@
             </div>
 
             <app-wave></app-wave>
+
+            <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true" (click)="optionsVisible = false"></i>
 
             <!-- logout button -->
             <div class="logout_button">

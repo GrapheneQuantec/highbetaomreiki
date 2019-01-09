@@ -33,6 +33,8 @@ export class AffirmationsComponent implements OnInit {
     globalVolume: number = 10;
     affirmationVisible: boolean = true;
     optionsVisible: boolean = false;
+    affirmationsVisible: boolean = false;
+    carouselVisible: boolean = false;
     loopAllAffirmations: boolean = true;
     playlists: Playlist[];
     affirmationCategories: string[];
@@ -202,6 +204,32 @@ export class AffirmationsComponent implements OnInit {
             }
         });
 
+    }
+
+    affirmationSwitch() {
+        this.closeAllMenus();
+        this.affirmationsVisible = true;        
+    }
+
+    carouselSwitch(event) {
+        this.closeAllMenus();
+        this.carouselVisible = true;
+        if (event.ctrlKey && event.shiftKey) {
+            this.playlists = this.carouselVideos.concat(this.advancedCarouselVideos);
+        } else {
+            this.playlists = this.carouselVideos;
+        }
+    }
+
+    optionsSwitch() {
+        this.closeAllMenus();
+        this.optionsVisible = true;
+    }
+
+    closeAllMenus() {
+        this.affirmationsVisible = false;
+        this.carouselVisible = false;
+        this.optionsVisible = false;
     }
 
     changedCarouselVideos(event) {
@@ -399,15 +427,6 @@ export class AffirmationsComponent implements OnInit {
 
     updateOmegaCounter() {
         this.affirmationBackground = `url(../../../assets/images/starpoints/active_star_${this.affirmationCounter}.png), url(../../../assets/images/${this.selectedOmega})`;
-    }
-
-    openOptions(event) {
-        this.optionsVisible = true;
-        if (event.ctrlKey && event.shiftKey) {
-            this.playlists = this.carouselVideos.concat(this.advancedCarouselVideos);
-        } else {
-            this.playlists = this.carouselVideos;
-        }
     }
 
     selectAffirmation(id) {
