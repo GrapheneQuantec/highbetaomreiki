@@ -532,6 +532,14 @@ export class AffirmationsComponent implements OnInit {
             }
         })
 
+        // TODO
+        // finish all reiki steps in the simplest series
+        // introduce delays between the steps
+        // create the option between manual and automatic change
+        // make the option to choose amout of repetitions
+        // arrange all the buttons nicely and intuitively
+        // synchroniczne play i synchronizacja w trakcie
+
         // { videoId: "NMTfMRi2fJk", caption: "Invocation" },
         // { videoId: "dx-UJ-Xkr1M", caption: "Symbols" },
         // { videoId: "VfBS_fHWt00", caption: "Grail" },
