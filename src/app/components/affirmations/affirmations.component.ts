@@ -165,7 +165,7 @@ export class AffirmationsComponent implements OnInit {
                 { videoId: "JsrrDDIOYZg", caption: "North" },
             ],
         },
-        
+
     ]
 
     constructor(private router: Router,
@@ -208,7 +208,7 @@ export class AffirmationsComponent implements OnInit {
 
     affirmationSwitch() {
         this.closeAllMenus();
-        this.affirmationsVisible = true;        
+        this.affirmationsVisible = true;
     }
 
     carouselSwitch(event) {
@@ -305,7 +305,7 @@ export class AffirmationsComponent implements OnInit {
         }
         this.updateKaraoke();
     }
-    
+
     resetKaraoke() {
         clearInterval(this.karaokeInterval);
         this.karaokeInterval = null;
@@ -508,6 +508,45 @@ export class AffirmationsComponent implements OnInit {
                 this.updateOmegaCounter();
             }
         }
+    }
+
+    startOmReiki() {
+
+        // open fullscreen view
+        this.fullscreenView(document.getElementsByTagName("body")[0]);
+
+        // clear elements on the website
+        this.affirmationVisible = false;
+        this.carouselVisible = false;
+        this.closeAllMenus();
+
+        // start invocation
+        let stateObservable = this.utilService.setBackgroundVideo("NMTfMRi2fJk");
+        stateObservable.subscribe(state => {
+
+            if (state.data == YT.PlayerState.ENDED) {
+                // start affirmation
+                this.utilService.setBackgroundVideo("4XT5PsazYcM");
+                this.affirmationVisible = true;
+                this.playKaraoke();
+            }
+        })
+
+        // { videoId: "NMTfMRi2fJk", caption: "Invocation" },
+        // { videoId: "dx-UJ-Xkr1M", caption: "Symbols" },
+        // { videoId: "VfBS_fHWt00", caption: "Grail" },
+        // { videoId: "xxMShqH2IRY", caption: "Song" },
+    }
+
+    fullscreenView(element) {
+        if (element.requestFullscreen)
+            element.requestFullscreen();
+        else if (element.mozRequestFullScreen)
+            element.mozRequestFullScreen();
+        else if (element.webkitRequestFullscreen)
+            element.webkitRequestFullscreen();
+        else if (element.msRequestFullscreen)
+            element.msRequestFullscreen();
     }
 
 }

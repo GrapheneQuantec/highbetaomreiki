@@ -19,10 +19,18 @@ export class UtilsService {
   private _volumeChanged: Subject<number> = new Subject();
   public readonly volumeChanged: Observable<number> = this._volumeChanged.asObservable();
 
+  private _videoState: Subject<any> = new Subject();
+  public readonly videoState: Observable<any> = this._videoState.asObservable();
+
   constructor() { }
 
   setBackgroundVideo(videoId) {
     this._backgroundVideoId.next(videoId);
+    return this.videoState;
+  }
+
+  updateVideoState(state) {
+    this._videoState.next(state);
   }
 
   setBackgroundPlaylist(playlist: Playlist) {

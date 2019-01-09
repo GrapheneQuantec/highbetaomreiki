@@ -35,6 +35,8 @@
                         [attr.value]="affirmation.id">{{affirmation.title}}</option>
                 </select>
 
+                <div class="startOmReiki" (click)="startOmReiki()">Start Li Om Reiki</div>
+
                 <!-- edit affirmation -->
                 <div *ngIf="authService.user$ | async as user" class="affirmation-edit-buttons">
                     <span *ngIf="!isConfirmDelete">

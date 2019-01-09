@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
 
   backgroundVideoId = "4XT5PsazYcM";
   private player;
-  private ytEvent;
   playlist: Playlist;
   loopAll: boolean = true;
   currentPlaylistIndex: number;
@@ -33,15 +32,17 @@ export class AppComponent implements OnInit {
   }
 
   onStateChange(event) {
-    this.ytEvent = event.data;
-    if (event.data == YT.PlayerState.ENDED) {
-      if (this.loopAll && this.playlist) {
-        this.currentPlaylistIndex = (this.currentPlaylistIndex + 1) % this.playlist.videos.length;
-        this.loadVideo(this.playlist.videos[this.currentPlaylistIndex].videoId);
-      } else {
-        this.player.seekTo(0);
-      }
-    }
+
+    this.utilService.updateVideoState(event);
+
+    // if (event.data == YT.PlayerState.ENDED) {
+    //   if (this.loopAll && this.playlist) {
+    //     this.currentPlaylistIndex = (this.currentPlaylistIndex + 1) % this.playlist.videos.length;
+    //     this.loadVideo(this.playlist.videos[this.currentPlaylistIndex].videoId);
+    //   } else {
+    //     this.player.seekTo(0);
+    //   }
+    // }
 
   }
   savePlayer(player) {
