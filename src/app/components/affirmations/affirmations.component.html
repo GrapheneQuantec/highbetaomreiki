@@ -11,18 +11,24 @@
 
             <app-wave></app-wave>
 
-            <div>
-                <span>Affirmations: </span>
+            <!-- select affirmation -->
+            <select class="margin_bottom" name="carousel" (change)="selectAffirmation($event.target.value)">
+                <option *ngFor="let affirmation of affirmations" [attr.selected]="affirmation.id == selectedAffirmation.id ? true : null"
+                    [attr.value]="affirmation.id">{{affirmation.title}}</option>
+            </select>
+
+            <div class="margin_bottom">
                 <input class="affirmationCountInput" [(ngModel)]="affirmationCount" type="number" min="1" max="16">
+                <span>Affirmations</span>
             </div>
 
             <!-- toggle factom -->
-            <div class="checkboxField">
+            <div class="margin_bottom">
                 <app-checkbox (checkedEvent)="toggleFactomMode($event)" [checkedVal]="isFactom" [text]="'Factom mode'"></app-checkbox>
             </div>
 
             <!-- toggle automatic progression -->
-            <div class="checkboxField">
+            <div class="margin_bottom">
                 <app-checkbox (checkedEvent)="toggleAutomaticProgression($event)" [checkedVal]="startNextAutomatically" [text]="'Auto continue'"></app-checkbox>
             </div>
 
@@ -30,67 +36,77 @@
             <div *ngIf="omReikiStarted" class="startOmReiki" (click)="newOmReiki()">New Li Om Reiki</div>
 
             <app-wave></app-wave>
-
-            <div class="karaoke-speed-picker">
-                <input class="slider" (change)="karaokeSpeedChanged()" [(ngModel)]="karaokeSpeed" type="range" min="0" max="400" step="16">
-                <span class="picker-label">{{karaokeSpeed}}</span>
-            </div>
-
-            <app-wave></app-wave>
-
-            <!-- toggle affirmation view -->
-            <div class="checkboxField">
-                <app-checkbox (checkedEvent)="toggleAffirmation($event)" [checkedVal]="affirmationVisible" [text]="'Show Affirmation'"></app-checkbox>
-            </div>
-
-            <div class="affirmation-list">
-                <!-- select affirmation -->
-                <select name="carousel" (change)="selectAffirmation($event.target.value)">
-                    <option *ngFor="let affirmation of affirmations" [attr.selected]="affirmation.id == selectedAffirmation.id ? true : null"
-                        [attr.value]="affirmation.id">{{affirmation.title}}</option>
-                </select>
-
-
-                <!-- edit affirmation -->
-                <div *ngIf="authService.user$ | async as user" class="affirmation-edit-buttons">
-                    <span *ngIf="!isConfirmDelete">
-                        <span *ngIf="!isBeingEdited">
-                            <span *ngIf="authService.canEdit(user)" (click)="startEdit()" class="crud-icon">
-                                <i class="fa fa-pencil"></i>
-                            </span>
-                            <span *ngIf="authService.canDelete(user)" (click)="deleteAffirmation()" class="crud-icon">
-                                <i class="fa fa-trash"></i>
-                            </span>
-                            <span *ngIf="authService.canEdit(user)" (click)="addAffirmation()" class="crud-icon">
-                                <i class="fa fa-plus"></i>
-                            </span>
-                        </span>
-                        <span *ngIf="isBeingEdited">
-                            <span (click)="updateItem()" class="crud-icon">
-                                <i class="fa fa-check"></i>
-                            </span>
-                            <span (click)="cancelEdit()" class="crud-icon">
-                                <i class="fa fa-close"></i>
-                            </span>
-                        </span>
-                    </span>
-                    <span *ngIf="isConfirmDelete && authService.canDelete(user)">
-                        Delete?
-                        <span (click)="confirmedDeleteAffirmation()" class="crud-icon">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <span (click)="revokedDeleteAffirmation()" class="crud-icon">
-                            <i class="fa fa-close"></i>
-                        </span>
-                    </span>
-                </div>
-            </div>
-
-            <app-wave></app-wave>
            
             <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true" (click)="affirmationsVisible = false"></i>
 
         </div>
+
+        <div class="showOptionsIcon contentField" (click)="affirmationEditionSwitch()" *ngIf="!affirmationsEditionVisible">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </div>
+
+        <div class="contentField" *ngIf="affirmationsEditionVisible">
+
+                <div class="option-title">
+                    <span>Edit Affirmations</span>
+                </div>
+    
+                <app-wave></app-wave>
+                <div class="affirmation-list">
+
+                    <!-- select affirmation -->
+                    <select name="carousel" (change)="selectAffirmation($event.target.value)">
+                        <option *ngFor="let affirmation of affirmations" [attr.selected]="affirmation.id == selectedAffirmation.id ? true : null"
+                            [attr.value]="affirmation.id">{{affirmation.title}}</option>
+                    </select>
+    
+    
+                    <!-- edit affirmation -->
+                    <div *ngIf="authService.user$ | async as user" class="margin_top">
+                        <span *ngIf="!isConfirmDelete">
+                            <span *ngIf="!isBeingEdited">
+                                <span *ngIf="authService.canEdit(user)" (click)="startEdit()" class="crud-icon">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                                <span *ngIf="authService.canDelete(user)" (click)="deleteAffirmation()" class="crud-icon">
+                                    <i class="fa fa-trash"></i>
+                                </span>
+                                <span *ngIf="authService.canEdit(user)" (click)="addAffirmation()" class="crud-icon">
+                                    <i class="fa fa-plus"></i>
+                                </span>
+                            </span>
+                            <span *ngIf="isBeingEdited">
+                                <span (click)="updateItem()" class="crud-icon">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                                <span (click)="cancelEdit()" class="crud-icon">
+                                    <i class="fa fa-close"></i>
+                                </span>
+                            </span>
+                        </span>
+                        <span *ngIf="isConfirmDelete && authService.canDelete(user)">
+                            Delete?
+                            <span (click)="confirmedDeleteAffirmation()" class="crud-icon">
+                                <i class="fa fa-check"></i>
+                            </span>
+                            <span (click)="revokedDeleteAffirmation()" class="crud-icon">
+                                <i class="fa fa-close"></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+    
+                <!-- toggle affirmation view -->
+                <div class="margin_top">
+                    <app-checkbox (checkedEvent)="toggleAffirmation($event)" [checkedVal]="affirmationVisible" [text]="'Show Affirmation'"></app-checkbox>
+                </div>
+    
+    
+                <app-wave></app-wave>
+               
+                <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true" (click)="affirmationsEditionVisible = false"></i>
+    
+            </div>
 
         <div class="showOptionsIcon contentField" (click)="carouselSwitch($event)" *ngIf="!carouselVisible">
             <i class="fa fa-youtube-square" aria-hidden="true"></i>
@@ -103,12 +119,12 @@
             </div>
 
             <!-- toggle loop all / loop one -->
-            <div class="checkboxField">
+            <div class="margin_bottom">
                 <app-checkbox (checkedEvent)="carouselShown = $event" [checkedVal]="carouselShown" [text]="'Show carousel'"></app-checkbox>
             </div>
 
             <!-- toggle loop all / loop one -->
-            <div class="checkboxField">
+            <div class="margin_bottom">
                 <app-checkbox (checkedEvent)="setPlaylistOptions($event)" [checkedVal]="loopAllAffirmations" [text]="'Loop All'"></app-checkbox>
             </div>
 
@@ -132,6 +148,18 @@
         </div>
 
         <div class="contentField" *ngIf="optionsVisible">
+
+            <!-- volume control -->
+            <div class="option-title">
+                <span>Karaoke speed</span>
+            </div>
+
+            <div class="karaoke-speed-picker">
+                <input class="slider" (change)="karaokeSpeedChanged()" [(ngModel)]="karaokeSpeed" type="range" min="0" max="400" step="16">
+                <span class="picker-label">{{karaokeSpeed}}</span>
+            </div>
+
+            <app-wave></app-wave>
 
             <!-- volume control -->
             <div class="option-title">

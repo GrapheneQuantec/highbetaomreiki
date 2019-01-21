@@ -35,6 +35,7 @@ export class AffirmationsComponent implements OnInit {
   affirmationVisible: boolean = true;
   optionsVisible: boolean = false;
   affirmationsVisible: boolean = false;
+  affirmationsEditionVisible: boolean = false;
   carouselVisible: boolean = false;
   loopAllAffirmations: boolean = true;
   playlists: Playlist[];
@@ -226,6 +227,11 @@ export class AffirmationsComponent implements OnInit {
     this.affirmationsVisible = true;
   }
 
+  affirmationEditionSwitch() {
+    this.closeAllMenus();
+    this.affirmationsEditionVisible = true;
+  }
+
   carouselSwitch(event) {
     this.closeAllMenus();
     this.carouselVisible = true;
@@ -243,6 +249,7 @@ export class AffirmationsComponent implements OnInit {
 
   closeAllMenus() {
     this.affirmationsVisible = false;
+    this.affirmationsEditionVisible = false;
     this.carouselVisible = false;
     this.optionsVisible = false;
   }
