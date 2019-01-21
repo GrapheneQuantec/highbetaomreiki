@@ -9,33 +9,47 @@
                 <span>Affirmations</span>
             </div>
 
-            <!-- toggle affirmation view -->
-            <div class="checkboxField">
-                <app-checkbox (checkedEvent)="toggleAffirmation($event)" [checkedVal]="affirmationVisible" [text]="'Show Affirmation'"></app-checkbox>
+            <app-wave></app-wave>
+
+            <div>
+                <span>Affirmations: </span>
+                <input class="affirmationCountInput" [(ngModel)]="affirmationCount" type="number" min="1" max="16">
             </div>
 
-            <div class="karaoke-controls">
-                <i class="fa fa-fast-backward" aria-hidden="true" (click)="resetKaraoke()"></i>
-                <i class="fa fa-backward" aria-hidden="true" (click)="stopKaraoke()"></i>
-                <i class="fa fa-pause" aria-hidden="true" (click)="pauseKaraoke()" *ngIf="karaokeInterval"></i>
-                <i class="fa fa-play" aria-hidden="true" (click)="playKaraoke()" *ngIf="!karaokeInterval"></i>
-                <i class="fa fa-forward" aria-hidden="true" (click)="forwardKaraoke()"></i>
-                <i class="fa fa-fast-forward" aria-hidden="true" (click)="finishKaraoke()"></i>
+            <!-- toggle factom -->
+            <div class="checkboxField">
+                <app-checkbox (checkedEvent)="toggleFactomMode($event)" [checkedVal]="isFactom" [text]="'Factom mode'"></app-checkbox>
             </div>
+
+            <!-- toggle automatic progression -->
+            <div class="checkboxField">
+                <app-checkbox (checkedEvent)="toggleAutomaticProgression($event)" [checkedVal]="startNextAutomatically" [text]="'Auto continue'"></app-checkbox>
+            </div>
+
+            <div *ngIf="!omReikiStarted" class="startOmReiki" (click)="startOmReiki()">Start Li Om Reiki</div>
+            <div *ngIf="omReikiStarted" class="startOmReiki" (click)="newOmReiki()">New Li Om Reiki</div>
+
+            <app-wave></app-wave>
 
             <div class="karaoke-speed-picker">
                 <input class="slider" (change)="karaokeSpeedChanged()" [(ngModel)]="karaokeSpeed" type="range" min="0" max="400" step="16">
                 <span class="picker-label">{{karaokeSpeed}}</span>
             </div>
 
-            <div class="affirmation-list" *ngIf="affirmationVisible">
+            <app-wave></app-wave>
+
+            <!-- toggle affirmation view -->
+            <div class="checkboxField">
+                <app-checkbox (checkedEvent)="toggleAffirmation($event)" [checkedVal]="affirmationVisible" [text]="'Show Affirmation'"></app-checkbox>
+            </div>
+
+            <div class="affirmation-list">
                 <!-- select affirmation -->
                 <select name="carousel" (change)="selectAffirmation($event.target.value)">
                     <option *ngFor="let affirmation of affirmations" [attr.selected]="affirmation.id == selectedAffirmation.id ? true : null"
                         [attr.value]="affirmation.id">{{affirmation.title}}</option>
                 </select>
 
-                <div class="startOmReiki" (click)="startOmReiki()">Start Li Om Reiki</div>
 
                 <!-- edit affirmation -->
                 <div *ngIf="authService.user$ | async as user" class="affirmation-edit-buttons">
@@ -140,9 +154,24 @@
 
         </div>
 
+        <div class="controls contentField" *ngIf="omReikiStarted">
+
+            <div class="karaoke-controls">
+                <i class="fa fa-fast-backward" aria-hidden="true" (click)="fastBackward()"></i>
+                <i class="fa fa-backward" aria-hidden="true" (click)="backward()"></i>
+                <i class="fa fa-pause" aria-hidden="true" (click)="pause()" *ngIf="!isPaused"></i>
+                <i class="fa fa-play" aria-hidden="true" (click)="play()" *ngIf="isPaused"></i>
+                <i class="fa fa-forward" aria-hidden="true" (click)="forward()"></i>
+                <i class="fa fa-fast-forward" aria-hidden="true" (click)="fastForward()"></i>
+                <i class="fa fa-close margin-left" aria-hidden="true" (click)="newOmReiki()"></i>
+            </div>
+        </div>
+
     </div>
 
 </div>
+
+<div class="blow-container" *ngIf="showBlow"><img src="assets/images/blow_hands.jpg" alt=""></div>
 
 <div class="carousel-wrapper">
     <div class="carousel-button left-button" (mouseenter)="spinRight(true)" (mouseleave)="spinRight(false)"></div>

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
-import { Playlist, PlaylistOptions } from '@app/models/playlist';
+import { Playlist, PlaylistOptions, Video, RewindType } from '@app/models/playlist';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
 
-  private _backgroundVideoId: Subject<string> = new Subject();
-  public readonly backgroundVideoId: Observable<string> = this._backgroundVideoId.asObservable();
+  private _backgroundVideo: Subject<Video> = new Subject();
+  public readonly backgroundVideo: Observable<Video> = this._backgroundVideo.asObservable();
 
   private _playlist: Subject<Playlist> = new Subject();
   public readonly playlist: Observable<Playlist> = this._playlist.asObservable();
@@ -22,10 +23,14 @@ export class UtilsService {
   private _videoState: Subject<any> = new Subject();
   public readonly videoState: Observable<any> = this._videoState.asObservable();
 
+  private _rewind: Subject<RewindType> = new Subject();
+  public readonly rewind: Observable<RewindType> = this._rewind.asObservable();
+
+
   constructor() { }
 
-  setBackgroundVideo(videoId) {
-    this._backgroundVideoId.next(videoId);
+  setBackgroundVideo(video: Video) {
+    this._backgroundVideo.next(video);
     return this.videoState;
   }
 
@@ -42,6 +47,10 @@ export class UtilsService {
   }
 
   setBackgroundVolume(volume: number) {
-    this,this._volumeChanged.next(volume);
+    this._volumeChanged.next(volume);
+  }
+
+  rewindVideo(rewind: RewindType) {
+    this._rewind.next(rewind);
   }
 }

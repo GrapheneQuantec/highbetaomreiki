@@ -18,6 +18,7 @@
 
 
 <div class="ytBgContainer">
+  <div class="video-overlay" *ngIf="isVideoOverlaid"></div>
   <div class="video-bg cover">
     <div class="video-fg">
       <youtube-player [videoId]="backgroundVideoId" (ready)="savePlayer($event)" (change)="onStateChange($event)" width="100%"

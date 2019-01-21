@@ -1,6 +1,5 @@
 #wave-container {
     position: relative;
-    height: 6px;
     width: 148px;
     transform: scale(-1);
     margin: 20px 0 12px;

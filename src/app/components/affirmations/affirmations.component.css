@@ -31,6 +31,19 @@
     cursor: pointer;
     text-align: center;
     width: 26px;
+    opacity: .4;
+}
+
+.showOptionsIcon:hover {
+    opacity: 1;
+}
+
+.controls {
+    opacity: .4;
+}
+
+.controls:hover {
+    opacity: 1;
 }
 
 .hideOptionsIcon {
@@ -49,8 +62,12 @@
 }
 
 .karaoke-controls i {
-    margin: 0 14px 10px 0;
+    margin: 0 14px 0 0;
     cursor: pointer;
+}
+
+.karaoke-controls i.margin-left {
+    margin: 0 0 0 14px;
 }
 
 .karaoke-speed-picker {
@@ -360,4 +377,36 @@ select {
 
   .karaoke-text {
     white-space: pre-wrap;
+  }
+
+  .blow-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+  .startOmReiki {
+    cursor: pointer;
+    margin-top: 10px;
+    border: 1px solid #8a0909;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 10px;
+    background: #8a090909;
+    text-align: center;
+  }
+
+  .startOmReiki:hover {
+    background: #8a090929;
+  }
+
+  .affirmationCountInput {
+    width: 35px;
+    background: transparent;
+    color: inherit;
+    border: 1px solid #8a0909;
+    border-radius: 5px;
+    padding: 5px;
   }

@@ -40,13 +40,17 @@
   z-index: -99;
 }
 
-.video-bg .video-fg, .video-bg youtube-player, .video-bg video {
+.video-bg .video-fg, .video-bg youtube-player, .video-bg video, .video-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  
+}
+
+.video-overlay {
+  background: #400000;
+  z-index: 100;
 }
 
 @media (max-aspect-ratio: 16000/9001) {
