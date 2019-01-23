@@ -1,6 +1,25 @@
 <div *ngIf="authService.user$ | async as user" class="affirmationPanel">
     <div class="leftPanel">
 
+        
+        <!-- Controls -->
+        <div class="showOptionsIcon contentField" (mouseenter)="controlsVisible = true" *ngIf="omReikiStarted && !controlsVisible">
+            <i class="fa fa-play" aria-hidden="true"></i>
+        </div>
+
+        <div class="controls contentField" (mouseleave)="controlsVisible = false" *ngIf="controlsVisible">
+            <div class="karaoke-controls">
+                <i class="fa fa-fast-backward" aria-hidden="true" (click)="fastBackward()"></i>
+                <i class="fa fa-backward" aria-hidden="true" (click)="backward()"></i>
+                <i class="fa fa-pause" aria-hidden="true" (click)="pause()" *ngIf="!isPaused"></i>
+                <i class="fa fa-play" aria-hidden="true" (click)="play()" *ngIf="isPaused"></i>
+                <i class="fa fa-forward" aria-hidden="true" (click)="forward()"></i>
+                <i class="fa fa-fast-forward" aria-hidden="true" (click)="fastForward()"></i>
+                <i class="fa fa-close margin-left" aria-hidden="true" (click)="newOmReiki()"></i>
+            </div>
+        </div>
+
+        <!-- Start Om Reiki -->
         <div class="showOptionsIcon contentField" (click)="affirmationSwitch()" *ngIf="!affirmationsVisible">Ω</div>
 
         <div class="contentField" *ngIf="affirmationsVisible">
@@ -29,7 +48,7 @@
 
             <!-- toggle automatic progression -->
             <div class="margin_bottom">
-                <app-checkbox (checkedEvent)="toggleAutomaticProgression($event)" [checkedVal]="startNextAutomatically" [text]="'Auto continue'"></app-checkbox>
+                <app-checkbox (checkedEvent)="toggleAutomaticProgression($event)" [checkedVal]="startNextAutomatically" [disabled]="isFactom" [text]="'Auto continue'"></app-checkbox>
             </div>
 
             <div *ngIf="!omReikiStarted" class="startOmReiki" (click)="startOmReiki()">Start Li Om Reiki</div>
@@ -41,6 +60,7 @@
 
         </div>
 
+        <!-- Edit affirmations -->
         <div class="showOptionsIcon contentField" (click)="affirmationEditionSwitch()" *ngIf="!affirmationsEditionVisible">
             <i class="fa fa-pencil" aria-hidden="true"></i>
         </div>
@@ -108,6 +128,7 @@
     
             </div>
 
+        <!-- Carousels -->
         <div class="showOptionsIcon contentField" (click)="carouselSwitch($event)" *ngIf="!carouselVisible">
             <i class="fa fa-youtube-square" aria-hidden="true"></i>
         </div>
@@ -141,8 +162,8 @@
             <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true" (click)="carouselVisible = false"></i>
 
         </div>
-
-
+        
+        <!-- Options -->
         <div class="showOptionsIcon contentField" (click)="optionsSwitch()" *ngIf="!optionsVisible">
             <i class="fa fa-cogs" aria-hidden="true"></i>
         </div>
@@ -180,19 +201,6 @@
                 <span (click)="authService.signOut()">Logout</span>
             </div>
 
-        </div>
-
-        <div class="controls contentField" *ngIf="omReikiStarted">
-
-            <div class="karaoke-controls">
-                <i class="fa fa-fast-backward" aria-hidden="true" (click)="fastBackward()"></i>
-                <i class="fa fa-backward" aria-hidden="true" (click)="backward()"></i>
-                <i class="fa fa-pause" aria-hidden="true" (click)="pause()" *ngIf="!isPaused"></i>
-                <i class="fa fa-play" aria-hidden="true" (click)="play()" *ngIf="isPaused"></i>
-                <i class="fa fa-forward" aria-hidden="true" (click)="forward()"></i>
-                <i class="fa fa-fast-forward" aria-hidden="true" (click)="fastForward()"></i>
-                <i class="fa fa-close margin-left" aria-hidden="true" (click)="newOmReiki()"></i>
-            </div>
         </div>
 
     </div>

@@ -9,6 +9,7 @@ export class CheckboxComponent implements OnInit {
 
   @Input() text: string;
   @Input() checkedVal: boolean;
+  @Input() disabled: boolean;
   @Output() checkedEvent = new EventEmitter();
 
   constructor() { }

@@ -39,11 +39,7 @@
 }
 
 .controls {
-    opacity: .4;
-}
-
-.controls:hover {
-    opacity: 1;
+    padding: 15px 10px;
 }
 
 .hideOptionsIcon {

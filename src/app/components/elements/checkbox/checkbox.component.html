@@ -1,4 +1,4 @@
-<label class="container">{{text}}
-  <input type="checkbox" [ngModel]="checkedVal" (ngModelChange)="check($event)">
+<label class="container" [ngClass]="{'disabled': disabled}">{{text}}
+  <input type="checkbox" [ngModel]="checkedVal" (ngModelChange)="check($event)" [attr.disabled]="disabled ? '' : null">
   <span class="checkmark"></span>
 </label>

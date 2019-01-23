@@ -32,6 +32,7 @@ export class AffirmationsComponent implements OnInit {
   videos: Video[] = [];
   images: Image[] = [];
   globalVolume: number = 10;
+  controlsVisible: boolean = false;
   affirmationVisible: boolean = true;
   optionsVisible: boolean = false;
   affirmationsVisible: boolean = false;

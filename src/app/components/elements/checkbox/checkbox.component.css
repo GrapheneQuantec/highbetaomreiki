@@ -20,6 +20,10 @@
     height: 0;
     width: 0;
   }
+
+  .container.disabled {
+    opacity: 0.5;
+  }
   
   /* Create a custom checkbox */
   .checkmark {
@@ -34,7 +38,7 @@
   }
   
   /* On mouse-over, add a grey background color */
-  .container:hover input ~ .checkmark {
+  .container:not(.disabled):hover input ~ .checkmark {
     background-color: #8b0f0d33;
   }
   
