@@ -27,6 +27,7 @@ import { YoutubePlayerModule } from 'ngx-youtube-player';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { WaveComponent } from './components/elements/wave/wave.component';
 import { CheckboxComponent } from './components/elements/checkbox/checkbox.component';
+import { VideoPlayerComponent } from './components/elements/video-player/video-player.component';
 
 const appRoutes: Routes = [
   { path: '**', component: AffirmationsComponent },
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
     SymbolsComponent,
     NavigationComponent,
     WaveComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    VideoPlayerComponent
   ],
   imports: [
     BrowserModule,
