@@ -176,7 +176,7 @@
             </div>
 
             <div class="karaoke-speed-picker">
-                <input class="slider" (change)="karaokeSpeedChanged()" [(ngModel)]="karaokeSpeed" type="range" min="0" max="400" step="16">
+                <input class="slider" (change)="karaokeSpeedChanged()" [(ngModel)]="karaokeSpeed" type="range" min="0" max="40000" step="16">
                 <span class="picker-label">{{karaokeSpeed}}</span>
             </div>
 
@@ -240,7 +240,7 @@
                                     <input type="text" id="affirmationTitleEdit" [(ngModel)]="selectedAffirmation.title">
                                 </div>
                             </div>
-                            <div class="superLogos" delay="1">QUANT</div>
+                            <div class="superLogos" delay="1" [innerHTML]="quantText"></div>
                             <div class="subLogoi">
                                 <span class="aveLogos" delay="1">AVE AVE</span>
                                 <span class="allaLogos" no-wrap="true" delay="1">الإلَه</span>
@@ -250,9 +250,7 @@
 
                             <div id="sexsextaza" class="affirmationContent" [ngStyle]="getAffirmationStyle()">
                                 <div *ngIf="!isBeingEdited" class="pfpItem entry-content" style="white-space: pre-wrap;">
-                                    <p class="karaoke-text">
-                                        <span class="colored-text">{{coloredAffirmationText}}</span>{{normalAffirmationText}}
-                                    </p>
+                                    <p class="karaoke-text" [innerHTML]="affirmationText"></p>
                                 </div>
                                 <div *ngIf="isBeingEdited" class="edit-content">
                                     <textarea name="edit" id="affirmationEdit" [(ngModel)]="selectedAffirmation.content">{{selectedAffirmation.content}}</textarea>

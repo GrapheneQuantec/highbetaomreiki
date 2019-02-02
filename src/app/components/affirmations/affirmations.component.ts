@@ -43,8 +43,10 @@ export class AffirmationsComponent implements OnInit {
   playlists: Playlist[];
   affirmationCategories: string[];
   karaokeText: string;
-  coloredAffirmationText: string;
-  normalAffirmationText: string;
+  affirmationText: string;
+  quantText: string = "QUANT";
+  karaokeTexts: [string];
+  karaokeTextsCount: number = 0;
   karaokeLetterCount: number = 0;
   karaokeSpeed: number = 80;
   karaokeInterval;
@@ -163,8 +165,8 @@ export class AffirmationsComponent implements OnInit {
     }
   }
 
-  videoSelected(video) {
-    this.utilService.setBackgroundVideo(video.videoId);
+  videoSelected(video: Video) {
+    this.utilService.setBackgroundVideo(video);
   }
 
   setPlaylistOptions(event) {
@@ -334,7 +336,7 @@ export class AffirmationsComponent implements OnInit {
       this.activeAffirmationId = affirmation.id;
       this.selectedOmega = this.getOmegaBackgroundPath(affirmation.omegaBackground);
       this.updateOmegaCounter();
-      this.normalAffirmationText = affirmation.content;
+      this.affirmationText = affirmation.content;
       this.karaokeLetterCount = 0;
       clearInterval(this.karaokeInterval);
       this.karaokeInterval = setInterval(() => this.progressKaraoke(), this.karaokeSpeed);
@@ -444,30 +446,36 @@ export class AffirmationsComponent implements OnInit {
   }
 
   updateKaraoke() {
-    let texts = this.selectedAffirmation.content; //.replace(/<br\s*[\/]?>/gi, "")
-    this.coloredAffirmationText = texts.substring(0, this.karaokeLetterCount);
-    this.normalAffirmationText = texts.substring(this.karaokeLetterCount, texts.length);
+    this.affirmationText = this.splitKaraokeText(this.selectedAffirmation.content);
+  }
+
+  splitKaraokeText(text: string) {
+    let coloredText = text.substring(0, this.karaokeLetterCount);
+    let normalText = text.substring(this.karaokeLetterCount, text.length);
+
+    return `<span class="colored-text">${coloredText}</span>${normalText}`;
   }
 
   progressKaraoke() {
 
+
     if (this.selectedAffirmation) {
-      let texts = this.selectedAffirmation.content; //.replace(/<br\s*[\/]?>/gi, "")
-      this.updateKaraoke();
-      if (this.karaokeLetterCount < texts.length) {
-        this.karaokeLetterCount = this.karaokeLetterCount + 1;
-      }
-      else {
-        this.karaokeLetterCount = 0;
-        if (this.affirmationCounter < this.affirmationCount) {
-          this.affirmationCounter = this.affirmationCounter + 1;
+        let texts = this.selectedAffirmation.content; //.replace(/<br\s*[\/]?>/gi, "")
+        this.updateKaraoke();
+        if (this.karaokeLetterCount < texts.length) {
+          this.karaokeLetterCount = this.karaokeLetterCount + 1;
         }
         else {
-          this.affirmationCounter = 1;
-          this.karaokeState.next("finished");
+          this.karaokeLetterCount = 0;
+          if (this.affirmationCounter < this.affirmationCount) {
+            this.affirmationCounter = this.affirmationCounter + 1;
+          }
+          else {
+            this.affirmationCounter = 1;
+            this.karaokeState.next("finished");
+          }
+          this.updateOmegaCounter();
         }
-        this.updateOmegaCounter();
-      }
     }
   }
 

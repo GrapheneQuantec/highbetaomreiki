@@ -24,7 +24,7 @@ export class VideoPlayerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.utilService.backgroundVideo.subscribe(video => this.loadVideo(video));
+    this.utilService.backgroundVideo.subscribe((video: Video) => this.loadVideo(video));
     this.utilService.playlist.subscribe(playlist => this.loadPlaylist(playlist));
     this.utilService.playlistOptions.subscribe(opt => this.loopAll = opt.loopAll);
     this.utilService.volumeChanged.subscribe(volume => this.volumeChanged(volume));

@@ -303,6 +303,7 @@ select {
     height: 225px;
     position: absolute;
     z-index: 100;
+    cursor: pointer;
 }
 
 .logout_button {
@@ -366,12 +367,16 @@ select {
     cursor: pointer;
   }
 
-  .colored-text {
-      color: #ffed00;
+  ::ng-deep .colored-text {
+    color: #ffed00;
   }
 
   .karaoke-text {
     white-space: pre-wrap;
+  }
+
+  .karaoke-text span {
+    color: #ffed00;
   }
 
   .blow-container {

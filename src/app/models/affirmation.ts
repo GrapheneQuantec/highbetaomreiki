@@ -5,6 +5,7 @@ export interface Affirmation {
   fontSettings?: FontSettings;
   omegaBackground?: string;
   category?: string;
+  logos?: [string];
 }
 
 export interface FontSettings {
