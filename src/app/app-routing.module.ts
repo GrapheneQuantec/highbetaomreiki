@@ -12,7 +12,7 @@ export const appRoutes: Routes = [
 
   { path: 'meditation/symbols', component: SymbolsComponent },
   // Matrix
-  { path: 'matrix', component: MatrixcollectionComponent },
+  { path: 'matrix', component: MatrixcollectionComponent, guar },
   // Default
   { path: '', component: AffirmationsComponent },
   // catch unmatched

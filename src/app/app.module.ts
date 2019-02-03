@@ -13,6 +13,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AffirmationsComponent } from './components/affirmations/affirmations.component';
 import { MatrixcollectionComponent } from './components/matrixcollection/matrixcollection.component';
 import { AuthService } from './core/auth.service';
+import { AuthGuard} from './core/auth.guard';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 // services
@@ -59,7 +60,12 @@ const appRoutes: Routes = [
     AppRoutingModule,
     YoutubePlayerModule,
   ],
-  providers: [AffirmationService, MatrixcollectionService, AuthService],
+  providers: [
+    AffirmationService, 
+    MatrixcollectionService, 
+    AuthService,
+    AuthGuard,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
