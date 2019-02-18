@@ -19,6 +19,7 @@ export class VideoPlayerComponent implements OnInit {
   loopAll: boolean = true;
   currentPlaylistIndex: number;
 
+
   constructor(
     private utilService: UtilsService,
   ) { }
@@ -58,7 +59,7 @@ export class VideoPlayerComponent implements OnInit {
   savePlayer(player) {
     this.player = player;
     this.player.playVideo();
-    this.player.setVolume(10);
+    this.player.setVolume(5);
   }
 
   playVideo() {

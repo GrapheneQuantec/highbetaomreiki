@@ -13,7 +13,7 @@
   bottom: 0;
   left: 0;
   color: #8b0f0d;
-  z-index: 1;
+  z-index: 100;
 }
 
 .contentField {
@@ -398,11 +398,20 @@ select {
   }
 
   .affirmationCountInput {
-    width: 35px;
+    width:50px;
     background: transparent;
     color: inherit;
     border: 1px solid #8a0909;
     border-radius: 5px;
     padding: 5px;
     margin-right: 5px;
+  }
+
+  .factomElement {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
   }

@@ -41,6 +41,11 @@
                 <span>Affirmations</span>
             </div>
 
+            <div class="margin_bottom">
+                <input class="affirmationCountInput" [(ngModel)]="factomSpeed" type="number">
+                <span>ms factom speed</span>
+            </div>
+
             <!-- toggle factom -->
             <div class="margin_bottom">
                 <app-checkbox (checkedEvent)="toggleFactomMode($event)" [checkedVal]="isFactom" [text]="'Factom mode'"></app-checkbox>
@@ -209,7 +214,30 @@
 
 <div class="blow-container" *ngIf="showBlow"><img src="assets/images/blow_hands.jpg" alt=""></div>
 
-<div class="carousel-wrapper">
+<div *ngIf="factomInterval" class="factomElements">
+    <app-factom [videoId]="'NMTfMRi2fJk'" [zIndex]="factomZindices[factomCounter][0]" [volume]="10"></app-factom>
+    <app-factom [videoId]="'dx-UJ-Xkr1M'" [zIndex]="factomZindices[factomCounter][1]" [volume]="0"></app-factom>
+    <app-factom [videoId]="'VfBS_fHWt00'" [zIndex]="factomZindices[factomCounter][2]" [volume]="10"></app-factom>
+    <app-factom [videoId]="'xxMShqH2IRY'" [zIndex]="factomZindices[factomCounter][3]" [volume]="10"></app-factom>
+</div>
+
+<!-- <div class="factomElement" [ngStyle]="{'z-index': (2 + factomCounter) % 3}">
+    <youtube-player 
+        [videoId]="'NMTfMRi2fJk'" 
+        (ready)="saveInvocationPlayer($event)" 
+        (change)="onPlayerStateChange($event, invocationPlayer)">
+    </youtube-player>
+</div>
+
+<div class="factomElement" [ngStyle]="{'z-index': (1 + factomCounter) % 3}">
+    <youtube-player 
+        [videoId]="'dx-UJ-Xkr1M'" 
+        (ready)="saveSymbolsPlayer($event)" 
+        (change)="onPlayerStateChange($event, symbolsPlayer)">
+    </youtube-player>
+</div> -->
+
+<div class="carousel-wrapper" [ngStyle]="{'z-index': 0}">
     <div class="carousel-button left-button" (mouseenter)="spinRight(true)" (mouseleave)="spinRight(false)"></div>
     <div class="carousel-button right-button" (mouseenter)="spinLeft(true)" (mouseleave)="spinLeft(false)"></div>
     <section class="container">

@@ -29,6 +29,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { WaveComponent } from './components/elements/wave/wave.component';
 import { CheckboxComponent } from './components/elements/checkbox/checkbox.component';
 import { VideoPlayerComponent } from './components/elements/video-player/video-player.component';
+import { FactomComponent } from './components/factom/factom.component';
 
 const appRoutes: Routes = [
   { path: '**', component: AffirmationsComponent },
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
     NavigationComponent,
     WaveComponent,
     CheckboxComponent,
-    VideoPlayerComponent
+    VideoPlayerComponent,
+    FactomComponent
   ],
   imports: [
     BrowserModule,
