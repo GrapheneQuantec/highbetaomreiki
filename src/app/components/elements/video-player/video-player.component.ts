@@ -47,6 +47,9 @@ export class VideoPlayerComponent implements OnInit {
         this.isVideoUnstarted = false;
         this.isVideoOverlaid = false;
         break;
+      case YT.PlayerState.ENDED:
+        this.player.seekTo(0);
+        break;
       default:
         this.isVideoUnstarted = false;
         this.isVideoOverlaid = false;
