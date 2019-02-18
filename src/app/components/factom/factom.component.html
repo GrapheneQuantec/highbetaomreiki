@@ -1,5 +1,4 @@
 <div class="ytBgContainer" [ngStyle]="{'z-index': zIndex}">
-  <div class="video-overlay" *ngIf="isVideoOverlaid"></div>
   <div class="video-bg cover">
     <div class="video-fg">
       <youtube-player [videoId]="videoId" (ready)="savePlayer($event)" (change)="onStateChange($event)" width="100%"
