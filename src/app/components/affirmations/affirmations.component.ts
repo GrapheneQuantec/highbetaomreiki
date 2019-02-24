@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { AffirmationService } from '../../services/affirmation.service';
 import { Affirmation } from '../../models/affirmation';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap, Event } from '@angular/router';
 import { switchMap, map } from 'rxjs/operators';
 import { AuthService } from '../../core/auth.service';
 import { UtilsService } from '@app/services/utils.service';
@@ -33,6 +33,7 @@ export class AffirmationsComponent implements OnInit {
   videos: Video[] = [];
   images: Image[] = [];
   globalVolume: number = 10;
+  factomVisible: boolean = false;
   controlsVisible: boolean = false;
   affirmationVisible: boolean = true;
   optionsVisible: boolean = false;
@@ -51,6 +52,8 @@ export class AffirmationsComponent implements OnInit {
   factomInterval;
   factomSpeed: number = 780;
   factomCounter: number = 0;
+  factomAffirmations: Array<Affirmation> = [];
+  factomAffirmationIndex: number = 0;
   karaokeRunning: boolean = true;
   affirmationCounter: number = 1;
   affirmationCount: number = 16;
@@ -149,7 +152,13 @@ export class AffirmationsComponent implements OnInit {
     this.optionsVisible = true;
   }
 
+  factomSwitch() {
+    this.closeAllMenus();
+    this.factomVisible = true;
+  }
+
   closeAllMenus() {
+    this.factomVisible = false;
     this.affirmationsVisible = false;
     this.affirmationsEditionVisible = false;
     this.carouselVisible = false;
@@ -385,7 +394,7 @@ export class AffirmationsComponent implements OnInit {
     this.affirmationService.addItem(item).then((doc: Affirmation) => {
       item.id = doc.id;
       this.affirmationService.updateItem(item);
-      this.selectAffirmation(doc.id);
+      this.selectAffirmationById(doc.id);
     });
   }
 
@@ -417,7 +426,23 @@ export class AffirmationsComponent implements OnInit {
     this.affirmationBackground = `url(../../../assets/images/starpoints/active_star_${this.affirmationCounter}.png), url(../../../assets/images/${this.selectedOmega})`;
   }
 
-  selectAffirmation(id) {
+  markAffirmation(event) {
+    if(event.target.value != "_default_" && !this.factomAffirmations.find(aff => aff.id == event.target.value)) {
+      this.factomAffirmations.push(this.affirmations.find(aff => aff.id == event.target.value));
+    }
+  }
+
+  unmarkAffirmation(affirmation: Affirmation) {
+    this.factomAffirmations = this.factomAffirmations.filter(aff => aff !== affirmation);
+  }
+
+  selectAffirmation(event) {
+    let id = event.target.value;
+    this.selectAffirmationById(id);
+  }
+
+  selectAffirmationById(id) {
+
     // this.router.navigate(['/meditation/affirmation/' + id]);
     if (this.affirmations) {
       this.setSelectedAffirmation(this.affirmations.find(aff => aff.id === id));
@@ -493,7 +518,12 @@ export class AffirmationsComponent implements OnInit {
         }
         else {
           this.affirmationCounter = 1;
-          this.karaokeState.next("finished");
+          if (this.isFactom) {
+            this.factomAffirmationIndex = (this.factomAffirmationIndex + 1) % this.factomAffirmations.length;
+            this.selectedAffirmation = this.factomAffirmations[this.factomAffirmationIndex];
+          } else {
+            this.karaokeState.next("finished");
+          }
         }
         this.updateOmegaCounter();
       }
@@ -504,82 +534,84 @@ export class AffirmationsComponent implements OnInit {
     this.factomCounter = (this.factomCounter + 1) % 5;
   }
 
+  startFactom() {
+    if (this.factomAffirmations.length != 0) {
+      this.closeAllMenus();
+      clearInterval(this.factomInterval);
+      this.factomInterval = setInterval(() => this.factomCount(), this.factomSpeed);
+      this.selectedAffirmation = this.factomAffirmations[this.factomAffirmationIndex];
+      this.resetKaraoke();
+      this.playKaraoke();
+    }
+  }
+
   startOmReiki() {
     this.closeAllMenus();
 
-    if (this.isFactom) {
-      
-      clearInterval(this.factomInterval);
-      this.factomInterval = setInterval(() => this.factomCount(), this.factomSpeed);
-      this.playKaraoke();
-      
-    } else {
+    this.omReikiStarted = true;
 
+    // open fullscreen view
+    this.fullscreenView(document.getElementsByTagName("body")[0]);
 
-      this.omReikiStarted = true;
+    // clear elements on the website
+    this.affirmationVisible = false;
+    this.carouselVisible = false;
+    this.showBlow = false;
+    this.resetKaraoke();
+    this.closeAllMenus();
 
-      // open fullscreen view
-      this.fullscreenView(document.getElementsByTagName("body")[0]);
+    // start invocation
+    let invocationObservable = this.utilService.setBackgroundVideo({videoId: "NMTfMRi2fJk", paused: !this.startNextAutomatically && !this.isFactom});
+    let invoSub = invocationObservable.subscribe(state => {
 
-      // clear elements on the website
-      this.affirmationVisible = false;
-      this.carouselVisible = false;
-      this.showBlow = false;
-      this.resetKaraoke();
-      this.closeAllMenus();
+      if (state.data == YT.PlayerState.ENDED) {
+        invoSub.unsubscribe();
 
-      // start invocation
-      let invocationObservable = this.utilService.setBackgroundVideo({videoId: "NMTfMRi2fJk", paused: !this.startNextAutomatically && !this.isFactom});
-      let invoSub = invocationObservable.subscribe(state => {
-
-        if (state.data == YT.PlayerState.ENDED) {
-          invoSub.unsubscribe();
-
-          // start affirmation
-          this.utilService.setBackgroundVideo({videoId: "4XT5PsazYcM", start: 3});
-          this.affirmationVisible = true;
-          this.isPaused = true;
-          if ( this.startNextAutomatically || this.isFactom ) {
-            this.playKaraoke();
-          }
-
-          this.karaokeState.subscribe(state => {
-            if (state == "finished") {
-              this.resetKaraoke();
-              this.affirmationVisible = false;
-
-              let symbolsObservable = this.utilService.setBackgroundVideo({videoId: "dx-UJ-Xkr1M", paused: !this.startNextAutomatically && !this.isFactom});
-              let symbSub = symbolsObservable.subscribe(state => {
-                if (state.data == YT.PlayerState.ENDED) {
-                  symbSub.unsubscribe();
-
-                  let grailObservable = this.utilService.setBackgroundVideo({videoId: "VfBS_fHWt00", paused: !this.startNextAutomatically && !this.isFactom});
-                  let grailSub = grailObservable.subscribe(state => {
-                    if (state.data == YT.PlayerState.ENDED) {
-                      grailSub.unsubscribe();
-
-                      let songObservable = this.utilService.setBackgroundVideo({videoId: "xxMShqH2IRY", paused: !this.startNextAutomatically && !this.isFactom});
-                      let songSub = songObservable.subscribe(state => {
-                        if (state.data == YT.PlayerState.ENDED) {
-                          songSub.unsubscribe();
-                          if (this.isFactom) {
-                            this.startOmReiki();
-                          } else {
-                            this.utilService.setBackgroundVideo({videoId: "4XT5PsazYcM", start: 300});
-                            this.showBlow = true;
-                          }
-                        }
-                      });
-                    }
-                  });
-                }
-              });
-            }
-          });
+        // start affirmation
+        this.utilService.setBackgroundVideo({videoId: "4XT5PsazYcM", start: 3});
+        this.affirmationVisible = true;
+        this.isPaused = true;
+        if ( this.startNextAutomatically || this.isFactom ) {
+          this.playKaraoke();
         }
 
+        this.karaokeState.subscribe(state => {
+          if (state == "finished") {
+            this.resetKaraoke();
+            this.affirmationVisible = false;
 
-      });
+            let symbolsObservable = this.utilService.setBackgroundVideo({videoId: "dx-UJ-Xkr1M", paused: !this.startNextAutomatically && !this.isFactom});
+            let symbSub = symbolsObservable.subscribe(state => {
+              if (state.data == YT.PlayerState.ENDED) {
+                symbSub.unsubscribe();
+
+                let grailObservable = this.utilService.setBackgroundVideo({videoId: "VfBS_fHWt00", paused: !this.startNextAutomatically && !this.isFactom});
+                let grailSub = grailObservable.subscribe(state => {
+                  if (state.data == YT.PlayerState.ENDED) {
+                    grailSub.unsubscribe();
+
+                    let songObservable = this.utilService.setBackgroundVideo({videoId: "xxMShqH2IRY", paused: !this.startNextAutomatically && !this.isFactom});
+                    let songSub = songObservable.subscribe(state => {
+                      if (state.data == YT.PlayerState.ENDED) {
+                        songSub.unsubscribe();
+                        if (this.isFactom) {
+                          this.startOmReiki();
+                        } else {
+                          this.utilService.setBackgroundVideo({videoId: "4XT5PsazYcM", start: 300});
+                          this.showBlow = true;
+                        }
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+
+
+    });
 
     // TODO
     // finish all reiki steps in the simplest series
@@ -593,7 +625,6 @@ export class AffirmationsComponent implements OnInit {
     // { videoId: "dx-UJ-Xkr1M", caption: "Symbols" },
     // { videoId: "VfBS_fHWt00", caption: "Grail" },
     // { videoId: "xxMShqH2IRY", caption: "Song" },
-    }
 
   }
 

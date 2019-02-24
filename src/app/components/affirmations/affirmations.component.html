@@ -2,6 +2,7 @@
     <div class="leftPanel">
 
         
+
         <!-- Controls -->
         <div class="showOptionsIcon contentField" (mouseenter)="controlsVisible = true" *ngIf="omReikiStarted && !controlsVisible">
             <i class="fa fa-play" aria-hidden="true"></i>
@@ -19,6 +20,59 @@
             </div>
         </div>
 
+        <div class="showOptionsIcon contentField" (click)="factomSwitch()" *ngIf="!factomVisible">
+            <app-coin style="zoom: .03;"></app-coin>
+        </div>
+
+        <div class="contentField" *ngIf="factomVisible">
+
+            <div class="option-title">
+                <span>Factom</span>
+            </div>
+
+            <app-wave></app-wave>
+
+            <!-- select affirmation -->
+            <select class="affirmations-select margin_bottom" 
+                name="carousel" 
+                (change)="markAffirmation($event)">
+                <option
+                    [attr.value]="'_default_'" >
+                    Select affirmation
+                </option>
+                <option 
+                    *ngFor="let affirmation of affirmations" 
+                    [attr.value]="affirmation.id">
+                    {{affirmation.title}}
+                </option>
+            </select>
+
+            <app-checkbox 
+                *ngFor="let affirmation of factomAffirmations" 
+                [checkedVal]="true"
+                (checkedEvent)="unmarkAffirmation(affirmation)" 
+                [text]="affirmation.title">
+            </app-checkbox>
+
+            <div class="margin_bottom">
+                <input class="affirmationCountInput" [(ngModel)]="affirmationCount" type="number" min="1" max="16">
+                <span>Affirmations</span>
+            </div>
+
+            <div class="margin_bottom">
+                <input class="affirmationCountInput" [(ngModel)]="factomSpeed" type="number">
+                <span>ms factom speed</span>
+            </div>
+
+            <div [ngClass]="{'disabled': factomAffirmations.length == 0}" class="startOmReiki" (click)="startFactom()">Start Factom</div>
+            <!-- <div *ngIf="omReikiStarted" class="startOmReiki" (click)="newFactom()">New Factom</div> -->
+
+            <app-wave></app-wave>
+           
+            <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true" (click)="factomVisible = false"></i>
+
+        </div>
+
         <!-- Start Om Reiki -->
         <div class="showOptionsIcon contentField" (click)="affirmationSwitch()" *ngIf="!affirmationsVisible">Ω</div>
 
@@ -31,9 +85,16 @@
             <app-wave></app-wave>
 
             <!-- select affirmation -->
-            <select class="margin_bottom" name="carousel" (change)="selectAffirmation($event.target.value)">
-                <option *ngFor="let affirmation of affirmations" [attr.selected]="affirmation.id == selectedAffirmation.id ? true : null"
-                    [attr.value]="affirmation.id">{{affirmation.title}}</option>
+            <select class="affirmations-select margin_bottom" 
+                name="carousel" 
+                (change)="selectAffirmation($event)">
+                <option 
+                    *ngFor="let affirmation of affirmations" 
+                    [attr.selected]="affirmation.id == selectedAffirmation.id ? true : null"
+                    [attr.value]="affirmation.id"
+                    [ngStyle]="{'marked': affirmation.marked}">
+                    {{affirmation.title}}
+                </option>
             </select>
 
             <div class="margin_bottom">
@@ -44,11 +105,6 @@
             <div class="margin_bottom">
                 <input class="affirmationCountInput" [(ngModel)]="factomSpeed" type="number">
                 <span>ms factom speed</span>
-            </div>
-
-            <!-- toggle factom -->
-            <div class="margin_bottom">
-                <app-checkbox (checkedEvent)="toggleFactomMode($event)" [checkedVal]="isFactom" [text]="'Factom mode'"></app-checkbox>
             </div>
 
             <!-- toggle automatic progression -->
@@ -80,7 +136,7 @@
                 <div class="affirmation-list">
 
                     <!-- select affirmation -->
-                    <select name="carousel" (change)="selectAffirmation($event.target.value)">
+                    <select name="carousel" (change)="selectAffirmation($event)">
                         <option *ngFor="let affirmation of affirmations" [attr.selected]="affirmation.id == selectedAffirmation.id ? true : null"
                             [attr.value]="affirmation.id">{{affirmation.title}}</option>
                     </select>

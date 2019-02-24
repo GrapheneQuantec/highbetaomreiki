@@ -8,6 +8,10 @@
     margin: 0;
 }
 
+.affirmations-select .marked {
+    font-weight: bold;
+}
+
 .leftPanel {
   position: fixed;
   bottom: 0;
@@ -391,10 +395,21 @@ select {
     margin-top: 10px;
     background: #8a090909;
     text-align: center;
+
+
   }
 
   .startOmReiki:hover {
     background: #8a090929;
+  }
+
+  .startOmReiki.disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .startOmReiki.disabled:hover {
+    background: #8a090909;
   }
 
   .affirmationCountInput {
