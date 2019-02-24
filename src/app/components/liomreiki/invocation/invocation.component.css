@@ -4,7 +4,7 @@
   text-align: center;
 }
 
-.CoinChain span {
+.CoinChain>span {
   display: inline-block;
   vertical-align: top;
 }
@@ -18,12 +18,17 @@
   margin: auto;
   width: 100%;
   white-space: pre-wrap;
-  color: #fffe25;
+  color: #fffe2577;
   font-size: 36px;
   line-height: 1.5;
   text-align: center;
   width: 70%;
   padding: 20px 0; 
+  white-space: pre-wrap;
+}
+
+.colored-text {
+    color: #fffe25;
 }
 
 .top-panel {
