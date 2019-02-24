@@ -540,6 +540,7 @@ export class AffirmationsComponent implements OnInit {
       clearInterval(this.factomInterval);
       this.factomInterval = setInterval(() => this.factomCount(), this.factomSpeed);
       this.selectedAffirmation = this.factomAffirmations[this.factomAffirmationIndex];
+      this.isFactom = true;
       this.resetKaraoke();
       this.playKaraoke();
     }
