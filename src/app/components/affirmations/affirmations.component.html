@@ -1,8 +1,6 @@
 <div *ngIf="authService.user$ | async as user" class="affirmationPanel">
     <div class="leftPanel">
 
-        
-
         <!-- Controls -->
         <div class="showOptionsIcon contentField" (mouseenter)="controlsVisible = true" *ngIf="omReikiStarted && !controlsVisible">
             <i class="fa fa-play" aria-hidden="true"></i>
@@ -268,10 +266,14 @@
 
 </div>
 
+<!-- <app-invocation class="invocation" [ngStyle]="{'z-index': factomZindices[factomCounter][0]}"></app-invocation> -->
+
+
 <div class="blow-container" *ngIf="showBlow"><img src="assets/images/blow_hands.jpg" alt=""></div>
 
 <div *ngIf="factomInterval" class="factomElements">
-    <app-factom [videoId]="'NMTfMRi2fJk'" [zIndex]="factomZindices[factomCounter][0]" [volume]="10"></app-factom>
+    <app-invocation class="invocation" [ngStyle]="{'z-index': factomZindices[factomCounter][0]}"></app-invocation>
+    <!-- <app-factom [videoId]="'NMTfMRi2fJk'" [zIndex]="factomZindices[factomCounter][0]" [volume]="10"></app-factom> -->
     <app-factom [videoId]="'dx-UJ-Xkr1M'" [zIndex]="factomZindices[factomCounter][1]" [volume]="0"></app-factom>
     <app-factom [videoId]="'VfBS_fHWt00'" [zIndex]="factomZindices[factomCounter][2]" [volume]="10"></app-factom>
     <app-factom [videoId]="'xxMShqH2IRY'" [zIndex]="factomZindices[factomCounter][3]" [volume]="10"></app-factom>

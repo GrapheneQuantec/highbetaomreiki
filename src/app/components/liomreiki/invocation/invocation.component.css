@@ -1,0 +1,80 @@
+
+.masters-left, .masters-right  {
+  width: 15%;
+  text-align: center;
+}
+
+.CoinChain span {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.CoinChain img {
+  width: 100%;
+}
+
+
+.invocation-text {
+  margin: auto;
+  width: 100%;
+  white-space: pre-wrap;
+  color: #fffe25;
+  font-size: 36px;
+  line-height: 1.5;
+  text-align: center;
+  width: 70%;
+  padding: 20px 0; 
+}
+
+.top-panel {
+  text-align: center;
+}
+
+.CoinChainOuterBorder {
+  background: linear-gradient(to right, #c19424, #fffe25);
+  padding: 6px;
+  border-radius: 122px;
+  margin: auto;
+  width: 80%;
+}
+
+.CoinChainMiddleBorder {
+  background: linear-gradient(to right, #390002, #a70d2e);
+  padding: 14px;
+  border-radius: 114px;
+
+}
+
+.CoinChainInnerBorder {
+  background: linear-gradient(to right, #e7ae2e, #ffff00);
+  padding: 6px;
+  border-radius: 98px;
+}
+
+.CoinChainOuterBorder.red {
+  margin-top: 40px;
+}
+
+.CoinChainOuterBorder.red, .CoinChainInnerBorder.red {
+  background: #600000;
+}
+
+.CoinChainWrap {
+  border-radius: 110px;
+}
+
+
+.CoinChain {
+  background: linear-gradient(to right,#3f060f ,#e81630);
+  background-repeat: no-repeat;
+  color: #ddcc89;
+  border: .1px solid transparent;
+  border-image-source: url(http://www.holopedia.eu/wp-content/uploads/2019/02/Q_pro_frame_square.png);
+  border-image-repeat: round;
+  border-image-width: 108px;
+  border-image-slice: 320;
+  border-radius: 92px;
+  box-sizing: border-box;
+  border-image-outset: 20px;
+  overflow: hidden;
+}
