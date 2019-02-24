@@ -9,12 +9,10 @@
       <div class="CoinChainWrap">
         <div class="CoinChain">
           <span class="masters-left">
-            <img src="../../../assets/images/invocation/masters/cic.png" alt="">
-            Cicciolina
-            <img src="../../../assets/images/invocation/masters/cytherea2.jpg" alt="">
-            Cytherea
-            <img src="../../../assets/images/invocation/masters/sarah_carmen.jpg" alt="">
-            Sarah Carmen
+            <div class="master" *ngFor="let master of leftMasters">
+                <img [src]="'../../../assets/images/invocation/masters/' + master[masterIndex].fileName" alt="">
+                {{master[masterIndex].name}}
+            </div>
           </span>
           <span class="invocation-text">
               <span class="colored-text">{{coloredAffirmationText}}</span>{{normalAffirmationText}}
