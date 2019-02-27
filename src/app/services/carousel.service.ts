@@ -113,9 +113,10 @@ export class CarouselService {
       value: "20181228",
       videos: [
         { videoId: "bcvsHfD1UV0", caption: "South" },
-        { videoId: "kFuLMvieOIs", caption: "North East" },
         { videoId: "tZOMKLHmczM", caption: "East" },
+        { videoId: "kFuLMvieOIs", caption: "North East" },
         { videoId: "JsrrDDIOYZg", caption: "North" },
+        { videoId: "BCobkLqvMwM", caption: "North West" },
       ],
     },
 
