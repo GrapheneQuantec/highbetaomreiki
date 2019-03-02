@@ -126,7 +126,7 @@ export class CarouselService {
       name: "2018 12 28 ~ O27",
       value: "20181228",
       videos: [
-        { videoId: "6vYdXbIdWHo", caption: "Square" },
+        { videoId: "dfxHM838AKI", caption: "Square" },
         { videoId: "OMe79aJhg3Y", caption: "South" },
         { videoId: "2qUYK3oJRnY", caption: "East" },
         { videoId: "6pX8DL34WSo", caption: "North East" },
