@@ -112,11 +112,26 @@ export class CarouselService {
       name: "2018 12 28",
       value: "20181228",
       videos: [
-        { videoId: "bcvsHfD1UV0", caption: "South" },
-        { videoId: "tZOMKLHmczM", caption: "East" },
-        { videoId: "kFuLMvieOIs", caption: "North East" },
-        { videoId: "JsrrDDIOYZg", caption: "North" },
-        { videoId: "BCobkLqvMwM", caption: "North West" },
+        { videoId: "6vYdXbIdWHo", caption: "Square" },
+        { videoId: "yKxYw2X8z5U", caption: "South" },
+        { videoId: "DPPilgwplPc", caption: "East" },
+        { videoId: "5pUwazPHRQ0", caption: "North East" },
+        { videoId: "-7CjY8Zx8HI", caption: "North" },
+        { videoId: "mtpRJYrVgZY", caption: "North West" },
+      ],
+    },
+
+    // 2018 12 28 O27
+    {
+      name: "2018 12 28 ~ O27",
+      value: "20181228",
+      videos: [
+        { videoId: "6vYdXbIdWHo", caption: "Square" },
+        { videoId: "OMe79aJhg3Y", caption: "South" },
+        { videoId: "2qUYK3oJRnY", caption: "East" },
+        { videoId: "6pX8DL34WSo", caption: "North East" },
+        { videoId: "E1XwY1RMk0c", caption: "North" },
+        { videoId: "9UJmX87I5x8", caption: "North West" },
       ],
     },
 
