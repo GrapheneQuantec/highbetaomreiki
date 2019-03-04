@@ -12,6 +12,19 @@
     font-weight: bold;
 }
 
+.holoartillect {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 16vw;
+    text-align: center;
+    z-index: 100;
+}
+
+.holoartillect img {
+    width: 100%;
+}
+
 .leftPanel {
   position: fixed;
   bottom: 0;
