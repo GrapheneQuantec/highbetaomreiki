@@ -646,4 +646,8 @@ export class AffirmationsComponent implements OnInit {
       element.msRequestFullscreen();
   }
 
+  openAppearIn() {
+    this.router.navigate([]).then(result => {  window.open('https://appear.in/liomreiki', '_blank'); });
+  }
+
 }
