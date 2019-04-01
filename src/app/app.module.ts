@@ -32,6 +32,7 @@ import { VideoPlayerComponent } from './components/elements/video-player/video-p
 import { FactomComponent } from './components/factom/factom.component';
 import { CoinComponent } from './components/elements/coin/coin.component';
 import { InvocationComponent } from './components/liomreiki/invocation/invocation.component';
+import { HologramComponent } from './components/pages/hologram/hologram.component';
 
 const appRoutes: Routes = [
   { path: '**', component: AffirmationsComponent },
@@ -53,6 +54,7 @@ const appRoutes: Routes = [
     FactomComponent,
     CoinComponent,
     InvocationComponent,
+    HologramComponent,
   ],
   imports: [
     BrowserModule,
