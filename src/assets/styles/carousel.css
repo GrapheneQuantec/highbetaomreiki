@@ -4,7 +4,6 @@ section, footer, nav {
 
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  background: linear-gradient(to right, #3f060f , #e81630);
 }
 
 /*body:before, body:after {
