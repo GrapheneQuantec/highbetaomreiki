@@ -62,7 +62,6 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    RouterModule.forRoot(appRoutes),
     AngularFireDatabaseModule,
     DragulaModule.forRoot(),
     AppRoutingModule,
