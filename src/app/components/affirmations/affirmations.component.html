@@ -8,6 +8,30 @@
     <div class="leftPanel">
 
         <!-- Controls -->
+        <div class="showOptionsIcon contentField" (click)="videosVisible = true" *ngIf="!videosVisible">
+            <i class="fa fa-film" aria-hidden="true"></i>
+        </div>
+        
+        <div class="controls contentField" *ngIf="videosVisible">
+            <!-- select video -->
+            <select class="affirmations-select margin_bottom" 
+            name="video" 
+            (change)="changeVideo($event)">
+            <option 
+                *ngFor="let video of backgroundVideos" 
+                [attr.selected]="video.id == backgroundVideoId.id ? true : null"
+                [attr.value]="video.id">
+                {{video.title}}
+            </option>
+            </select>
+
+            <app-wave></app-wave>
+           
+            <i class="fa fa-angle-double-left hideOptionsIcon" aria-hidden="true" (click)="videosVisible = false"></i>
+        </div>
+
+
+        <!-- Controls -->
         <div class="showOptionsIcon contentField" (mouseenter)="controlsVisible = true" *ngIf="omReikiStarted && !controlsVisible">
             <i class="fa fa-play" aria-hidden="true"></i>
         </div>
@@ -410,4 +434,4 @@
     </section>
 </div>
 
-<app-video-player [videoId]="'4XT5PsazYcM'" [zIndex]="-1"></app-video-player>
+<app-video-player #bgvideoplayer [videoId]="backgroundVideoId" [zIndex]="-1"></app-video-player>

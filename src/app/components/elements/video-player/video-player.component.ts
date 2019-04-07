@@ -85,6 +85,10 @@ export class VideoPlayerComponent implements OnInit {
       this.utilService.updateVideoState(YT.PlayerState.PAUSED);
     }
   }
+  
+  loadVideoFromId(videoId: string) {
+    this.player.loadVideoById({ 'videoId': videoId });
+  }
 
   rewindVideo(type: RewindType) {
     switch (type) {

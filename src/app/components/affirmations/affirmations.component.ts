@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { AffirmationService } from '../../services/affirmation.service';
 import { Affirmation } from '../../models/affirmation';
 import { Router, ActivatedRoute, ParamMap, Event } from '@angular/router';
@@ -8,6 +8,7 @@ import { UtilsService } from '@app/services/utils.service';
 import { Playlist, Video, Image } from '@app/models/playlist';
 import { Subject } from 'rxjs';
 import { CarouselService } from '@app/services/carousel.service';
+import { VideoPlayerComponent } from '../elements/video-player/video-player.component';
 
 declare var initCarousel: any;
 
@@ -19,6 +20,7 @@ declare var initCarousel: any;
 export class AffirmationsComponent implements OnInit {
 
   @Output() selectedVideoId: string;
+  @ViewChild('bgvideoplayer') videoPlayer: VideoPlayerComponent;
 
   affirmations: Affirmation[];
   activeAffirmationId: string;
@@ -33,6 +35,7 @@ export class AffirmationsComponent implements OnInit {
   videos: Video[] = [];
   images: Image[] = [];
   globalVolume: number = 10;
+  videosVisible: boolean = false;
   factomVisible: boolean = false;
   controlsVisible: boolean = false;
   affirmationVisible: boolean = true;
@@ -65,6 +68,12 @@ export class AffirmationsComponent implements OnInit {
   isPaused: boolean = false;
   omReikiStarted: boolean = false;
   startNextAutomatically: boolean = false;
+
+  backgroundVideos = [
+    { id: "4XT5PsazYcM", title: "House build" },
+    { id: "KkJRqNPxtp8", title: "Lungs" },
+  ];
+  backgroundVideoId = this.backgroundVideos[0].id;
   
   public invocationPlayer: any;
   public symbolsPlayer: any;
@@ -115,7 +124,7 @@ export class AffirmationsComponent implements OnInit {
       this.affirmations = affirmations;
       this.affirmationCategories = this.removeDuplicates(affirmations.filter(aff => aff.category).map(aff => aff.category));
       if (affirmations.length > 0 && !this.activeAffirmationId) {
-        this.setSelectedAffirmation(affirmations[0]);
+        this.setSelectedAffirmation(this.affirmations.find(aff => aff.id === 'Hd9vAvZ7SfJQNdF7t4sj'));
       }
     });
 
@@ -127,6 +136,11 @@ export class AffirmationsComponent implements OnInit {
 
   }
 
+  changeVideo(event) {
+    this.backgroundVideoId = event.target.value; 
+    this.videoPlayer.loadVideoFromId(this.backgroundVideoId);
+  }
+  
   affirmationSwitch() {
     this.closeAllMenus();
     this.affirmationsVisible = true;
@@ -158,6 +172,7 @@ export class AffirmationsComponent implements OnInit {
   }
 
   closeAllMenus() {
+    this.videosVisible = false;
     this.factomVisible = false;
     this.affirmationsVisible = false;
     this.affirmationsEditionVisible = false;
