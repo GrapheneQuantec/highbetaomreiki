@@ -70,9 +70,9 @@ export class AffirmationsComponent implements OnInit {
   startNextAutomatically: boolean = false;
 
   backgroundVideos = [
+    { id: "eKFTSSKCzWA", title: "Nature" },
     { id: "4XT5PsazYcM", title: "House build" },
     { id: "xPbPtwL9V30", title: "Lungs" },
-    { id: "eKFTSSKCzWA", title: "Nature" },
   ];
   backgroundVideoId = this.backgroundVideos[0].id;
   
