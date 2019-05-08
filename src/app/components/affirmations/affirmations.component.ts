@@ -73,6 +73,7 @@ export class AffirmationsComponent implements OnInit {
     { id: "eKFTSSKCzWA", title: "Nature" },
     { id: "4XT5PsazYcM", title: "House build" },
     { id: "xPbPtwL9V30", title: "Lungs" },
+    { id: "r3WxYr6NA18", title: "Michelli" },
   ];
   backgroundVideoId = this.backgroundVideos[0].id;
   
@@ -585,7 +586,7 @@ export class AffirmationsComponent implements OnInit {
         invoSub.unsubscribe();
 
         // start affirmation
-        this.utilService.setBackgroundVideo({videoId: "4XT5PsazYcM", start: 3});
+        this.utilService.setBackgroundVideo({videoId: "eKFTSSKCzWA", start: 3});
         this.affirmationVisible = true;
         this.isPaused = true;
         if ( this.startNextAutomatically || this.isFactom ) {
