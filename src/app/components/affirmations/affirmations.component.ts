@@ -615,7 +615,7 @@ export class AffirmationsComponent implements OnInit {
                         if (this.isFactom) {
                           this.startOmReiki();
                         } else {
-                          this.utilService.setBackgroundVideo({videoId: "4XT5PsazYcM", start: 300});
+                          this.utilService.setBackgroundVideo({videoId: "eKFTSSKCzWA", start: 300});
                           this.showBlow = true;
                         }
                       }
@@ -648,7 +648,7 @@ export class AffirmationsComponent implements OnInit {
 
   newOmReiki() {
     this.omReikiStarted = false;
-    this.utilService.setBackgroundVideo({videoId: "4XT5PsazYcM", start: 300});
+    this.utilService.setBackgroundVideo({videoId: "eKFTSSKCzWA", start: 300});
     this.showBlow = false;
   }
 
