@@ -88,7 +88,7 @@ export class AffirmationsComponent implements OnInit {
   ]
 
   omegas = [
-    { value: "OmegaSubaru", text: "Omega Subaru", url: "Omegass.gif" },
+    { value: "OmegaSubaru", text: "Omega Subaru", url: "omegatm.gif" },
     { value: "OmegaMultipleString", text: "Omega Multiple String", url: "omega_multiple_string.png" }
   ];
 
