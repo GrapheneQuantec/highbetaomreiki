@@ -9,6 +9,7 @@ import { Playlist, Video, Image } from '@app/models/playlist';
 import { Subject } from 'rxjs';
 import { CarouselService } from '@app/services/carousel.service';
 import { VideoPlayerComponent } from '../elements/video-player/video-player.component';
+import { ItemService } from '@app/services/item.service';
 
 declare var initCarousel: any;
 
@@ -96,6 +97,7 @@ export class AffirmationsComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     public affirmationService: AffirmationService,
+    private itemService: ItemService,
     public authService: AuthService,
     private utilService: UtilsService,
     private carouselService: CarouselService,
