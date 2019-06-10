@@ -33,6 +33,7 @@ import { FactomComponent } from './components/factom/factom.component';
 import { CoinComponent } from './components/elements/coin/coin.component';
 import { InvocationComponent } from './components/liomreiki/invocation/invocation.component';
 import { HologramComponent } from './components/pages/hologram/hologram.component';
+import { ItemService } from './services/item.service';
 
 const appRoutes: Routes = [
   { path: '**', component: AffirmationsComponent },
@@ -69,6 +70,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     AffirmationService, 
+    ItemService, 
     MatrixcollectionService, 
     AuthService,
     AuthGuard,

@@ -9,6 +9,7 @@ import { Playlist, Video, Image } from '@app/models/playlist';
 import { Subject } from 'rxjs';
 import { CarouselService } from '@app/services/carousel.service';
 import { VideoPlayerComponent } from '../elements/video-player/video-player.component';
+import { ItemService } from '@app/services/item.service';
 
 declare var initCarousel: any;
 
@@ -88,14 +89,13 @@ export class AffirmationsComponent implements OnInit {
     [-10, -10, -10, 10],
   ]
 
-  omegas = [
-    { value: "OmegaSubaru", text: "Omega Subaru", url: "omegatm.gif" },
-    { value: "OmegaMultipleString", text: "Omega Multiple String", url: "omega_multiple_string.png" }
-  ];
+  omegas;
+  bgVideos;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     public affirmationService: AffirmationService,
+    private itemService: ItemService,
     public authService: AuthService,
     private utilService: UtilsService,
     private carouselService: CarouselService,
@@ -121,6 +121,9 @@ export class AffirmationsComponent implements OnInit {
         }
       }
     });
+    
+    this.itemService.getItems('omegas').subscribe(omegas => this.omegas = omegas);
+    this.itemService.getItems('bg_videos').subscribe(bgVideos => this.bgVideos = bgVideos);
 
     this.affirmationService.getAffirmations().subscribe(affirmations => {
       this.affirmations = affirmations;
@@ -397,7 +400,7 @@ export class AffirmationsComponent implements OnInit {
   }
 
   addAffirmation() {
-    const item: Affirmation = {
+      const item: Affirmation = {
       title: 'New',
       content: '',
       fontSettings: {
@@ -405,7 +408,7 @@ export class AffirmationsComponent implements OnInit {
         lineHeight: 1.5,
         letterSpacing: 0,
       },
-      omegaBackground: this.omegas[0].value
+      omegaBackground: this.omegas[0].name
     };
 
     this.affirmationService.addItem(item).then((doc: Affirmation) => {
@@ -427,7 +430,7 @@ export class AffirmationsComponent implements OnInit {
 
   getOmegaBackgroundPath(omegaValue) {
     // select omega from the omegas array by its value
-    const omega = this.omegas.filter(obj => obj.value === omegaValue);
+    const omega = this.omegas.filter(obj => obj.name === omegaValue);
     let omegaPath;
 
     if (omega[0]) {
@@ -440,7 +443,7 @@ export class AffirmationsComponent implements OnInit {
   }
 
   updateOmegaCounter() {
-    this.affirmationBackground = `url(../../../assets/images/starpoints/active_star_${this.affirmationCounter}.png), url(../../../assets/images/${this.selectedOmega})`;
+    this.affirmationBackground = `url(../../../assets/images/starpoints/active_star_${this.affirmationCounter}.png), url(${this.selectedOmega})`;
   }
 
   markAffirmation(event) {

@@ -18,10 +18,10 @@
             name="video" 
             (change)="changeVideo($event)">
             <option 
-                *ngFor="let video of backgroundVideos" 
-                [attr.selected]="video.id == backgroundVideoId.id ? true : null"
-                [attr.value]="video.id">
-                {{video.title}}
+                *ngFor="let video of bgVideos" 
+                [attr.selected]="video.videoId == backgroundVideoId.id ? true : null"
+                [attr.value]="video.videoId">
+                {{video.name}}
             </option>
             </select>
 
@@ -48,9 +48,9 @@
             </div>
         </div>
 
-        <div class="showOptionsIcon contentField" routerLink="/holo" >
+        <!-- <div class="showOptionsIcon contentField" routerLink="/holo" >
             <i class="fa fa-th-large" aria-hidden="true"></i>
-        </div>
+        </div> -->
 
         <div class="showOptionsIcon contentField" (click)="openAppearIn()" >
             <i class="fa fa-video-camera" aria-hidden="true"></i>
@@ -384,7 +384,7 @@
                             </div>
 
                             <!-- font controls -->
-                            <div *ngIf="isBeingEdited" class="text-controls">
+                            <div *ngIf="isBeingEdited && selectedAffirmation" class="text-controls">
                                 <span>
                                     <div>font size</div>
                                     <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.fontSize">
@@ -403,7 +403,7 @@
                             <div *ngIf="isBeingEdited" class="omega-background-select">
                                 <div>Omega background</div>
                                 <select (change)="changeOmega($event)" [(ngModel)]="selectedAffirmation.omegaBackground">
-                                    <option *ngFor='let omega of omegas' value="{{omega.value}}">{{omega.text}}</option>
+                                    <option *ngFor='let omega of omegas' value="{{omega.name}}">{{omega.name}}</option>
                                 </select>
                             </div>
 
