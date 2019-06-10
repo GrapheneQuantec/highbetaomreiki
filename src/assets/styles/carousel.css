@@ -3,7 +3,6 @@ section, footer, nav {
 }
 
 body {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 /*body:before, body:after {
@@ -351,7 +350,6 @@ figure {
 }
 
 code {
-  font-family: 'Monaco', 'Menlo', monospace;
 }
 
 /* index navigation */

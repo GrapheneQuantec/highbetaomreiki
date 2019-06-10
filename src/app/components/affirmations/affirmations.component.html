@@ -354,7 +354,7 @@
                         </div>
                         <div class="subdiv">{{image.caption}}</div>
                     </figure>
-                    <div class="affirmationWrapper">
+                    <div class="affirmationWrapper" [ngClass]="{'zoomed': isAffirmationZoomed}" (click)="isAffirmationZoomed = !isAffirmationZoomed">
                         <div *ngIf="affirmationVisible" class="affirmation" [ngStyle]="{'background-image': affirmationBackground }">
                             <div class="affirmation-title">
                                 <div *ngIf="!isBeingEdited">

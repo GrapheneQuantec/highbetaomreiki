@@ -191,16 +191,20 @@ select {
     font-size: 30px;
 }
 
+.affirmationWrapper.zoomed {
+    zoom: 2;
+    margin-top: -130%;
+}
+
 .affirmation {
   background-size: 100%;
   background-repeat: no-repeat;
   width: 404px;
   color: maroon;
   text-align: center;
-  padding: 124px 260px;
-  font-family: cursive;
-  min-height: 700px;
   cursor: pointer;
+  padding: 124px 260px;
+  min-height: 700px;
   zoom: .8;
   display: inline-block;
   height: 1000px;
@@ -222,7 +226,7 @@ select {
     font-size: 22px;
     margin-right: 10px;
     font-weight: bold;
-    margin-top: 94px;
+    margin-top: 106px;
 }
 
 .subLogoi {
@@ -277,7 +281,6 @@ select {
     padding: 0;
     text-align: inherit;
     color: inherit;
-    font-family: inherit;
     font-size: inherit;
     letter-spacing: inherit;
     line-height: inherit;

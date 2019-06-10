@@ -69,6 +69,7 @@ export class AffirmationsComponent implements OnInit {
   isPaused: boolean = false;
   omReikiStarted: boolean = false;
   startNextAutomatically: boolean = false;
+  isAffirmationZoomed: boolean = false;
 
   backgroundVideos = [
     { id: "eKFTSSKCzWA", title: "Nature" },
@@ -129,7 +130,9 @@ export class AffirmationsComponent implements OnInit {
       this.affirmations = affirmations;
       this.affirmationCategories = this.removeDuplicates(affirmations.filter(aff => aff.category).map(aff => aff.category));
       if (affirmations.length > 0 && !this.activeAffirmationId) {
-        this.setSelectedAffirmation(this.affirmations.find(aff => aff.id === 'Hd9vAvZ7SfJQNdF7t4sj'));
+        const sisters = this.affirmations.find(aff => aff.id === 'Hd9vAvZ7SfJQNdF7t4sj');
+        const selectedAff = (sisters) ? sisters : this.affirmations[0];
+        this.setSelectedAffirmation(selectedAff);
       }
     });
 
