@@ -18,10 +18,10 @@
             name="video" 
             (change)="changeVideo($event)">
             <option 
-                *ngFor="let video of backgroundVideos" 
-                [attr.selected]="video.id == backgroundVideoId.id ? true : null"
-                [attr.value]="video.id">
-                {{video.title}}
+                *ngFor="let video of bgVideos" 
+                [attr.selected]="video.videoId == backgroundVideoId.id ? true : null"
+                [attr.value]="video.videoId">
+                {{video.name}}
             </option>
             </select>
 
@@ -48,9 +48,9 @@
             </div>
         </div>
 
-        <div class="showOptionsIcon contentField" routerLink="/holo" >
+        <!-- <div class="showOptionsIcon contentField" routerLink="/holo" >
             <i class="fa fa-th-large" aria-hidden="true"></i>
-        </div>
+        </div> -->
 
         <div class="showOptionsIcon contentField" (click)="openAppearIn()" >
             <i class="fa fa-video-camera" aria-hidden="true"></i>

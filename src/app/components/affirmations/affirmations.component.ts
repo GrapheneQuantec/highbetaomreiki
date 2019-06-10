@@ -90,6 +90,7 @@ export class AffirmationsComponent implements OnInit {
   ]
 
   omegas;
+  bgVideos;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -120,8 +121,9 @@ export class AffirmationsComponent implements OnInit {
         }
       }
     });
-
-    this.itemService.getItems('omegas').subscribe(omegas => {this.omegas = omegas; console.log({omegasPre: this.omegas})});
+    
+    this.itemService.getItems('omegas').subscribe(omegas => this.omegas = omegas);
+    this.itemService.getItems('bg_videos').subscribe(bgVideos => this.bgVideos = bgVideos);
 
     this.affirmationService.getAffirmations().subscribe(affirmations => {
       this.affirmations = affirmations;
