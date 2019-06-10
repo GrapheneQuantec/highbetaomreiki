@@ -18,7 +18,7 @@ export class ItemService {
     this.afs$ = afs;
   }
 
-  getitemById(collectionName: string, id?: string) {
+  getItemById(collectionName: string, id?: string) {
     this.itemsCollection = this.afs$.collection<any>(collectionName);
 
     return this.itemsCollection.doc(id).ref.get().then(function (doc) {
@@ -26,7 +26,7 @@ export class ItemService {
     });
   }
 
-  getitems(collectionName: string) {
+  getItems(collectionName: string) {
 
     this.itemsCollection = this.afs$.collection<any>(collectionName);
     this.items = this.itemsCollection.snapshotChanges().pipe(map(changes => {

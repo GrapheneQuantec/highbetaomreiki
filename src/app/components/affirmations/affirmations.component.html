@@ -384,7 +384,7 @@
                             </div>
 
                             <!-- font controls -->
-                            <div *ngIf="isBeingEdited" class="text-controls">
+                            <div *ngIf="isBeingEdited && selectedAffirmation" class="text-controls">
                                 <span>
                                     <div>font size</div>
                                     <input type="number" [(ngModel)]="selectedAffirmation.fontSettings.fontSize">
@@ -403,7 +403,7 @@
                             <div *ngIf="isBeingEdited" class="omega-background-select">
                                 <div>Omega background</div>
                                 <select (change)="changeOmega($event)" [(ngModel)]="selectedAffirmation.omegaBackground">
-                                    <option *ngFor='let omega of omegas' value="{{omega.value}}">{{omega.text}}</option>
+                                    <option *ngFor='let omega of omegas' value="{{omega.name}}">{{omega.name}}</option>
                                 </select>
                             </div>
 
