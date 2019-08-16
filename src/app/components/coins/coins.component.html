@@ -1,38 +1,16 @@
-<!-- <button (click)="fetchCoins()">Fetch coins</button> -->
-
-<!-- <select name="" id="">
-    <option value="coin.id" *ngFor="let coin of coinses"></option>
-  </select> -->
-
 <div class="coin" *ngIf="currentCoin">
   <div class="image">
     <img [src]="currentCoin.image.small" alt="">
   </div>
   <div class="details">
-    <div class="role">Parent</div>
+    <div class="role">{{title}}</div>
     <div class="name">{{currentCoin.name}}</div>
     <div class="symbol">{{currentCoin.symbol}}</div>
   </div>
   <div class="controls">
-    <div class="prev" (click)="prevParentCoin()">△</div>
-    <div *ngIf="isParentPlaying" class="pause fa fa-pause" (click)="pauseParentCoin()"></div>
-    <div *ngIf="!isParentPlaying" class="pause fa fa-play" (click)="playParentCoin()"></div>
-    <div class="next" (click)="nextParentCoin()">▽</div>
-  </div>
-</div>
-<div class="coin" *ngIf="secondCurrentCoin">
-  <div class="image">
-    <img [src]="secondCurrentCoin.image.small" alt="">
-  </div>
-  <div class="details">
-    <div class="role">Child</div>
-    <div class="name">{{secondCurrentCoin.name}}</div>
-    <div class="symbol">{{secondCurrentCoin.symbol}}</div>
-  </div>
-  <div class="controls">
-    <div class="prev" (click)="prevChildCoin()">△</div>
-    <div *ngIf="isChildPlaying" class="pause fa fa-pause" (click)="pauseChildCoin()"></div>
-    <div *ngIf="!isChildPlaying" class="pause fa fa-play" (click)="playChildCoin()"></div>
-    <div class="next" (click)="nextChildCoin()">▽</div>
+    <div class="prev" (click)="prevCoin()">△</div>
+    <div *ngIf="isPlaying" class="pause fa fa-pause" (click)="pauseCoin()"></div>
+    <div *ngIf="!isPlaying" class="pause fa fa-play" (click)="playCoin()"></div>
+    <div class="next" (click)="nextCoin()">▽</div>
   </div>
 </div>
