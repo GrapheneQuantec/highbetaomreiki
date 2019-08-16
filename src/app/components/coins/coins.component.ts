@@ -17,6 +17,12 @@ export class CoinsComponent implements OnInit {
   secondCurrentCoin
   secondCurrentCoinIndex = 2000;
 
+  isParentPlaying
+  isChildPlaying
+
+  primaryInterval
+  secondaryInterval
+
   constructor(
     public httpClient: HttpClient,
     public itemService: ItemfireService,
@@ -31,24 +37,88 @@ export class CoinsComponent implements OnInit {
     // });
 
     this.httpClient.get("https://api.coingecko.com/api/v3/coins/list").subscribe((list: any[]) => {
-      setInterval(() => {
-        this.httpClient.get(`https://api.coingecko.com/api/v3/coins/${list[this.currentCoinIndex].id}?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false`).subscribe((coin: any) => {
-          this.currentCoin = coin;
-          this.currentCoinIndex = (this.currentCoinIndex + 1) % list.length;
-        });
-      }, 790);
+      this.coins = list;
 
-      setInterval(() => {
-        this.httpClient.get(`https://api.coingecko.com/api/v3/coins/${list[this.secondCurrentCoinIndex].id}?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false`).subscribe((coin: any) => {
-          this.secondCurrentCoin = coin;
-          this.secondCurrentCoinIndex = (this.secondCurrentCoinIndex + 1) % list.length;
-        });
-      }, 1000);
+      this.setParentCoin();
+      this.playParentCoin();
+
+      this.setChildCoin();
+      this.playChildCoin();
 
     });
   }
 
+  getCoinLink(coinId) {
+    return `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false`;
+  }
+
   fetchCoins() {
-    
+
+  }
+  
+  setParentCoin() {
+    this.httpClient.get(this.getCoinLink(this.coins[this.currentCoinIndex].id)).subscribe((coin: any) => this.currentCoin = coin);
+  }
+
+  SetParentCoinIndex(direction) {
+    this.currentCoinIndex = (this.currentCoinIndex + this.coins.length + direction) % this.coins.length;
+  }
+
+  prevParentCoin() {
+    this.pauseParentCoin();
+    this.SetParentCoinIndex(-1);
+    this.setParentCoin();
+   }
+
+  nextParentCoin() {
+    this.pauseParentCoin();
+    this.SetParentCoinIndex(1);
+    this.setParentCoin();
+  }
+
+  playParentCoin() {
+    this.isParentPlaying = true;
+    this.primaryInterval = setInterval(() => {
+      this.SetParentCoinIndex(1);
+      this.setParentCoin();
+    }, 720);
+  }
+
+  pauseParentCoin() {
+    this.isParentPlaying = false;
+    clearInterval(this.primaryInterval);
+  }
+
+  setChildCoin() {
+    this.httpClient.get(this.getCoinLink(this.coins[this.secondCurrentCoinIndex].id)).subscribe((coin: any) => this.secondCurrentCoin = coin);
+  }
+
+  SetChildCoinIndex(direction) {
+    this.secondCurrentCoinIndex = (this.secondCurrentCoinIndex + this.coins.length - 1) % this.coins.length;
+  }
+
+  prevChildCoin() {
+    this.pauseChildCoin();
+    this.SetChildCoinIndex(-1);
+    this.setChildCoin();
+   }
+
+  nextChildCoin() {
+    this.pauseChildCoin();
+    this.SetChildCoinIndex(1);
+    this.setChildCoin();
+  }
+
+  playChildCoin() {
+    this.isChildPlaying = true;
+    this.secondaryInterval = setInterval(() => {
+      this.SetChildCoinIndex(1);
+      this.setChildCoin();
+    }, 7200);
+  }
+
+  pauseChildCoin() {
+    this.isChildPlaying = false;
+    clearInterval(this.secondaryInterval);
   }
 }

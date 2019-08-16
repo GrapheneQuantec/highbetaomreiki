@@ -1,7 +1,12 @@
 .coin {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 100px 4fr 1fr;
   grid-column-gap: 10px;
+}
+
+.role {
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .name {
@@ -16,4 +21,33 @@
 img {
   width: 100px;
   height: 100px;
+}
+
+.controls {
+  position: relative;
+  font-size: 24px;
+  display: none;
+}
+
+.coin:hover .controls {
+  display: block;
+}
+
+.controls .prev{
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+}
+
+.controls .pause{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.controls .next{
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
 }
