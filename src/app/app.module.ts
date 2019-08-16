@@ -7,14 +7,14 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from '@app/app-routing.module';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AffirmationsComponent } from './components/affirmations/affirmations.component';
 import { MatrixcollectionComponent } from './components/matrixcollection/matrixcollection.component';
 import { AuthService } from './core/auth.service';
 import { AuthGuard} from './core/auth.guard';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 // services
 import { AffirmationService } from './services/affirmation.service';
@@ -34,6 +34,8 @@ import { CoinComponent } from './components/elements/coin/coin.component';
 import { InvocationComponent } from './components/liomreiki/invocation/invocation.component';
 import { HologramComponent } from './components/pages/hologram/hologram.component';
 import { ItemService } from './services/item.service';
+import { CoinsComponent } from './components/coins/coins.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: '**', component: AffirmationsComponent },
@@ -56,6 +58,7 @@ const appRoutes: Routes = [
     CoinComponent,
     InvocationComponent,
     HologramComponent,
+    CoinsComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,7 @@ const appRoutes: Routes = [
     DragulaModule.forRoot(),
     AppRoutingModule,
     YoutubePlayerModule,
+    HttpClientModule,
   ],
   providers: [
     AffirmationService, 
@@ -74,6 +78,7 @@ const appRoutes: Routes = [
     MatrixcollectionService, 
     AuthService,
     AuthGuard,
+    AngularFirestore,
   ],
   bootstrap: [AppComponent]
 })
