@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { CarouselService } from '@app/services/carousel.service';
 import { VideoPlayerComponent } from '../elements/video-player/video-player.component';
 import { ItemService } from '@app/services/item.service';
+import { environment } from '@env/environment';
 
 declare var initCarousel: any;
 
@@ -72,6 +73,7 @@ export class AffirmationsComponent implements OnInit {
   omReikiStarted: boolean = false;
   startNextAutomatically: boolean = false;
   isAffirmationZoomed: boolean = false;
+  environmentName: string;
 
   backgroundVideos = [
     { id: "eKFTSSKCzWA", title: "Nature" },
@@ -107,6 +109,9 @@ export class AffirmationsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.environmentName = environment.name;
+    console.log('en: ~~', this.environmentName)
 
     this.authService.user$.subscribe(user => {
       this.user = user;
@@ -587,8 +592,8 @@ export class AffirmationsComponent implements OnInit {
     this.resetKaraoke();
     this.closeAllMenus();
 
-    // start invocation
-    let invocationObservable = this.utilService.setBackgroundVideo({videoId: "NMTfMRi2fJk", paused: !this.startNextAutomatically && !this.isFactom});
+    // start invocation, masters ~> NMTfMRi2fJk
+    let invocationObservable = this.utilService.setBackgroundVideo({videoId: "J3nlkcMx2BA", paused: !this.startNextAutomatically && !this.isFactom});
     let invoSub = invocationObservable.subscribe(state => {
 
       if (state.data == YT.PlayerState.ENDED) {
