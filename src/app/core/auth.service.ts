@@ -84,6 +84,10 @@ export class AuthService {
     return this.checkAuthorization(user, ['admin', 'author']);
   }
 
+  canSeeCoins(user: User): boolean {
+    return this.checkAuthorization(user, ['coinuser', 'coinmaster']);
+  }
+
   private checkAuthorization(user: User, allowedRoles: string[]): boolean {
     if (!user) { return false; }
     for (const role of allowedRoles) {
