@@ -4,11 +4,12 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
-import { User } from '../core/user';
+import { User, Roles } from '../core/user';
 
 
 import { Observable, BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { environment } from '@env/environment';
 
 @Injectable()
 export class AuthService {
@@ -58,14 +59,19 @@ export class AuthService {
 
     const userRef: AngularFirestoreDocument<User> = this.afs.doc('users/' + authData.uid);
 
+    let roles: Roles = {};
+    if (environment.name == 'liomreiki') {
+      roles = {
+        reader: true
+      }
+    }
+
     const data: User = {
       uid: authData.uid,
       email: authData.email,
       photoURL: authData.photoURL,
       displayName: authData.displayName,
-      roles: {
-        reader: true
-      }
+      roles: roles
     };
 
     return userRef.set(data, { merge: true });

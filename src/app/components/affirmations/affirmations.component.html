@@ -321,7 +321,9 @@
 <div *ngIf="factomInterval" class="factomElements">
     <app-invocation *ngIf="environmentName == 'huiaomreiki'" class="invocation" [ngStyle]="{'z-index': factomZindices[factomCounter][0]}"></app-invocation>
     <!-- <app-factom [videoId]="'NMTfMRi2fJk'" [zIndex]="factomZindices[factomCounter][0]" [volume]="10"></app-factom> -->
-    <app-factom *ngIf="environmentName == 'liomreiki'" [videoId]="'J3nlkcMx2BA'" [zIndex]="factomZindices[factomCounter][0]" [volume]="0"></app-factom>
+    <app-factom *ngIf="environmentName == 'liomreiki' || environmentName == 'liomreikiadv'" 
+      [videoId]="'J3nlkcMx2BA'" [zIndex]="factomZindices[factomCounter][0]" [volume]="0">
+    </app-factom>
     <app-factom [videoId]="'dx-UJ-Xkr1M'" [zIndex]="factomZindices[factomCounter][1]" [volume]="0"></app-factom>
     <app-factom [videoId]="'VfBS_fHWt00'" [zIndex]="factomZindices[factomCounter][2]" [volume]="10"></app-factom>
     <app-factom [videoId]="'xxMShqH2IRY'" [zIndex]="factomZindices[factomCounter][3]" [volume]="10"></app-factom>
