@@ -1,10 +1,20 @@
 <span *ngIf="(authService.user$ | async) as user; else loading">
-  <span *ngIf="authService.canRead(user)">
+  <span *ngIf="authService.canRead(user); else permissionRequired">
     <div class="main-site">
       <router-outlet></router-outlet>
     </div>
   </span>
 </span>
+
+<ng-template #permissionRequired>
+    <div class="outerWelcome">
+      <div class="innerWelcome">
+        <h1>Li Om Reiki welcomes you</h1>
+        To view this website's content, please contact your teacher
+        or send an email to <a href="mailto:liomreiki@gmail.com">liomreiki@gmail.com</a>
+      </div>
+    </div>
+  </ng-template>
 
 <ng-template #loading>
   <div class="outerWelcome">
