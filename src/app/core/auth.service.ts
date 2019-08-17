@@ -59,11 +59,9 @@ export class AuthService {
 
     const userRef: AngularFirestoreDocument<User> = this.afs.doc('users/' + authData.uid);
 
-    let roles: Roles = {};
-    if (environment.name == 'liomreiki') {
-      roles = {
-        reader: true
-      }
+    let roles: Roles = authData.roles;
+    if (environment.name == 'liomreiki' && !authData.roles['reader']) {
+      roles['reader'] = true;
     }
 
     const data: User = {
