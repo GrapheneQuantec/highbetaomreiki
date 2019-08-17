@@ -11,6 +11,7 @@ export class CoinComponent implements OnInit {
   @Input() coinReverse: string;
   @Input() subtitle: string;
   @Input() obverseText: string[];
+  @Input() height: string;
 
   wordsInterval: number = 810;
   obverseWord: string;
