@@ -5,9 +5,13 @@
         Holo Artillect
     </div>
 
-    <div class="coins-overlay contentField">
-      <app-coins [title]="'Parent'" [intervalTime]="7200"></app-coins>
-      <app-coins [title]="'Child'" [intervalTime]="2689"></app-coins>
+    <div class="coins-overlay contentField" *ngIf="false">
+      <app-coins [title]="'Parent'" [intervalTime]="7200" (coinClicked)="coinReverse = $event"></app-coins>
+      <app-coins [title]="'Child'" [intervalTime]="2689" (coinClicked)="selectedCoin = $event"></app-coins>
+      <app-coin [coinReverse]="{ 'background-image': coinReverse? coinReverse.image.large: 'initial'}"></app-coin>
+      <div class="aspect-ratio">
+        <iframe src="assets/coinsphere/index.html" frameborder="0"></iframe>
+      </div>
     </div>
 
     <div class="leftPanel">

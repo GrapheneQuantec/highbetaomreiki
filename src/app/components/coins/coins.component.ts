@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ItemfireService } from '@app/services/itemfire.service';
 import { createOfflineCompileUrlResolver } from '@angular/compiler';
@@ -12,6 +12,8 @@ export class CoinsComponent implements OnInit {
 
   @Input() title: string;
   @Input() intervalTime: number;
+
+  @Output() coinClicked = new EventEmitter();
 
   coins
   
@@ -74,6 +76,10 @@ export class CoinsComponent implements OnInit {
   pauseCoin() {
     this.isPlaying = false;
     clearInterval(this.interval);
+  }
+
+  selectCoin(coin) {
+    this.coinClicked.emit(coin);
   }
 
 }

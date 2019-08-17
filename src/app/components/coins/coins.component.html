@@ -1,4 +1,4 @@
-<div class="coin" *ngIf="currentCoin">
+<div class="coin" *ngIf="currentCoin" (click)="selectCoin(currentCoin)">
   <div class="image">
     <img [src]="currentCoin.image.small" alt="">
   </div>

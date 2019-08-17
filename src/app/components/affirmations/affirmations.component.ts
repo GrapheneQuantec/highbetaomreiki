@@ -23,6 +23,8 @@ export class AffirmationsComponent implements OnInit {
   @Output() selectedVideoId: string;
   @ViewChild('bgvideoplayer') videoPlayer: VideoPlayerComponent;
 
+  
+
   affirmations: Affirmation[];
   activeAffirmationId: string;
   selectedAffirmation: Affirmation = {};

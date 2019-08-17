@@ -1,9 +1,22 @@
+.aspect-ratio {
+  position: relative;
+	padding-bottom: 100%; /* 16:9 */
+	height: 0;
+}
+
+.aspect-ratio iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 330px;
+	height: 330px;
+}
 
 .coins-overlay {
   position: absolute;
   top: 0;
   right: 0;
-  width: 300px;
+  width: 316px;
   z-index: 1000;
 }
 
