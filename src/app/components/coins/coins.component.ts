@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ItemfireService } from '@app/services/itemfire.service';
 import { createOfflineCompileUrlResolver } from '@angular/compiler';
+import { CoinService } from '@app/services/coin.service';
 
 @Component({
   selector: 'app-coins',
@@ -12,6 +13,8 @@ export class CoinsComponent implements OnInit {
 
   @Input() title: string;
   @Input() intervalTime: number;
+  @Input() coinType: "parent" | "child";
+  @Input() initialIndex: number = 0;
 
   @Output() coinClicked = new EventEmitter();
 
@@ -25,12 +28,13 @@ export class CoinsComponent implements OnInit {
   constructor(
     public httpClient: HttpClient,
     public itemService: ItemfireService,
+    private coinService: CoinService,
   ) { }
 
   ngOnInit() {
     this.httpClient.get("https://api.coingecko.com/api/v3/coins/list").subscribe((list: any[]) => {
       this.coins = list;
-
+      this.currentCoinIndex = Math.floor((Math.random() * (this.coins.length -1)));
       this.setCoin();
       this.playCoin();
 
@@ -46,7 +50,7 @@ export class CoinsComponent implements OnInit {
   }
   
   setCoin() {
-    this.httpClient.get(this.getCoinLink(this.coins[this.currentCoinIndex].id)).subscribe((coin: any) => this.currentCoin = coin);
+    this.httpClient.get(this.getCoinLink(this.coins[this.currentCoinIndex].id)).subscribe((coin: any) => this.selectCoin(coin));
   }
 
   SetCoinIndex(direction) {
@@ -79,7 +83,13 @@ export class CoinsComponent implements OnInit {
   }
 
   selectCoin(coin) {
-    this.coinClicked.emit(coin);
+    this.currentCoin = coin;
+    if (this.coinType == "parent") {
+      this.coinService.setParentCoin(coin);
+    }
+    if (this.coinType == "child") {
+      this.coinService.setChildCoin(coin);
+    }
   }
 
 }
