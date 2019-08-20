@@ -63,6 +63,8 @@ export class AuthService {
       authData.roles['reader'] = true;
     }
 
+    console.log({ad: authData.roles})
+
     const data: User = {
       uid: authData.uid,
       email: authData.email,
