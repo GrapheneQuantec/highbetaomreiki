@@ -59,9 +59,8 @@ export class AuthService {
 
     const userRef: AngularFirestoreDocument<User> = this.afs.doc('users/' + authData.uid);
 
-    let roles: Roles = authData.roles;
-    if (environment.name == 'liomreiki' && !authData.roles['reader']) {
-      roles['reader'] = true;
+    if (environment.name == 'liomreiki' && authData.roles && !authData.roles['reader']) {
+      authData.roles['reader'] = true;
     }
 
     const data: User = {
@@ -69,7 +68,7 @@ export class AuthService {
       email: authData.email,
       photoURL: authData.photoURL,
       displayName: authData.displayName,
-      roles: roles
+      roles: authData.roles
     };
 
     return userRef.set(data, { merge: true });
