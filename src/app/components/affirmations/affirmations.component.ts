@@ -83,6 +83,8 @@ export class AffirmationsComponent implements OnInit {
     { id: "r3WxYr6NA18", title: "Michelli" },
   ];
   backgroundVideoId = this.backgroundVideos[0].id;
+
+  
   
   public invocationPlayer: any;
   public symbolsPlayer: any;
@@ -97,6 +99,7 @@ export class AffirmationsComponent implements OnInit {
 
   omegas;
   bgVideos;
+  meditation_videos;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -132,7 +135,8 @@ export class AffirmationsComponent implements OnInit {
     });
     
     this.itemService.getItems('omegas').subscribe(omegas => this.omegas = omegas);
-    this.itemService.getItems('bg_videos').subscribe(bgVideos => this.bgVideos = bgVideos);
+    this.itemService.getItems('bg_videos').subscribe(videos => this.bgVideos = videos);
+    this.itemService.getItems('meditation_videos').subscribe(videos => this.meditation_videos = videos);
 
     this.affirmationService.getAffirmations().subscribe(affirmations => {
       this.affirmations = affirmations;
@@ -593,7 +597,8 @@ export class AffirmationsComponent implements OnInit {
     this.closeAllMenus();
 
     // start invocation, masters ~> NMTfMRi2fJk
-    let invocationObservable = this.utilService.setBackgroundVideo({videoId: "J3nlkcMx2BA", paused: !this.startNextAutomatically && !this.isFactom});
+    let invocationVideo = this.meditation_videos.find(video => video.name == "Invocation");
+    let invocationObservable = this.utilService.setBackgroundVideo({videoId: invocationVideo.videoId, paused: !this.startNextAutomatically && !this.isFactom});
     let invoSub = invocationObservable.subscribe(state => {
 
       if (state.data == YT.PlayerState.ENDED) {
@@ -613,7 +618,8 @@ export class AffirmationsComponent implements OnInit {
             this.affirmationVisible = false;
 
             let symbolsCounter = 0;
-            let symbolsObservable = this.utilService.setBackgroundVideo({videoId: "f5ALvqqv4wI", paused: !this.startNextAutomatically && !this.isFactom});
+            let symbolsVideo = this.meditation_videos.find(video => video.name == "Symbols");
+            let symbolsObservable = this.utilService.setBackgroundVideo({videoId: symbolsVideo.videoId, paused: !this.startNextAutomatically && !this.isFactom});
             let symbSub = symbolsObservable.subscribe(state => {
               if (state.data == YT.PlayerState.ENDED) {
                 symbolsCounter = symbolsCounter + 1;
