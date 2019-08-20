@@ -612,9 +612,13 @@ export class AffirmationsComponent implements OnInit {
             this.resetKaraoke();
             this.affirmationVisible = false;
 
-            let symbolsObservable = this.utilService.setBackgroundVideo({videoId: "dx-UJ-Xkr1M", paused: !this.startNextAutomatically && !this.isFactom});
+            let symbolsCounter = 0;
+            let symbolsObservable = this.utilService.setBackgroundVideo({videoId: "f5ALvqqv4wI", paused: !this.startNextAutomatically && !this.isFactom});
             let symbSub = symbolsObservable.subscribe(state => {
               if (state.data == YT.PlayerState.ENDED) {
+                symbolsCounter = symbolsCounter + 1;
+                if (symbolsCounter < 8) return
+                
                 symbSub.unsubscribe();
 
                 let grailObservable = this.utilService.setBackgroundVideo({videoId: "VfBS_fHWt00", paused: !this.startNextAutomatically && !this.isFactom});

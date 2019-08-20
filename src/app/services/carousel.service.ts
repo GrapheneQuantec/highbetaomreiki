@@ -15,7 +15,7 @@ export class CarouselService {
       value: "liomreiki",
       videos: [
         { videoId: "NMTfMRi2fJk", caption: "Invocation" },
-        { videoId: "dx-UJ-Xkr1M", caption: "Symbols" },
+        { videoId: "f5ALvqqv4wI", caption: "Symbols" },
         { videoId: "VfBS_fHWt00", caption: "Grail" },
         { videoId: "xxMShqH2IRY", caption: "Song" },
       ],
