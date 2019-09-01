@@ -12,9 +12,10 @@ export interface Roles {
     roles?:    Roles;
 
     constructor(authData) {
-      this.uid    = authData.uid
+      this.uid      = authData.uid
       this.email    = authData.email
       this.photoURL = authData.photoURL
-    //   this.roles    = { reader: true }
+      this.displayName = authData.displayName
+      this.roles    = authData.roles
     }
   }

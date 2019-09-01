@@ -57,20 +57,19 @@ export class AuthService {
   private updateUser(authData) {
     const userData = new User(authData);
 
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc('users/' + authData.uid);
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc('users/' + userData.uid);
 
-    if (environment.name == 'liomreiki' && authData.roles && !authData.roles['reader']) {
-      authData.roles['reader'] = true;
+    if (environment.name == 'liomreiki' && !userData.roles) {
+      userData.roles = {reader: true};
     }
 
-    console.log({ad: authData.roles})
 
     const data: User = {
-      uid: authData.uid,
-      email: authData.email,
-      photoURL: authData.photoURL,
-      displayName: authData.displayName,
-      roles: authData.roles
+      uid: userData.uid,
+      email: userData.email,
+      photoURL: userData.photoURL,
+      displayName: userData.displayName,
+      roles: userData.roles
     };
 
     return userRef.set(data, { merge: true });
