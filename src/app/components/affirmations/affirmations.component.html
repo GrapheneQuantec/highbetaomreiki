@@ -6,8 +6,11 @@
     </div>
 
     <div class="coins-overlay contentField" *ngIf="authService.canSeeCoins(user)">
-      <app-coins [initialIndex]="0" [coinType]="'parent'" [title]="'Parent'" [intervalTime]="7200" (coinClicked)="coinReverse = $event"></app-coins>
-      <app-coins [initialIndex]="2000" [coinType]="'child'" [title]="'Child'" [intervalTime]="2689" (coinClicked)="selectedCoin = $event"></app-coins>
+      <div class="parentChild" *ngIf="coins$ | async as coins">
+        <app-coins [coins]="coins" [initialIndex]="0" [coinType]="'parent'" [title]="'Parent'" [intervalTime]="7200" (coinClicked)="coinReverse = $event"></app-coins>
+        <app-coins [coins]="coins" [initialIndex]="2000" [coinType]="'child'" [title]="'Child'" [intervalTime]="2689" (coinClicked)="selectedCoin = $event"></app-coins>
+      </div>
+
       <app-coin [height]="'230px'" ></app-coin>
       <div class="aspect-ratio">
         <iframe src="assets/coinsphere/index.html" frameborder="0"></iframe>

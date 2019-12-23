@@ -11,6 +11,7 @@ import { CarouselService } from '@app/services/carousel.service';
 import { VideoPlayerComponent } from '../elements/video-player/video-player.component';
 import { ItemService } from '@app/services/item.service';
 import { environment } from '@env/environment';
+import { HttpClient } from '@angular/common/http';
 
 declare var initCarousel: any;
 
@@ -100,6 +101,7 @@ export class AffirmationsComponent implements OnInit {
   omegas;
   bgVideos;
   meditation_videos;
+  coins$
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -108,10 +110,13 @@ export class AffirmationsComponent implements OnInit {
     public authService: AuthService,
     private utilService: UtilsService,
     private carouselService: CarouselService,
-  ) {
+    public httpClient: HttpClient,
+    ) {
   }
 
   ngOnInit() {
+
+    this.coins$ = this.httpClient.get("https://api.coingecko.com/api/v3/coins/list")
 
     this.environmentName = environment.name;
     console.log('en: ~~', this.environmentName)

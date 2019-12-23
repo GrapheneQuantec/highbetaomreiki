@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ItemfireService } from '@app/services/itemfire.service';
 import { createOfflineCompileUrlResolver } from '@angular/compiler';
 import { CoinService } from '@app/services/coin.service';
+const express = require('express');
+const app = express();
 
 @Component({
   selector: 'app-coins',
@@ -15,11 +17,11 @@ export class CoinsComponent implements OnInit {
   @Input() intervalTime: number;
   @Input() coinType: "parent" | "child";
   @Input() initialIndex: number = 0;
+  @Input() coins: any[];
 
   @Output() coinClicked = new EventEmitter();
 
-  coins
-  
+    
   currentCoin
   currentCoinIndex = 0;
   isPlaying
@@ -32,13 +34,30 @@ export class CoinsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.httpClient.get("https://api.coingecko.com/api/v3/coins/list").subscribe((list: any[]) => {
-      this.coins = list;
-      this.currentCoinIndex = Math.floor((Math.random() * (this.coins.length -1)));
+
+    app.get('/posts', function(req, res) {
+      res.send([
+        {
+          id: 0,
+          title: 'Lorem ipsum',
+          content: 'Dolor sit amet',
+          author: 'Marcin'
+        },
+        {
+          id: 1,
+          title: 'Vestibulum cursus',
+          content: 'Dante ut sapien mattis',
+          author: 'Marcin'
+        }
+      ]);
+    });
+
+    fetch("http://beacon.nist.gov/beacon/2.0/pulse/last", {mode: 'no-cors'}).then(json => console.log({json}))
+    console.log({coins: this.coins})  
+    this.currentCoinIndex = Math.floor((Math.random() * (this.coins.length -1)));
       this.setCoin();
       this.playCoin();
 
-    });
   }
 
   getCoinLink(coinId) {
