@@ -1,3 +1,24 @@
 .user-picture {
   width: 200px;
 }
+
+.member {
+  margin: 5px 0;
+}
+
+.member .member-image {
+  display: inline;
+  vertical-align: middle;
+}
+
+.member img {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}
+
+.member .member-name {
+  display: inline;
+  vertical-align: middle;
+  margin-left: 8px;
+}

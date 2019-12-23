@@ -2,3 +2,11 @@
   <img class="user-picture" [src]="user.photoURL" alt="">
   {{user.displayName}}
 </div>
+
+<div class="members">
+  <div class="member" *ngFor="let member of members">
+    <span class="member-image"><img [src]="member.photoURL" alt=""></span>
+    <span class="member-name">{{member.displayName}}</span>
+  </div>
+</div>
+

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@app/core/auth.service';
+import { ItemService } from '@app/services/item.service';
 
 @Component({
   selector: 'app-member-area',
@@ -8,12 +9,15 @@ import { AuthService } from '@app/core/auth.service';
 })
 export class MemberAreaComponent implements OnInit {
 
+  members;
+
   constructor(
     public authService: AuthService,
-  ) { }
+    private itemService: ItemService,
+    ) { }
 
   ngOnInit() {
-    this.authService.user$.subscribe(u=>console.log({dn: u.displayName}))
+    this.itemService.getItems('users').subscribe(users => this.members = users);
   }
 
 }
