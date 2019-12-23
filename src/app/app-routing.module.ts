@@ -4,6 +4,7 @@ import { AffirmationsComponent } from '@app/components/affirmations/affirmations
 import { MatrixcollectionComponent } from '@app/components/matrixcollection/matrixcollection.component';
 import { SymbolsComponent } from '@app/components/symbols/symbols.component';
 import { HologramComponent } from './components/pages/hologram/hologram.component';
+import { MemberAreaComponent } from './components/member-area/member-area.component';
 
 export const appRoutes: Routes = [
   // Affirmations
@@ -17,6 +18,7 @@ export const appRoutes: Routes = [
   { path: 'holo', component: HologramComponent },
   // Matrix
   { path: 'matrix', component: MatrixcollectionComponent },
+  { path: 'member-area', component: MemberAreaComponent },
   // Default
   { path: '', component: AffirmationsComponent },
   // catch unmatched

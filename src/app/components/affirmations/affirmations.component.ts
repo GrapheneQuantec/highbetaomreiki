@@ -118,6 +118,7 @@ export class AffirmationsComponent implements OnInit {
 
     this.authService.user$.subscribe(user => {
       this.user = user;
+      console.log({user})
     });
 
     this.route.url.subscribe((u) => {

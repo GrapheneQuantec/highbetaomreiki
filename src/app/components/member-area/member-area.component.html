@@ -1,0 +1,4 @@
+<div *ngIf="(authService.user$ | async) as user">
+  <img class="user-picture" [src]="user.photoURL" alt="">
+  {{user.displayName}}
+</div>

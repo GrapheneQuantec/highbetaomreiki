@@ -36,6 +36,7 @@ import { HologramComponent } from './components/pages/hologram/hologram.componen
 import { ItemService } from './services/item.service';
 import { CoinsComponent } from './components/coins/coins.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MemberAreaComponent } from './components/member-area/member-area.component';
 
 const appRoutes: Routes = [
   { path: '**', component: AffirmationsComponent },
@@ -59,6 +60,7 @@ const appRoutes: Routes = [
     InvocationComponent,
     HologramComponent,
     CoinsComponent,
+    MemberAreaComponent,
   ],
   imports: [
     BrowserModule,
