@@ -1,9 +1,18 @@
+:host {
+  display: flex;
+}
+
+.users-section, .chat-section {
+  flex: 1 0 50%;
+}
+
 .user-picture {
   width: 200px;
 }
 
 .member {
   margin: 5px 0;
+  cursor: pointer;
 }
 
 .member .member-image {
@@ -21,4 +30,22 @@
   display: inline;
   vertical-align: middle;
   margin-left: 8px;
+}
+
+.messages {
+  margin-top:10px;
+}
+
+.message {
+  display: flex;
+  margin-top:10px;
+}
+
+.message .member-image {
+  width: 40px;
+  margin-right: 8px;
+}
+
+.message .member-image img{
+  width: 100%;
 }

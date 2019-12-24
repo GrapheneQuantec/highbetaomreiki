@@ -15,7 +15,6 @@ export class ItemfireService {
   }
 
   addItem(item: any, collectionName: string) {
-    console.log('hello')
     const promise = new Promise((resolve, reject) => {
         this.db.collection(collectionName).add(item)
         .then((data) => { resolve(data); })
@@ -54,12 +53,16 @@ export class ItemfireService {
     return this.db.collection(collectionName, ref => ref.where("category", "==", category)).valueChanges({idField: 'id'}); 
   }
 
-  getItemsByAttribute(collectionName: string, attributeName: string, attributeValue: string) {
-    return this.db.collection(collectionName, ref => ref.where(attributeName, "==", attributeValue)).valueChanges({idField: 'id'}); 
+  getItemsByAttribute(collectionName: string, attributeName: string, attributeValue: string, operation: any = "==") {
+    return this.db.collection(collectionName, ref => ref.where(attributeName, operation, attributeValue)).valueChanges({idField: 'id'}); 
   }
 
   getItemsByCategoryOrderedBy(collectionName: string, category: string, orderBy: string, direction: "asc" | "desc" = "asc") {
     return this.db.collection(collectionName, ref => ref.where("category", "==", category).orderBy(orderBy, direction)).valueChanges({idField: 'id'}); 
+  }
+
+  getItemsByAttributeOrderedBy(collectionName: string, attributeName: string, attributeValue: string, orderBy: string, operation: any = "==", direction: "asc" | "desc" = "asc") {
+    return this.db.collection(collectionName, ref => ref.where(attributeName, operation, attributeValue).orderBy(orderBy, direction)).valueChanges({idField: 'id'}); 
   }
 
 }

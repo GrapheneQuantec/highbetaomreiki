@@ -39,9 +39,10 @@ export class ItemService {
     return this.items;
   }
 
-  addItem(item: any) {
+  addItem(collectionName: string, item: any) {
+    const collection = this.afs$.collection<any>(collectionName);
     const promise = new Promise((resolve, reject) => {
-      this.itemsCollection.add(item)
+      collection.add(item)
         .then((data) => { resolve(data); })
         .catch(error => reject(error));
     });

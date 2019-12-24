@@ -1,12 +1,33 @@
-<div *ngIf="(authService.user$ | async) as user">
-  <img class="user-picture" [src]="user.photoURL" alt="">
-  {{user.displayName}}
+
+<div class="users-section">
+
+  <div *ngIf="(authService.user$ | async) as user">
+    <img class="user-picture" [src]="user.photoURL" alt="">
+    {{user.displayName}}
+  </div>
+  
+  <div class="members">
+    <div class="member" *ngFor="let member of members" (click)="chooseMember(member)">
+      <span class="member-image"><img [src]="member.photoURL" alt=""></span>
+      <span class="member-name">{{member.displayName}}</span>
+    </div>
+  </div>
+  
 </div>
 
-<div class="members">
-  <div class="member" *ngFor="let member of members">
-    <span class="member-image"><img [src]="member.photoURL" alt=""></span>
-    <span class="member-name">{{member.displayName}}</span>
+<div class="chat-section">
+  <div class="messages">
+    <div class="input-message">
+      <input type="text" name="" id="" [(ngModel)]="currentMessage">
+      <input type="button" value="Send" (click)="sendMessage()">
+    </div>
+    <div class="message" *ngFor="let message of conversationMessages">
+      <div class="member-image">
+        <img [src]="getMemberPicture(message.author)" alt="">
+      </div>
+      <div class="message-content">
+        {{message.content}}
+      </div>
+    </div>
   </div>
 </div>
-
