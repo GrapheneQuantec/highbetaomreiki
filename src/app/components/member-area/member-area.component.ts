@@ -26,30 +26,46 @@ export class MemberAreaComponent implements OnInit {
   ngOnInit() {
     this.authService.user$.subscribe(user => this.currentUser = user);
     this.itemService.getItems('users').subscribe(users => this.members = users);
-    this.itemService.getItemsOrderedBy('chat_messages', 'creationDate').subscribe(messages => this.messages = messages);
+    this.itemService.getItemsOrderedBy('chat_messages', 'creationDate').subscribe(messages => {
+      this.messages = messages;
+      this.showConversation();
+    });
   }
 
   chooseMember(member) {
     this.selectedMember = member;
+    this.showConversation();
+  }
+
+  showConversation() {
     this.conversationMessages = this.messages.filter(message => {
       var participants: string[] = message.participants;
-      return participants.includes(this.selectedMember.uid)
+      var currentParticipants = [this.currentUser.uid, this.selectedMember.uid]
+      return currentParticipants.every(v => participants.includes(v))
     })
   }
 
   sendMessage() {
+    let messageText = this.currentMessage;
+    this.currentMessage = '';
+
     const message = {
-      content: this.currentMessage,
+      content: messageText,
       author: this.currentUser.uid,
       participants: [this.selectedMember.uid, this.currentUser.uid],
       creationDate: Date.now()
     };
     
-    this.itemService.addItem(message, 'chat_messages');
+    this.itemService.addItem(message, 'chat_messages')
+    .catch(error => this.currentMessage = messageText);
   }
 
   getMemberPicture(messageAuthor) {
     return this.members.filter(m => m.uid == messageAuthor).map(m => m.photoURL);
+  }
+
+  getMemberName(messageAuthor) {
+    return this.members.filter(m => m.uid == messageAuthor).map(m => m.displayName);
   }
 
 }

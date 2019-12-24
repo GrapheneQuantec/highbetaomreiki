@@ -26,7 +26,7 @@
         <img [src]="getMemberPicture(message.author)" alt="">
       </div>
       <div class="message-content">
-        {{message.content}}
+        <b>{{getMemberName(message.author)}}</b> {{message.creationDate | date:short}}<br> {{message.content}}
       </div>
     </div>
   </div>
