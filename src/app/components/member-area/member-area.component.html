@@ -16,12 +16,8 @@
 </div>
 
 <div class="chat-section">
-  <div class="messages">
-    <div class="input-message">
-      <input type="text" name="" id="" [(ngModel)]="currentMessage">
-      <input type="button" value="Send" (click)="sendMessage()">
-    </div>
-    <div class="message" *ngFor="let message of conversationMessages">
+  <div class="messages" #messagesDiv>
+    <div class="message" *ngFor="let message of messages">
       <div class="member-image">
         <img [src]="getMemberPicture(message.author)" alt="">
       </div>
@@ -29,5 +25,9 @@
         <b>{{getMemberName(message.author)}}</b> {{message.creationDate | date:short}}<br> {{message.content}}
       </div>
     </div>
+  </div>
+  <div class="input-message">
+    <input type="text" name="" id="" [(ngModel)]="currentMessage">
+    <input type="button" value="Send" (click)="sendMessage()">
   </div>
 </div>

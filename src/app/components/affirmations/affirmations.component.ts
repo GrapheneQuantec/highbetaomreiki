@@ -84,7 +84,7 @@ export class AffirmationsComponent implements OnInit {
   ];
   backgroundVideoId = this.backgroundVideos[0].id;
 
-  
+  affirmationSlides = true;
   
   public invocationPlayer: any;
   public symbolsPlayer: any;
@@ -403,12 +403,14 @@ export class AffirmationsComponent implements OnInit {
 
   setSelectedAffirmation(affirmation: Affirmation) {
     if (affirmation) {
-      this.selectedAffirmation = affirmation;
+      let tempAffirmation = affirmation;
+      tempAffirmation.content = `${affirmation.content}<br>${affirmation.content}`;
+      this.selectedAffirmation = tempAffirmation;
 
-      this.activeAffirmationId = affirmation.id;
-      this.selectedOmega = this.getOmegaBackgroundPath(affirmation.omegaBackground);
+      this.activeAffirmationId = tempAffirmation.id;
+      this.selectedOmega = this.getOmegaBackgroundPath(tempAffirmation.omegaBackground);
       this.updateOmegaCounter();
-      this.normalAffirmationText = affirmation.content;
+      this.normalAffirmationText = tempAffirmation.content;
       this.karaokeLetterCount = 0;
       clearInterval(this.karaokeInterval);
       this.karaokeInterval = setInterval(() => this.progressKaraoke(), this.karaokeSpeed);

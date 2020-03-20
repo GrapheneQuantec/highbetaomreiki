@@ -388,8 +388,15 @@
                                 <span class="yesuLogos" no-wrap="true" delay="1">Yes'u</span>
                             </div>
 
-                            <div id="sexsextaza" class="affirmationContent" [ngStyle]="getAffirmationStyle()">
-                                <div *ngIf="!isBeingEdited" class="pfpItem entry-content" style="white-space: pre-wrap;">
+                            <div id="sexsextaza" 
+                              class="affirmationContent" 
+                              [ngStyle]="getAffirmationStyle()"
+                            >
+                                <div *ngIf="!isBeingEdited" 
+                                  class="pfpItem entry-content" 
+                                  [ngClass]="{'slide': affirmationSlides}"
+                                  style="white-space: pre-wrap;"
+                                >
                                     <p class="karaoke-text">
                                         <span class="colored-text">{{coloredAffirmationText}}</span>{{normalAffirmationText}}
                                     </p>

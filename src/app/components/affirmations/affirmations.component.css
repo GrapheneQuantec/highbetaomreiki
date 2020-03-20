@@ -1,3 +1,24 @@
+.entry-content.slide {
+  overflow: hidden;
+  height: 416px;
+}
+
+.entry-content.slide .karaoke-text {
+  animation: slideup linear 108s infinite;
+  animation-delay: 8s;
+}
+
+@keyframes slideup {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+
 .aspect-ratio {
   position: relative;
 	padding-bottom: 100%; /* 16:9 */

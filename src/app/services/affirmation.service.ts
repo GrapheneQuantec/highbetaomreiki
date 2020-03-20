@@ -31,7 +31,7 @@ export class AffirmationService {
 
   getAffirmations() {
 
-    this.affirmationsCollection = this.afs$.collection<Affirmation>(this.collectionName);
+    this.affirmationsCollection = this.afs$.collection<Affirmation>(this.collectionName, ref => ref.orderBy('title'));
     this.affirmations = this.affirmationsCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Affirmation;
