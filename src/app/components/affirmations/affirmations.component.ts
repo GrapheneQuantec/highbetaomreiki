@@ -24,7 +24,7 @@ export class AffirmationsComponent implements OnInit {
   @Output() selectedVideoId: string;
   @ViewChild('bgvideoplayer') videoPlayer: VideoPlayerComponent;
 
-  
+
 
   affirmations: Affirmation[];
   activeAffirmationId: string;
@@ -85,8 +85,8 @@ export class AffirmationsComponent implements OnInit {
   ];
   backgroundVideoId = this.backgroundVideos[0].id;
 
-  affirmationSlides = true;
-  
+  affirmationSlides = false;
+
   public invocationPlayer: any;
   public symbolsPlayer: any;
 
@@ -99,7 +99,7 @@ export class AffirmationsComponent implements OnInit {
   ]
 
   omegas;
-  bgVideos;
+  // bgVideos;
   meditation_videos;
 
   constructor(private router: Router,
@@ -135,9 +135,9 @@ export class AffirmationsComponent implements OnInit {
         }
       }
     });
-    
+
     this.itemService.getItems('omegas').subscribe(omegas => this.omegas = omegas);
-    this.itemService.getItems('bg_videos').subscribe(videos => this.bgVideos = videos);
+    // this.itemService.getItems('bg_videos').subscribe(videos => this.bgVideos = videos);
     this.itemService.getItems('meditation_videos').subscribe(videos => this.meditation_videos = videos);
 
     this.affirmationService.getAffirmations().subscribe(affirmations => {
@@ -159,10 +159,10 @@ export class AffirmationsComponent implements OnInit {
   }
 
   changeVideo(event) {
-    this.backgroundVideoId = event.target.value; 
+    this.backgroundVideoId = event.target.value;
     this.videoPlayer.loadVideoFromId(this.backgroundVideoId);
   }
-  
+
   affirmationSwitch() {
     this.closeAllMenus();
     this.affirmationsVisible = true;
@@ -251,7 +251,6 @@ export class AffirmationsComponent implements OnInit {
   toggleAffirmation(event) {
     this.affirmationVisible = event;
   }
-  
 
   backwardKaraoke() {
     if (this.karaokeLetterCount != 0) {
@@ -628,7 +627,7 @@ export class AffirmationsComponent implements OnInit {
               if (state.data == YT.PlayerState.ENDED) {
                 symbolsCounter = symbolsCounter + 1;
                 if (symbolsCounter < 8) return
-                
+
                 symbSub.unsubscribe();
 
                 let grailObservable = this.utilService.setBackgroundVideo({videoId: "VfBS_fHWt00", paused: !this.startNextAutomatically && !this.isFactom});

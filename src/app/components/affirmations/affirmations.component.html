@@ -27,10 +27,10 @@
             name="video" 
             (change)="changeVideo($event)">
             <option 
-                *ngFor="let video of bgVideos" 
-                [attr.selected]="video.videoId == backgroundVideoId.id ? true : null"
-                [attr.value]="video.videoId">
-                {{video.name}}
+                *ngFor="let video of backgroundVideos" 
+                [attr.selected]="video.id == backgroundVideoId ? true : null"
+                [attr.value]="video.id">
+                {{video.title}}
             </option>
             </select>
 
