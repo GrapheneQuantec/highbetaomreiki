@@ -404,7 +404,9 @@ export class AffirmationsComponent implements OnInit {
   setSelectedAffirmation(affirmation: Affirmation) {
     if (affirmation) {
       let tempAffirmation = affirmation;
-      tempAffirmation.content = `${affirmation.content}<br>${affirmation.content}`;
+      if (this.affirmationSlides) {
+        tempAffirmation.content = `${affirmation.content}<br>${affirmation.content}`;
+      }
       this.selectedAffirmation = tempAffirmation;
 
       this.activeAffirmationId = tempAffirmation.id;
