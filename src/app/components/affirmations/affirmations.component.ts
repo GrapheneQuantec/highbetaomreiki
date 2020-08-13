@@ -144,7 +144,7 @@ export class AffirmationsComponent implements OnInit {
       this.affirmations = affirmations;
       this.affirmationCategories = this.removeDuplicates(affirmations.filter(aff => aff.category).map(aff => aff.category));
       if (affirmations.length > 0 && !this.activeAffirmationId) {
-        const sisters = this.affirmations.find(aff => aff.id === 'Hd9vAvZ7SfJQNdF7t4sj');
+        const sisters = this.affirmations.find(aff => aff.id === 'ZoOkaBCYLVriXn0ZAQ6r');
         const selectedAff = (sisters) ? sisters : this.affirmations[0];
         this.setSelectedAffirmation(selectedAff);
       }
