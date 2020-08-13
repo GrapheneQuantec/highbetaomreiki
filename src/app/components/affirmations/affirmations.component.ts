@@ -82,6 +82,7 @@ export class AffirmationsComponent implements OnInit {
     { id: "4XT5PsazYcM", title: "House build" },
     { id: "xPbPtwL9V30", title: "Lungs" },
     { id: "r3WxYr6NA18", title: "Michelli" },
+    { id: "KWxDoYgzWpg", title: "Sisisi" },
   ];
   backgroundVideoId = this.backgroundVideos[0].id;
 
