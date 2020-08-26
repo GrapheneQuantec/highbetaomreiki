@@ -40,6 +40,7 @@ export class AffirmationsComponent implements OnInit {
   images: Image[] = [];
   globalVolume: number = 10;
   videosVisible: boolean = false;
+  linksVisible: boolean = false;
   factomVisible: boolean = false;
   controlsVisible: boolean = false;
   affirmationVisible: boolean = true;
@@ -194,8 +195,14 @@ export class AffirmationsComponent implements OnInit {
     this.factomVisible = true;
   }
 
+  linksSwitch() {
+    this.closeAllMenus();
+    this.linksVisible = true;
+  }
+
   closeAllMenus() {
     this.videosVisible = false;
+    this.linksVisible = false;
     this.factomVisible = false;
     this.affirmationsVisible = false;
     this.affirmationsEditionVisible = false;

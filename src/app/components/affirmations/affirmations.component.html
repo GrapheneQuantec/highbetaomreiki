@@ -65,8 +65,13 @@
             <i class="fa fa-user" aria-hidden="true"></i>
         </div>
 
-        <div class="showOptionsIcon contentField" (click)="openAppearIn()" >
-            <i class="fa fa-video-camera" aria-hidden="true"></i>
+        <div class="showOptionsIcon contentField" (click)="linksSwitch()" *ngIf="!linksVisible" >
+            <i class="fa fa-link" aria-hidden="true"></i>
+        </div>
+
+        <div class="contentField" *ngIf="linksVisible">
+            <a href="https://codepen.io/jahal/full/MWyjWQW" target="_blank">Jesus I trust in You</a>
+            <a href="https://whereby.com/networkmeditation" target="_blank">Network Meditation</a>
         </div>
 
         <div class="showOptionsIcon contentField" (click)="factomSwitch()" *ngIf="!factomVisible">
