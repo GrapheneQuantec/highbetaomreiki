@@ -77,6 +77,7 @@ export class AffirmationsComponent implements OnInit {
   environmentName: string;
 
   backgroundVideos = [
+    // { id: "t0BdKM1dkos", title: "Mireille Healy" },
     { id: "-PSo-c2oByo", title: "Sun Quan" },
     { id: "eKFTSSKCzWA", title: "Nature" },
     { id: "3co7V1xdthA", title: "Quantum Holopedia" },
